@@ -20,12 +20,12 @@
 	const SMONEY = "$";
 
 	//Datos envio de correo
-	const NOMBRE_REMITENTE = "MG DAKAVA";
+	const NOMBRE_REMITENTE = "AYUNTAMIENTO PROGRESO";
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
-	const NOMBRE_EMPESA = "MG DAKAVA";
+	const NOMBRE_EMPESA = "AYUNTAMIENTO PROGRESO";
 	const WEB_EMPRESA = "https://www.progreso.tecnm.mx/";
-	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización. ";
-	const SHAREDHASH = "MgDakava";
+	const DESCRIPCION = "Mantenimiento a equipos. ";
+	const SHAREDHASH = "AyuntamientoProgreso";
 	
 	//Constantes de las Categorías para el Slider
 	const CAT_SLIDER = "1,2,3";
@@ -33,7 +33,7 @@
 
 
 	//Datos para Encriptar / Desencriptar
-	const KEY = 'mgdakava';
+	const KEY = 'ayuntamientoprogreso';
 	const METHODENCRIPT = "AES-128-ECB";
 
 	//Envio

@@ -13,7 +13,7 @@
 
 		public function login()
 		{
-			$data['page_tag'] = "Login - MG DAKAVA";
+			$data['page_tag'] = "Login - AP Mantenimientos";
 			$data['page_title'] = "Login";
 			$data['page_name'] = "login";
 			$data['page_functions_js'] = "functions_login.js";
