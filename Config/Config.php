@@ -24,7 +24,7 @@
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
 	const NOMBRE_EMPRESA = "AYUNTAMIENTO PROGRESO";
 	const WEB_EMPRESA = "https://www.progreso.tecnm.mx/";
-	const DESCRIPCION = "Mantenimiento a equipos.";
+	const DESCRIPCION = "Mantenimiento a equipos. ";
 	const SHAREDHASH = "AyuntamientoProgreso";
 	
 	//Constantes de las Categorías para el Slider
