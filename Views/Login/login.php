@@ -14,7 +14,7 @@
     <title><?= $data['page_tag']; ?></title>
   </head>
   <body>
-    <section class="">
+    <section class="material-half-bg">
       <div class="cover"></div>
     </section>
     <section class="login-content">

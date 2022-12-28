@@ -1,6 +1,6 @@
 <?php 
 	
-	const BASE_URL = "http://localhost/ssweb";
+	const BASE_URL = "http://localhost/mgdakava";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -20,12 +20,12 @@
 	const SMONEY = "$";
 
 	//Datos envio de correo
-	const NOMBRE_REMITENTE = "AYUNTAMIENTO PROGRESO";
+	const NOMBRE_REMITENTE = "MG DAKAVA";
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
-	const NOMBRE_EMPRESA = "MANTENIMIENTO - AYUNTAMIENTO PROGRESO";
+	const NOMBRE_EMPESA = "MG DAKAVA";
 	const WEB_EMPRESA = "https://www.progreso.tecnm.mx/";
-	const DESCRIPCION = "Mantenimiento a equipos. ";
-	const SHAREDHASH = "AyuntamientoProgreso";
+	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización. ";
+	const SHAREDHASH = "MgDakava";
 	
 	//Constantes de las Categorías para el Slider
 	const CAT_SLIDER = "1,2,3";
@@ -33,7 +33,7 @@
 
 
 	//Datos para Encriptar / Desencriptar
-	const KEY = 'ssweb';
+	const KEY = 'mgdakava';
 	const METHODENCRIPT = "AES-128-ECB";
 
 	//Envio
