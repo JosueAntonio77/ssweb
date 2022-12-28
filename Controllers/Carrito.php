@@ -13,7 +13,7 @@
 
 		public function carrito()
 		{
-			$data['page_tag'] = NOMBRE_EMPESA.' - Cotizar';
+			$data['page_tag'] = NOMBRE_EMPRESA.' - Cotizar';
 			$data['page_title'] = 'Cotizaciones';
 			$data['page_name'] = "cotización";
 			$this->views->getView($this,"carrito",$data); 
@@ -27,7 +27,7 @@
 			if (isset($_SESSION['login'])) {
 				$this->setDetalleTemp();
 			}
-			$data['page_tag'] = NOMBRE_EMPESA.' - Procesar Cotización';
+			$data['page_tag'] = NOMBRE_EMPRESA.' - Procesar Cotización';
 			$data['page_title'] = 'Cotizar';
 			$data['page_name'] = "procesarcotización";
 			//$data['tiposPago'] = $this->getTiposPagoT();

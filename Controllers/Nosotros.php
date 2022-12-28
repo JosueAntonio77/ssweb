@@ -7,8 +7,8 @@
 
 		public function nosotros()
 		{
-			$data['page_tag'] = NOMBRE_EMPESA;
-			$data['page_title'] = NOMBRE_EMPESA;
+			$data['page_tag'] = NOMBRE_EMPRESA;
+			$data['page_title'] = NOMBRE_EMPRESA;
 			$data['page_name'] = "mg_dakava";
 			$this->views->getView($this,"nosotros",$data);
 		}

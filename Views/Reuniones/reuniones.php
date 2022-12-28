@@ -39,7 +39,7 @@
   <div class="d-flex">
     <div id="sidebar">
       <div class="p-2">
-        <a href="http://localhost/mgdakava/" class="navbar-brand text-center text-light w-100 p-4 border-bottom">
+        <a href="http://localhost/ssweb/" class="navbar-brand text-center text-light w-100 p-4 border-bottom">
         <img src="../../Assets/images/LOGO_MG.png" alt="Logo de Mg Dakava" height="70%" width="70%"/>
         </a>
       </div>
@@ -99,9 +99,9 @@
           <form class="form-inline my-2 my-md-0">
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
               <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                <li><a class="dropdown-item" href="http://localhost/mgdakava/opciones"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-                <li><a class="dropdown-item" href="http://localhost/mgdakava/usuarios/perfil"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                <li><a class="dropdown-item" href="http://localhost/mgdakava/logout"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/ssweb/opciones"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="http://localhost/ssweb/usuarios/perfil"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="http://localhost/ssweb/logout"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
               </ul>
             </li>
           </form>

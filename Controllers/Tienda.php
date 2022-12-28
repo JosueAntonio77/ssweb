@@ -16,8 +16,8 @@
 
 		public function tienda()
 		{
-			$data['page_tag'] = NOMBRE_EMPESA;
-			$data['page_title'] = NOMBRE_EMPESA;
+			$data['page_tag'] = NOMBRE_EMPRESA;
+			$data['page_title'] = NOMBRE_EMPRESA;
 			$data['page_name'] = "mg_dakava";
 			$data['productos'] = $this->getProductosT();
 			$this->views->getView($this,"tienda",$data);
@@ -38,7 +38,7 @@
                 //dep($infoCategoria); exit;
                 $categoria = strClean($params);
                 //dep($this->getProductosCategoriaT($categoria));
-                $data['page_tag'] = NOMBRE_EMPESA." | ".$infoCategoria['categoria'];
+                $data['page_tag'] = NOMBRE_EMPRESA." | ".$infoCategoria['categoria'];
 			    $data['page_title'] = $infoCategoria['categoria'];
 			    $data['page_name'] = "categoria";
                 $data['productos'] = $infoCategoria['productos'];
@@ -59,7 +59,7 @@
                 }  
                 //$arrProducto = $this->getProductoT($producto);
                 //dep($this->getProductosRandom($arrProducto['categoriaid'], 8, "r"));
-                $data['page_tag'] = NOMBRE_EMPESA." | ".$infoProducto['nombre'];
+                $data['page_tag'] = NOMBRE_EMPRESA." | ".$infoProducto['nombre'];
 			    $data['page_title'] = $infoProducto['nombre'];
 			    $data['page_name'] = "producto";
                 $data['producto'] = $infoProducto;

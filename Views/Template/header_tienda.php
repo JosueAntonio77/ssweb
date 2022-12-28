@@ -70,7 +70,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 							Help & FAQs
 						</a>-->
 
-						<a href="http://localhost/mgdakava/dashboard" class="flex-c-m trans-04 p-lr-25">
+						<a href="<?= base_url(); ?>/dashboard" class="flex-c-m trans-04 p-lr-25">
 							Mi Cuenta
 						</a>
 
@@ -113,7 +113,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 							</li>
 
 							<li>
-								<a href="http://localhost/mgdakava/Views/Reuniones/reuniones.php">Reuniones</a>
+								<a href="<?= base_url(); ?>/Views/Reuniones/reuniones.php">Reuniones</a>
 							</li>
 						</ul>
 					</div>
@@ -179,7 +179,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 							Help & FAQs
 						</a>
 
-						<a href="http://localhost/mgdakava/dashboard" class="flex-c-m p-lr-10 trans-04">
+						<a href="<?= base_url(); ?>/dashboard" class="flex-c-m p-lr-10 trans-04">
 							Mi Cuenta
 						</a>
 
