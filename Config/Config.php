@@ -1,6 +1,6 @@
 <?php 
 	
-	const BASE_URL = "http://localhost/mgdakava";
+	const BASE_URL = "http://localhost/ssweb";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -20,9 +20,9 @@
 	const SMONEY = "$";
 
 	//Datos envio de correo
-	const NOMBRE_REMITENTE = "AYUNTAMIENTO PROGRESO.";
+	const NOMBRE_REMITENTE = "AYUNTAMIENTO PROGRESO";
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
-	const NOMBRE_EMPRESA = "AYUNTAMIENTO PROGRESO.";
+	const NOMBRE_EMPRESA = "MANTENIMIENTO - AYUNTAMIENTO PROGRESO";
 	const WEB_EMPRESA = "https://www.progreso.tecnm.mx/";
 	const DESCRIPCION = "Mantenimiento a equipos. ";
 	const SHAREDHASH = "AyuntamientoProgreso";
@@ -33,7 +33,7 @@
 
 
 	//Datos para Encriptar / Desencriptar
-	const KEY = 'ayuntamientoprogreso';
+	const KEY = 'ssweb';
 	const METHODENCRIPT = "AES-128-ECB";
 
 	//Envio
