@@ -1,6 +1,6 @@
 <?php 
 	
-	const BASE_URL = "http://localhost/mgdakava";
+	const BASE_URL = "http://localhost/ssweb/ss";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -22,7 +22,7 @@
 	//Datos envio de correo
 	const NOMBRE_REMITENTE = "MG DAKAVA";
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
-	const NOMBRE_EMPESA = "MG DAKAVA";
+	const NOMBRE_EMPRESA = "MG DAKAVA";
 	const WEB_EMPRESA = "https://www.progreso.tecnm.mx/";
 	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización. ";
 	const SHAREDHASH = "MgDakava";
