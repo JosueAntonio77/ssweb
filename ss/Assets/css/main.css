@@ -14946,10 +14946,10 @@ be a descendant of the grid when it is being dragged.
   color: #fff;
   text-align: center;
   font-family: 'Niconne';
-  padding: 0 15px;
+  padding: 0 0px;
   font-size: 26px;
-  font-weight: 400;
-  line-height: 50px;
+  font-weight: 400px;
+  line-height: 30px;
 }
 
 @media (min-width: 768px) {
@@ -14958,8 +14958,8 @@ be a descendant of the grid when it is being dragged.
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
     display: block;
-    width: 230px;
-    background-color: #007d71;
+    width: 200px;
+    background-color: #009688;
   }
 }
 
