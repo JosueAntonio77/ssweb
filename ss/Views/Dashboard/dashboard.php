@@ -48,7 +48,7 @@
     <?php } ?>
     <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
       <div class="col-md-6 col-lg-3">
-        <a href="<?= base_url() ?>/pedidos" class="linkw">
+        <a href="<?= base_url() ?>/cotizaciones" class="linkw">
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
             <div class="info">
               <h4>Entregas</h4>

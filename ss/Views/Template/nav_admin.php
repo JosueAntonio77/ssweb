@@ -39,6 +39,15 @@
         </li>
         <?php } ?>
 
+        <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/productos">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Recepciones</span>  
+            </a>
+        </li>
+        <?php } ?>
+
         <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
@@ -47,16 +56,6 @@
             </a>
         </li>
         <?php } ?> 
-
-        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/proveedores">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Proveedores</span>
-            </a>
-        </li>
-        <?php } ?>
-
 
         <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
         <li class="treeview">
