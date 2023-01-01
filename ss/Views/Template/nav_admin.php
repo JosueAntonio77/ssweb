@@ -30,15 +30,6 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Cotizaciones</span>
-            </a>
-        </li>
-        <?php } ?> 
-
         <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/clientes">
@@ -47,6 +38,15 @@
             </a>
         </li>
         <?php } ?>
+
+        <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Entregas</span>
+            </a>
+        </li>
+        <?php } ?> 
 
         <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
         <li>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Mg Dakava CRM TecNM Campus Progreso">
+  <meta name="description" content="Ayuntamiento de Progreso">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="TecNM">
@@ -40,7 +40,7 @@
   <header class="app-header">
     <div class="p-2">
       <a class="app-header__logo" href="<?= base_url(); ?>/dashboard">
-        <img src="<?= media(); ?>/images/LOGO_MG.png" alt="Logo de Mg Dakava" height="60%" width="60%" />
+        <img src="<?= media(); ?>/images/logoAP.png" alt="Logo de Ayuntamiento de Progreso" height="60%" width="60%" />
       </a>
     </div>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>

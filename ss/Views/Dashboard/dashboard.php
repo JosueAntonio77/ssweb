@@ -145,10 +145,7 @@
       type: 'line'
     },
     title: {
-      text: 'Ventas de <?= $data['ventasMDia']['mes'] . ' del ' . $data['ventasMDia']['anio'] ?>'
-    },
-    subtitle: {
-      text: 'Total Ventas <?= SMONEY . '. ' . formatMoney($data['ventasMDia']['total']) ?> '
+      text: 'Entregas de <?= $data['ventasMDia']['mes'] . ' del ' . $data['ventasMDia']['anio'] ?>'
     },
     xAxis: {
       categories: [
@@ -189,10 +186,10 @@
       type: 'column'
     },
     title: {
-      text: 'Ventas del año <?= $data['ventasAnio']['anio'] ?> '
+      text: 'Entregas del año <?= $data['ventasAnio']['anio'] ?> '
     },
     subtitle: {
-      text: 'Esdística de ventas por mes'
+      text: 'Estadística de entregas por mes'
     },
     xAxis: {
       type: 'category',
