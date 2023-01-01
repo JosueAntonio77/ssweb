@@ -39,7 +39,7 @@
                 <a href="<?= base_url() ?>/productos" class="linkw">
                     <div class="widget-small warning coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
                         <div class="info">
-                            <h4>Productos</h4>
+                            <h4>Recepciones</h4>
                             <p><b><?= $data['productos'] ?></b></p>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 <a href="<?= base_url() ?>/pedidos" class="linkw">
                     <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
                         <div class="info">
-                            <h4>Pedidos</h4>
+                            <h4>Entregas</h4>
                             <p><b><?= $data['pedidos'] ?></b></p>
                         </div>
                     </div>
@@ -63,14 +63,14 @@
         <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
             <div class="col-md-6">
                 <div class="tile">
-                    <h3 class="tile-title">Últimos Pedidos</h3>
+                    <h3 class="tile-title">Mantenimientos</h3>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Cliente</th>
                                 <th>Estado</th>
-                                <th class="text-right">Monto</th>
+                                <th class="text-right">Problema</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -98,13 +98,13 @@
         <div class="col-md-6">
             <div class="tile">
                 <div class="container-title">
-                    <h3 class="tile-title">Últimos Productos</h3>
+                    <h3 class="tile-title">Últimas Entregas</h3>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Producto</th>
-                                <th>Monto</th>
+                                <th>Cliente</th>
+                                <th>Problema</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -135,7 +135,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="container-title">
-                    <h3 class="tile-title">Ventas por mes</h3>
+                    <h3 class="tile-title">Entregas por mes</h3>
                     <div class="dflex">
                         <input class="date-picker ventasMes" name="ventasMes" placeholder="Mes y Año">
                         <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchVMes()"> <i class="fas fa-search"></i> </button>
