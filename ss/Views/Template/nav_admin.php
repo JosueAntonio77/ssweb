@@ -30,15 +30,6 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Cotizaciones</span>
-            </a>
-        </li>
-        <?php } ?> 
-
         <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/clientes">
@@ -48,15 +39,23 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
         <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/proveedores">
+            <a class="app-menu__item" href="<?= base_url(); ?>/productos">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Proveedores</span>
+                <span class="app-menu__label">Recepciones</span>  
             </a>
         </li>
         <?php } ?>
 
+        <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Entregas</span>
+            </a>
+        </li>
+        <?php } ?> 
 
         <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
         <li class="treeview">
@@ -85,7 +84,7 @@
 
          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
         <li>
-            <a class="app-menu__item" href="http://localhost/ssweb/Views/Reuniones/reuniones.php">
+            <a class="app-menu__item" href="<?= base_url(); ?>/Views/Reuniones/reuniones.php">
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
                 <span class="app-menu__label">Reuniones</span>
             </a>

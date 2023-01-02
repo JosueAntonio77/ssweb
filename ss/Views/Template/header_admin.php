@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Mg Dakava CRM TecNM Campus Progreso">
+  <meta name="description" content="Ayuntamiento de Progreso">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="TecNM">
@@ -13,12 +13,12 @@
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/bootstrap-select.min.css">
-  <link rel="stylesheet" type="text/css" href="<?= media();?>/js/datepicker/jquery-ui.min.css"> 
+  <link rel="stylesheet" type="text/css" href="<?= media(); ?>/js/datepicker/jquery-ui.min.css">
   <!-- estilos personalidos-->
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">
 
   <!--Estilos de Reuniones-->
-  <link rel="stylesheet" type="text/css" href="<?= media(); ?>css/fullcalendar.min.css">
+  <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/fullcalendar.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>css/bootstrap.min.css">
@@ -37,7 +37,12 @@
     </div>
   </div>
   <!-- Navbar-->
-  <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard"> <img src="<?= media(); ?>/images/LOGO_MG.png" alt="Logo de Mg Dakava" height="70%" width="70%" /></a>
+  <header class="app-header">
+    <div class="p-2">
+      <a class="app-header__logo" href="<?= base_url(); ?>/dashboard">
+        <img src="<?= media(); ?>/images/logoAP.png" alt="Logo de Ayuntamiento de Progreso" height="60%" width="60%" />
+      </a>
+    </div>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
