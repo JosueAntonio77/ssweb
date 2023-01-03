@@ -86,7 +86,7 @@
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/Views/Reuniones/reuniones.php">
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                <span class="app-menu__label">Reuniones</span>
+                <span class="app-menu__label">Calendario</span>
             </a>
         </li>
         <?php } ?>

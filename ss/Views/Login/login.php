@@ -41,7 +41,7 @@
           </div>
           <div class="form-group">
             <div>
-              <p class="semibold-text mb-2"><a href="#" data-toggle="">Registrar</a></p>
+              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Registrar</a></p>
             </div>
           </div>
           <div class="form-group">
@@ -54,6 +54,33 @@
             <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> INICIAR SESIÓN</button>
           </div>
         </form>
+
+        <form id="formRegister" name="formRegister" class="forget-form" action="">
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Registrar</h3>
+          <div class="form-group">
+						<label for="txtNombre">Nombres</label>
+						<input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" required="">
+					</div>
+					<div class="form-group">
+						<label for="txtApellido">Apellidos</label>
+						<input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido" required="">
+					</div>
+          <div class="form-group">
+						<label for="txtTelefono">Teléfono</label>
+						<input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
+					</div>
+					<div class="form-group">
+						<label for="txtEmailCliente">Email</label>
+						<input type="email" class="form-control valid validEmail" id="txtEmailCliente" name="txtEmailCliente" required="">
+					</div>
+          <div class="form-group btn-container">
+            <button type="submit" class="btn btn-primary">Regístrate</button>
+          </div>
+          <div class="form-group mt-3">
+            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Iniciar sesión</a></p>
+          </div>
+        </form>
+
         <form id="formRecetPass" name="formRecetPass" class="forget-form" action="">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>¿Olvidaste contraseña?</h3>
           <div class="form-group">
@@ -67,6 +94,7 @@
             <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Iniciar sesión</a></p>
           </div>
         </form>
+
       </div>
     </section>
     <script>
