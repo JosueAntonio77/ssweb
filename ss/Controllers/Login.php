@@ -50,6 +50,54 @@
 			die();
 		}
 
+		public function registro(){
+			if($_POST){
+				error_reporting(0);
+				
+				if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailCliente']))
+				{
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+				}else{ 
+					$strNombre = ucwords(strClean($_POST['txtNombre']));
+					$strApellido = ucwords(strClean($_POST['txtApellido']));
+					$intTelefono = intval(strClean($_POST['txtTelefono']));
+					$strEmail = strtolower(strClean($_POST['txtEmailCliente']));
+					$intTipoId = 7; 
+					$request_user = "";
+					
+					$strPassword = passGenerator();
+					$strPasswordEncript = hash("SHA256",$strPassword);
+					$request_user = $this->insertCliente($strNombre, 
+														$strApellido, 
+														$intTelefono, 
+														$strEmail,
+														$strPasswordEncript,
+														$intTipoId );
+					if($request_user > 0 )
+					{
+						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+						$nombreUsuario = $strNombre.' '.$strApellido;
+						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
+											 'email' => $strEmail,
+											 'password' => $strPassword,
+											 'asunto' => 'Bienvenido al mantenimiento del Ayuntamiento de Progreso');
+						$_SESSION['idUser'] = $request_user;
+						$_SESSION['login'] = true;
+						$this->login->sessionLogin($request_user);
+						//Esta comentado por que estamos de forma local. Esto sirve para enviar a su correo credenciales. 
+                        //sendEmail($dataUsuario,'email_bienvenida');
+
+					}else if($request_user == 'exist'){
+						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');		
+					}else{
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+					}
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
+
 		public function resetPass(){
 			if($_POST){
 				error_reporting(0);
