@@ -18,7 +18,7 @@
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Mensajes | Mgdakava";
-			$data['page_title'] = "Mensajes <small>Mg Dakava</small>";
+			$data['page_title'] = "Mensajes <small>Ayuntamiento de Progreso</small>";
 			$data['page_name'] = "contactos";
 			$data['page_functions_js'] = "functions_contactos.js";
 			$this->views->getView($this,"contactos",$data);

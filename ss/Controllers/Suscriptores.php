@@ -18,7 +18,7 @@
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Suscriptores - Mgdakava";
-			$data['page_title'] = "Suscriptores <small>Mg Dakava</small>";
+			$data['page_title'] = "Suscriptores <small>Ayuntamiento de Progreso</small>";
 			$data['page_name'] = "suscriptores";
 			$data['page_functions_js'] = "functions_suscriptores.js";
 			$this->views->getView($this,"suscriptores",$data);

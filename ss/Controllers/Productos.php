@@ -19,7 +19,7 @@ class Productos extends Controllers{
 			header("Location:".base_url().'/dashboard');
 		}
 		$data['page_tag'] = "Productos";
-		$data['page_title'] = "PRODUCTOS <small>Mgdakava</small>";
+		$data['page_title'] = "Recepciones <small>Ayuntamiento de Progreso</small>";
 		$data['page_name'] = "proveedores";
 		$data['page_functions_js'] = "functions_productos.js";
 		$this->views->getView($this,"productos",$data); 
