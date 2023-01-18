@@ -41,7 +41,7 @@
 
         <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
         <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/productos">
+            <a class="app-menu__item" href="<?= base_url(); ?>/recepciones">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
                 <span class="app-menu__label">Recepciones</span>  
             </a>
