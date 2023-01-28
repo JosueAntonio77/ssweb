@@ -9,7 +9,7 @@
 		{
 			$data['page_tag'] = NOMBRE_EMPRESA;
 			$data['page_title'] = NOMBRE_EMPRESA;
-			$data['page_name'] = "mg_dakava";
+			$data['page_name'] = "Ayuntamiento de Progreso";
 			$this->views->getView($this,"contacto",$data);
 		}
 	}

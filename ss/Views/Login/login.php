@@ -117,6 +117,13 @@
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary">Regístrate</button>
+                      <br>
+                      <br>
+                      <div class="form-group">
+                        <div class="utility">
+                          <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto">Contactate con nosotros aquí.</a></p>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </div>

@@ -2,27 +2,7 @@
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-lg-4 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						TecNM Campus Progreso
-					</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="" class="stext-107 cl7 hov-cl1 trans-04">
-								Programación Web
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Administración de la Relación con los clientes
-							</a>
-						</li>
-						<br>
-						<img src="<?= media() ?>/images/TecNM_Progreso.png" alt="IMG-LOGO-ITSP" width=25%>
-					</ul>
-				</div>
+				
 
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
@@ -30,7 +10,7 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Dirección: Av, Industrias No Contaminantes #12613, Hacienda Sodzil Nte., Mérida, Yuc.
+						Dirección: C. 80 1885, Centro, 97320 Progreso, Yuc.
 						<br><br>
 						Teléfono: +52 9995098813
 						<br>
@@ -49,30 +29,6 @@
 							<i class="fa fa-linkedin"></i>
 						</a>
 					</div>
-				</div>
-
-				<div class="col-sm-6 col-lg-4 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Subscríbete
-					</h4>
-
-					<form id="frmSuscripcion" name="frmSuscripcion">
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" id="nombreSuscripcion" name="nombreSuscripcion" placeholder="Nombre completo" required>
-							<div class="focus-input1 trans-04"></div>
-						</div>
-						<br>
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" id="emailSuscripcion" name="emailSuscripcion" placeholder="email@example.com" required>
-							<div class="focus-input1 trans-04"></div>
-						</div>
-
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribirme
-							</button>
-						</div>
-					</form>
 				</div>
 			</div>
 

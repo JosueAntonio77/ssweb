@@ -729,59 +729,6 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   display: none;
 }
 
-.main-menu-m {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #717fe0;
-}
-
-.main-menu-m > li > a {
-  font-family: Poppins-Medium;
-  font-size: 14px;
-  color: white;
-  line-height: 2.8;
-  padding: 8px 20px 8px 20px;
-}
-
-.main-menu-m > li {
-  color: white;
-  position: relative;
-}
-
-.arrow-main-menu-m {
-  font-size: 14px;
-  color: #fff;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: 10px;
-  top: 2px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.arrow-main-menu-m i {
-  transform-origin: center;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.turn-arrow-main-menu-m i {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
 /*---------------------------------------------*/
 .sub-menu-m {
   background-color: #fff;

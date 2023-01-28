@@ -53,7 +53,7 @@
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">
-								Av, Industrias No Contaminantes #12613, Hacienda Sodzil Nte., Mérida, Yuc.
+								C. 80 1885, Centro, 97320 Progreso, Yuc.
 							</p>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								ventas.dakava@gmail.com
+								ayuntamientoprogreso@gmail.com
 							</p>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 
 	<!-- Map -->
 	<div class="map">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14893.998055587112!2d-89.6413875!3d21.0527026!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8616a0066280473f!2sMG%20DAKAVA%20COMPANY%20S.A.%20DE%20C.V!5e0!3m2!1ses!2smx!4v1654987645230!5m2!1ses!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="100%" height="600px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1105.2844714027501!2d-89.6635241769206!3d21.28258788891006!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f55dd2a97b9ab23%3A0xc5eb078aedfcd27c!2sAyuntamiento%20De%20Progreso!5e0!3m2!1ses-419!2smx!4v1674502809033!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="100%" height="600px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 	</div>
 
 
