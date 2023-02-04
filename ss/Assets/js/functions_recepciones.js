@@ -24,7 +24,7 @@ window.addEventListener('load', function(e){
             {"data":"descripcion"},
             {"data":"precio"},
             {"data":"modelo"},
-            {"data":"dimenciones"},
+            {"data":"dimensiones"},
             {"data":"status"},
             {"data":"options"}
         ],
@@ -40,7 +40,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 1, 2, 3, 4, 5] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -48,7 +48,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 1, 2, 3, 4, 5] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -56,7 +56,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 1, 2, 3, 4, 5] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -64,7 +64,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 1, 2, 3, 4, 5] 
                 }
             }
         ],
@@ -82,9 +82,9 @@ window.addEventListener('load', function(e){
             let strDescripcion = document.querySelector('#txtDescripcion').value;
             let strModelo = document.querySelector('#txtModelo').value;
             let strPrecio = document.querySelector('#txtPrecio').value;
-            let strDimenciones = document.querySelector('#txtDimenciones').value;
+            let strDimensiones = document.querySelector('#txtDimensiones').value;
             let intStatus = document.querySelector('#listStatus').value;
-            if(strNombre == '' || strModelo == '' || strPrecio == '' || strDimenciones == '' )
+            if(strNombre == '' || strModelo == '' || strPrecio == '' || strDimensiones == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -119,7 +119,7 @@ window.addEventListener('load', function(e){
                             rowTable.cells[2].textContent = strDescripcion;
                             rowTable.cells[3].textContent = SMONEY+strPrecio;
                             rowTable.cells[4].textContent = strModelo;
-                            rowTable.cells[5].textContent = strDimenciones;
+                            rowTable.cells[5].textContent = strDimensiones;
                             rowTable.cells[6].innerHTML =  htmlStatus;
                             rowTable = ""; 
                         }
@@ -257,7 +257,7 @@ function fntEditInfo(element,idProducto){
                 document.querySelector("#txtDescripcion").value = objProducto.descripcion;
                 document.querySelector("#txtModelo").value = objProducto.modelo;
                 document.querySelector("#txtPrecio").value = objProducto.precio;
-                document.querySelector("#txtDimenciones").value = objProducto.dimenciones;
+                document.querySelector("#txtDimensiones").value = objProducto.dimensiones;
                 document.querySelector("#listCategoria").value = objProducto.categoriaid;
                 document.querySelector("#listStatus").value = objProducto.status;
                 document.querySelector("#listProveedor").value = objProducto.proveedorid;

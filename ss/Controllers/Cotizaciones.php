@@ -17,9 +17,9 @@ class Cotizaciones extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
 		}
-		$data['page_tag'] = "Cotizaciones";
+		$data['page_tag'] = "Entregas";
 		$data['page_title'] = "Entregas <small>Ayuntamiento de Progreso</small>";
-		$data['page_name'] = "cotizaciones";
+		$data['page_name'] = "entregas";
 		$data['page_functions_js'] = "functions_cotizaciones.js";
 		$this->views->getView($this,"cotizaciones",$data); 
 	} 

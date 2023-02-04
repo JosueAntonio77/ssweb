@@ -62,20 +62,21 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						H. AYUNTAMIENTO DE PROGRESO
+					<a href="https://ayuntamientodeprogreso.gob.mx/" class="flex-c-m p-lr-10 trans-04">
+					H. AYUNTAMIENTO DE PROGRESO 
+						</a>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
 						<!--<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
-						</a>-->
-
+						</a>
 						<a href="<?= base_url(); ?>/dashboard" class="flex-c-m trans-04 p-lr-25">
 							Mi Cuenta
-						</a>
+						</a>-->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Salir
+						<a href="<?= base_url(); ?>/login" class="flex-c-m trans-04 p-lr-25">
+							Regresar
 						</a>
 					</div>
 				</div>

@@ -16,7 +16,7 @@
 		{
 			if(empty($_SESSION['permisosMod']['r'])){
 				header("Location:".base_url().'/dashboard');
-			};
+			}
 			$data['page_tag'] = "Mensajes | Ayuntamiento de Progreso";
 
 			$data['page_title'] = "Mensajes <small>Ayuntamiento de Progreso</small>";

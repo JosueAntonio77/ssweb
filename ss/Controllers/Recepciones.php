@@ -28,7 +28,7 @@ class Recepciones extends Controllers{
    public function setProducto(){
 			if($_POST){
 
-				if(empty($_POST['txtNombre']) || empty($_POST['txtModelo']) ||empty($_POST['listCategoria']) || empty($_POST['listProveedor']) ||  empty($_POST['txtDescripcion']) ||empty($_POST['txtPrecio']) || empty($_POST['txtDimenciones']) || empty($_POST['listStatus']) )
+				if(empty($_POST['txtNombre']) || empty($_POST['txtModelo']) ||empty($_POST['listCategoria']) || empty($_POST['listProveedor']) ||  empty($_POST['txtDescripcion']) ||empty($_POST['txtPrecio']) || empty($_POST['txtDimensiones']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
@@ -40,7 +40,7 @@ class Recepciones extends Controllers{
 					$intCategoriaId = intval($_POST['listCategoria']);
 					$intProveedorId = intval($_POST['listProveedor']);
 					$strPrecio = strClean($_POST['txtPrecio']);
-					$strDimenciones = strClean($_POST['txtDimenciones']);
+					$strDimensiones = strClean($_POST['txtDimensiones']);
 					$intStatus = intval($_POST['listStatus']);
 
 					$ruta = strtolower(clear_cadena($strNombre));
@@ -55,7 +55,7 @@ class Recepciones extends Controllers{
 																		$strDescripcion, 
 																		$strPrecio, 
 																		$strModelo, 
-																		$strDimenciones, 
+																		$strDimensiones, 
 																		$ruta,	
 																		$intStatus,
 																		$intProveedorId);
@@ -69,7 +69,7 @@ class Recepciones extends Controllers{
 																		$strDescripcion, 
 																		$strPrecio, 
 																		$strModelo, 
-																		$strDimenciones, 
+																		$strDimensiones, 
 																		$ruta,	
 																		$intStatus,
 																		$intProveedorId);	
@@ -110,7 +110,7 @@ class Recepciones extends Controllers{
 						$arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
 					}
 
-					$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);
+					//$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);
 
 					if($_SESSION['permisosMod']['r']){
 						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idproducto'].')" title="Ver recepción"><i class="far fa-eye"></i></button>';

@@ -28,19 +28,19 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                      <label class="control-label">Modelo <span class="required">*</span></label>
-                      <input class="form-control" id="txtModelo" name="txtModelo" type="text" placeholder="Modelo" required="">
+                      <label class="control-label">Usuario <span class="required">*</span></label>
+                      <input class="form-control" id="txtModelo" name="txtModelo" type="text" placeholder="Nombre" required="">
                       <br>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label">Precio <span class="required">*</span></label>
+                            <label class="control-label">Teléfono <span class="required">*</span></label>
                             <input class="form-control" id="txtPrecio" name="txtPrecio" type="text" required="">
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label">Dimensiones <span class="required">*</span></label>
-                            <input class="form-control" id="txtDimenciones" name="txtDimenciones" type="text" placeholder="Dimenciones" required="">
+                            <label class="control-label">Dirección <span class="required">*</span></label>
+                            <input class="form-control" id="txtDimensiones" name="txtDimensiones" type="text" placeholder="Dirección" required="">
                         </div>
                     </div>
 

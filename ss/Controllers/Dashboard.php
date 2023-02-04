@@ -24,17 +24,17 @@
 			$data['usuarios'] = $this->model->cantUsuarios();
 			$data['clientes'] = $this->model->cantClientes();
 			$data['productos'] = $this->model->cantProductos();
-			$data['pedidos'] = $this->model->cantPedidos();
-			$data['pedidos'] = $this->model->cantPedidos();
-			$data['lastOrders'] = $this->model->lastOrders();
+			//$data['pedidos'] = $this->model->cantPedidos();
+			//$data['pedidos'] = $this->model->cantPedidos();
+			//$data['lastOrders'] = $this->model->lastOrders();
 			$data['productosTen'] = $this->model->productosTen();
 
 			$anio = date('Y');
 			$mes = date('m');
 			//dep($data['pagosMes']);exit;
-			$data['ventasMDia'] = $this->model->selectVentasMes($anio,$mes);
+			//$data['ventasMDia'] = $this->model->selectVentasMes($anio,$mes);
 			//dep($data['ventasMDia']);exit;
-			$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
+			//$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
 			//dep($data['ventasAnio']);exit;
 			if( $_SESSION['userData']['idrol'] == RCLIENTES ){
 				$this->views->getView($this,"dashboardCliente",$data);
@@ -44,7 +44,7 @@
 		}
 
 		
-		public function ventasMes(){
+	/*	public function ventasMes(){
 			if($_POST){
 				$grafica = "ventasMes";
 				$nFecha = str_replace(" ","",$_POST['fecha']);
@@ -66,7 +66,7 @@
 				echo $script;
 				die();
 			}
-		}
+		}*/
 
 	}
  ?>

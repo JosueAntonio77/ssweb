@@ -24,7 +24,7 @@
 			$total = $request['total']; 
 			return $total;
 		}
-		public function cantPedidos(){
+		/*public function cantPedidos(){
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
@@ -109,7 +109,7 @@
 			}
 			$arrVentas = array('anio' => $anio, 'meses' => $arrMVentas);
 			return $arrVentas;
-		}
+		}*/
 		public function productosTen(){
 			$sql = "SELECT * FROM producto WHERE status = 1 ORDER BY idproducto DESC LIMIT 1,10 ";
 			$request = $this->select_all($sql);

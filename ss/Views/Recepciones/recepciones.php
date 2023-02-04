@@ -25,9 +25,9 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Nombre</th>
+                          <th>Recepción</th>
                           <th>Descripción</th>
-                          <th>Precio</th>
+                          <th>Teléfono</th>
                           <th>Modelo</th>
                           <th>Dimensiones</th>
                           <th>Status</th>

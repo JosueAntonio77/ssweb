@@ -1,25 +1,37 @@
-<?php headerAdmin($data); ?>
-<main class="app-content">
-  <div class="app-title">
-    <div>
-      <h1><i class="fa fa-file-text-o"></i> <?= $data['page_title'] ?></h1>
-    </div>
-    <ul class="app-breadcrumb breadcrumb">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/cotizaciones"> Cotizaciones</a></li>
-    </ul>
-  </div>
+<?php headerAdmin($data);?>
+    <main class="app-content">
+            <div class="app-title">
+                <div>
+                <h1><i class="fa fa-file-text-o"></i> Reporte de Entrega</h1>  
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="<?= base_url(); ?>/cotizaciones">Entregas</a></li>
+                </ul>
+            </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="title">
-        <?php dep($data['arrPedido']); ?>
+      <div class="tile">
+        
+      <?php dep($data['arrPedido']); ?>
+        <?php $data['arrPedido']; 
+                    
+                    if(empty($data['arrPedido'])){
+
+                    ?>
+                    <p>Datos no encontrados</p>
+                    <?php }else{ 
+                 //       $estudiante = $data['arrPedido']['estudiante']; 
+                        $pago = $data['arrPedido']['orden'];
+                        ?>
+      
         <section class="invoice">
           <div class="row mb-4">
             <div class="col-6">
-              <h2 class="page-header"><i class="fa fa-globe"></i> <img src="<?= media(); ?> /images/LOGO_MG_dark.png" width="100px" heigh="100px"> </h2>
+              <h2 class="page-header"><i ></i> <img src="<?= media(); ?> /images/logo.png" width="150px" heigh="200px"> </h2>
             </div>
             <div class="col-6">
-              <h5 class="text-right">Fecha:</h5>
+              <h5 class="text-right">Fecha: <?= $data['orden']['fecha'] ?></h5>
             </div>
           </div>
           <div class="row invoice-info">
@@ -71,6 +83,7 @@
                 <i class="fa fa-print"></i> Imprimir</a></div>
           </div>
         </section>
+        <?php } ?>
       </div>
     </div>
   </div>

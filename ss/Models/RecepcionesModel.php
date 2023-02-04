@@ -9,7 +9,7 @@
 		private $intProveedorId;
 		private $intIdPrecio;
 		private $strModelo;
-		private $strDimenciones;
+		private $strDimensiones;
 		private $strRuta;
 		private $intStatus;
 		private $strImagen;
@@ -19,14 +19,14 @@
 			parent::__construct();
 		}	
 
-		public function insertProducto(int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimenciones, string $ruta, int $status, int $proveedorid){
+		public function insertProducto(int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimensiones, string $ruta, int $status, int $proveedorid){
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
 			$this->strModelo = $modelo;
 			$this->intCategoriaId = $categoriaid;
 			$this->intProveedorId = $proveedorid;
 			$this->strPrecio = $precio;
-			$this->strDimenciones = $dimenciones;
+			$this->strDimensiones = $dimensiones;
 			$this->strRuta = $ruta;
 			$this->intStatus = $status;
 			$return = 0;
@@ -39,7 +39,7 @@
 														descripcion,
 														precio,
 														modelo,
-														dimenciones,
+														dimensiones,
 														ruta,
 														status,
 														proveedorid) 
@@ -49,7 +49,7 @@
         						$this->strDescripcion,
         						$this->strPrecio,
         						$this->strModelo,
-        						$this->strDimenciones,
+        						$this->strDimensiones,
 								$this->strRuta,
         						$this->intStatus,
         						$this->intProveedorId);
@@ -61,7 +61,7 @@
 	        return $return;
 		}
 
-		public function updateProducto(int $idproducto, int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimenciones, string $ruta, int $status, int $proveedorid){
+		public function updateProducto(int $idproducto, int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimensiones, string $ruta, int $status, int $proveedorid){
 			$this->intIdProducto = $idproducto;
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
@@ -69,7 +69,7 @@
 			$this->intCategoriaId = $categoriaid;
 			$this->intProveedorId = $proveedorid;
 			$this->strPrecio = $precio;
-			$this->strDimenciones = $dimenciones;
+			$this->strDimensiones = $dimensiones;
 			$this->strRuta = $ruta;
 			$this->intStatus = $status;
 			$return = 0;
@@ -83,7 +83,7 @@
 							descripcion=?,
 							precio=?,
 							modelo=?,
-							dimenciones=?,
+							dimensiones=?,
 							ruta=?,
 							status=?, 
 							proveedorid=? 
@@ -93,7 +93,7 @@
         						$this->strDescripcion,
         						$this->strPrecio,
         						$this->strModelo,
-        						$this->strDimenciones,
+        						$this->strDimensiones,
 								$this->strRuta,
         						$this->intStatus,
         						$this->intProveedorId);
@@ -122,7 +122,7 @@
 							pd.nombre as proveedor,
 							p.precio,
 							p.modelo,
-							p.dimenciones,
+							p.dimensiones,
 							p.status 
 					FROM producto p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
@@ -143,7 +143,7 @@
 							pd.nombre as proveedor,
 							p.precio,
 							p.modelo,
-							p.dimenciones,
+							p.dimensiones,
 							p.status 
 					FROM producto p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
