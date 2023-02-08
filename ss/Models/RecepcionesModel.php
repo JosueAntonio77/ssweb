@@ -2,15 +2,13 @@
 
 	class RecepcionesModel extends Mysql
 	{
-		private $intIdProducto;
+		private $intIdMantenimiento;
 		private $strNombre;
 		private $strDescripcion;
+		private $strDiagnostico;
 		private $intCategoriaId;
-		private $intProveedorId;
-		private $intIdPrecio;
-		private $strModelo;
-		private $strDimensiones;
-		private $strRuta;
+		private $intPersonaId;
+		private $strEquipo;
 		private $intStatus;
 		private $strImagen;
 
@@ -19,40 +17,34 @@
 			parent::__construct();
 		}	
 
-		public function insertProducto(int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimensiones, string $ruta, int $status, int $proveedorid){
+		public function insertMantenimiento(string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
-			$this->strModelo = $modelo;
+			$this->strDiagnostico = $diagnostico;
 			$this->intCategoriaId = $categoriaid;
-			$this->intProveedorId = $proveedorid;
-			$this->strPrecio = $precio;
-			$this->strDimensiones = $dimensiones;
-			$this->strRuta = $ruta;
+			$this->intPersonaId = $personaid;
+			$this->strEquipo = $equipo;
 			$this->intStatus = $status;
 			$return = 0;
-			$sql = "SELECT * FROM producto WHERE nombre = '{$this->strNombre}'";
+			$sql = "SELECT * FROM Mantenimiento WHERE nombre = '{$this->strNombre}'";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO producto(categoriaid,
-														nombre,
+				$query_insert  = "INSERT INTO Mantenimiento(nombre, 
 														descripcion,
-														precio,
-														modelo,
-														dimensiones,
-														ruta,
-														status,
-														proveedorid) 
-								  VALUES(?,?,?,?,?,?,?,?,?)";
-	        	$arrData = array($this->intCategoriaId,
-        						$this->strNombre,
+														diagnostico, 
+														categoriaid,
+														personaid, 
+														equipo,
+														status) 
+								  VALUES(?,?,?,?,?,?,?)";
+	        	$arrData = array($this->strNombre,
         						$this->strDescripcion,
-        						$this->strPrecio,
-        						$this->strModelo,
-        						$this->strDimensiones,
-								$this->strRuta,
-        						$this->intStatus,
-        						$this->intProveedorId);
+        						$this->strDiagnostico,
+        						$this->intCategoriaId,
+        						$this->intPersonaId,
+								$this->strEquipo,
+        						$this->intStatus);
 	        	$request_insert = $this->insert($query_insert,$arrData);
 	        	$return = $request_insert;
 			}else{
@@ -61,42 +53,37 @@
 	        return $return;
 		}
 
-		public function updateProducto(int $idproducto, int $categoriaid, string $nombre, string $descripcion, string $precio, string $modelo, string $dimensiones, string $ruta, int $status, int $proveedorid){
-			$this->intIdProducto = $idproducto;
+		public function updateMantenimiento(int $idMantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
+			
+			$this->intIdMantenimiento = $idMantenimiento;
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
-			$this->strModelo = $modelo;
+			$this->strDiagnostico = $diagnostico;
 			$this->intCategoriaId = $categoriaid;
-			$this->intProveedorId = $proveedorid;
-			$this->strPrecio = $precio;
-			$this->strDimensiones = $dimensiones;
-			$this->strRuta = $ruta;
+			$this->intPersonaId = $personaid;
+			$this->strEquipo = $equipo;
 			$this->intStatus = $status;
 			$return = 0;
-			$sql = "SELECT * FROM producto WHERE nombre = '{$this->strNombre}' AND idproducto != $this->intIdProducto ";
+			$sql = "SELECT * FROM Mantenimiento WHERE nombre = '{$this->strNombre}' AND idMantenimiento != $this->intIdMantenimiento ";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$sql = "UPDATE producto 
-						SET categoriaid=?,
-							nombre=?,
+				$sql = "UPDATE Mantenimiento 
+						SET nombre=?,
 							descripcion=?,
-							precio=?,
-							modelo=?,
-							dimensiones=?,
-							ruta=?,
-							status=?, 
-							proveedorid=? 
-						WHERE idproducto = $this->intIdProducto ";
-				$arrData = array($this->intCategoriaId,
-        						$this->strNombre,
-        						$this->strDescripcion,
-        						$this->strPrecio,
-        						$this->strModelo,
-        						$this->strDimensiones,
-								$this->strRuta,
-        						$this->intStatus,
-        						$this->intProveedorId);
+							diagnostico=?,
+							categoriaid=?,
+							personaid=?,
+							equipo=?,
+							status=?
+						WHERE idMantenimiento = $this->intIdMantenimiento ";
+				$arrData = array($this->strNombre,
+								$this->strDescripcion,
+								$this->strDiagnostico,
+								$this->intCategoriaId,
+								$this->intPersonaId,
+								$this->strEquipo,
+								$this->intStatus);
 
 	        	$request = $this->update($sql,$arrData);
 	        	$return = $request;
@@ -111,81 +98,77 @@
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " and p.idproducto != 1 ";
+				$whereAdmin = " and p.idMantenimiento != 1 ";
 			}
-			$sql = "SELECT p.idproducto,
+			$sql = "SELECT p.idMantenimiento,
 							p.nombre,
-							p.descripcion,
+							p.personaid,
 							p.categoriaid,
-							p.proveedorid,
 							c.nombre as categoria,
-							pd.nombre as proveedor,
-							p.precio,
-							p.modelo,
-							p.dimensiones,
+							pd.nombres as persona,
+							p.descripcion,
+							p.equipo,
 							p.status 
-					FROM producto p
+					FROM Mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
-					INNER JOIN proveedor pd ON p.proveedorid = pd.idproveedor
+					INNER JOIN persona pd ON p.personaid = pd.idpersona
 					WHERE p.status != 0 ".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}
 
-		public function selectProducto(int $idproducto){
-			$this->intIdProducto = $idproducto;
-			$sql = "SELECT p.idproducto,
+		public function selectMantenimiento(int $idMantenimiento){
+			$this->intIdMantenimiento = $idMantenimiento;
+			$sql = "SELECT p.idMantenimiento,
 							p.nombre,
-							p.descripcion,
+							p.personaid, 
 							p.categoriaid,
-							p.proveedorid,
 							c.nombre as categoria,
-							pd.nombre as proveedor,
-							p.precio,
-							p.modelo,
-							p.dimensiones,
+							pd.nombres as persona,
+							p.descripcion,
+							p.equipo,
 							p.status 
-					FROM producto p
+					FROM Mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
-					INNER JOIN proveedor pd ON p.proveedorid = pd.idproveedor
-					WHERE idproducto = $this->intIdProducto";
+					INNER JOIN persona pd ON p.personaid = pd.idpersona
+					WHERE idMantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;
 
 		}
 
-		public function insertImage(int $idproducto, string $imagen){
-			$this->intIdProducto = $idproducto;
+		public function insertImage(int $idMantenimiento, string $imagen){
+			$this->intIdMantenimiento = $idMantenimiento;
 			$this->strImagen = $imagen;
-			$query_insert  = "INSERT INTO imagen(productoid,img) VALUES(?,?)";
-	        $arrData = array($this->intIdProducto,
+			$query_insert  = "INSERT INTO imagen(Mantenimientoid,img) VALUES(?,?)";
+	        $arrData = array($this->intIdMantenimiento,
         					$this->strImagen);
 	        $request_insert = $this->insert($query_insert,$arrData);
 	        return $request_insert;
 		}
 
-		public function selectImages(int $idproducto){
-			$this->intIdProducto = $idproducto;
-			$sql = "SELECT productoid,img
+		public function selectImages(int $idMantenimiento){
+			$this->intIdMantenimiento = $idMantenimiento;
+			$sql = "SELECT Mantenimientoid,img
 					FROM imagen
-					WHERE productoid = $this->intIdProducto";
+					WHERE Mantenimientoid = $this->intIdMantenimiento";
 			$request = $this->select_all($sql);
 			return $request;
 		}
 
-		public function deleteImage(int $idproducto, string $imagen){
-			$this->intIdProducto = $idproducto;
+		public function deleteImage(int $idMantenimiento, string $imagen){
+			$this->intIdMantenimiento = $idMantenimiento;
 			$this->strImagen = $imagen;
 			$query  = "DELETE FROM imagen 
-						WHERE productoid = $this->intIdProducto 
+						WHERE Mantenimientoid = $this->intIdMantenimiento 
 						AND img = '{$this->strImagen}'";
 	        $request_delete = $this->delete($query);
 	        return $request_delete;
 		}
 
-		public function deleteProducto(int $idproducto){
-			$this->intIdProducto = $idproducto;
-			$sql = "UPDATE producto SET status = ? WHERE idproducto = $this->intIdProducto ";
+		public function deleteMantenimiento(int $idMantenimiento){
+			$this->intIdMantenimiento = $idMantenimiento;
+			$sql = "UPDATE Mantenimiento SET status = ? WHERE idMantenimiento = $this->intIdMantenimiento ";
 			$arrData = array(0);
 			$request = $this->update($sql,$arrData);
 			return $request;

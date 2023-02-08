@@ -25,65 +25,60 @@ class Recepciones extends Controllers{
 		$this->views->getView($this,"recepciones",$data); 
 	} 
 
-   public function setProducto(){
+   public function setMantenimiento(){
 			if($_POST){
 
-				if(empty($_POST['txtNombre']) || empty($_POST['txtModelo']) ||empty($_POST['listCategoria']) || empty($_POST['listProveedor']) ||  empty($_POST['txtDescripcion']) ||empty($_POST['txtPrecio']) || empty($_POST['txtDimensiones']) || empty($_POST['listStatus']) )
+				if(empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['listPersona']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					 
-					$idProducto = intval($_POST['idProducto']);
+					$idMantenimiento = intval($_POST['idMantenimiento']);
 					$strNombre =  strClean($_POST['txtNombre']);
 					$strDescripcion = strClean($_POST['txtDescripcion']);
-					$strModelo = strClean($_POST['txtModelo']);
+					$strDiagnostico = strClean($_POST['txtDiagnostico']);
 					$intCategoriaId = intval($_POST['listCategoria']);
-					$intProveedorId = intval($_POST['listProveedor']);
-					$strPrecio = strClean($_POST['txtPrecio']);
-					$strDimensiones = strClean($_POST['txtDimensiones']);
+					$intPersonaId = intval($_POST['listPersona']);
+					$strEquipo = strClean($_POST['txtEquipo']);
 					$intStatus = intval($_POST['listStatus']);
 
 					$ruta = strtolower(clear_cadena($strNombre));
 					$ruta = str_replace(" ","-",$ruta);
 
-					if($idProducto == 0)
+					if($idMantenimiento == 0)
 					{
 						$option = 1;
 						if($_SESSION['permisosMod']['w']){
-							$request_producto = $this->model->insertProducto($intCategoriaId,
-																		$strNombre, 
-																		$strDescripcion, 
-																		$strPrecio, 
-																		$strModelo, 
-																		$strDimensiones, 
-																		$ruta,	
-																		$intStatus,
-																		$intProveedorId);
+							$request_mantenimiento = $this->model->insertMantenimiento($strNombre, 
+																		$strDescripcion,
+																		$strDiagnostico,
+																		$intCategoriaId,
+																		$intPersonaId,
+																		$strEquipo, 
+																		$intStatus);
 						}
 					}else{
 						$option = 2;
 						if($_SESSION['permisosMod']['u']){
-							$request_producto = $this->model->updateProducto($idProducto,
-																		$intCategoriaId,
+							$request_Mantenimiento = $this->model->updateMantenimiento($idMantenimiento,
 																		$strNombre, 
 																		$strDescripcion, 
-																		$strPrecio, 
-																		$strModelo, 
-																		$strDimensiones, 
-																		$ruta,	
-																		$intStatus,
-																		$intProveedorId);	
+																		$strDiagnostico, 
+																		$intCategoriaId,
+																		$intPersonaId,   
+																		$strEquipo, 
+																		$intStatus);	
 						}
 					}
 
-					if($request_producto > 0 )
+					if($request_Mantenimiento > 0 )
 					{
 						if($option == 1){
-							$arrResponse = array('status' => true, 'idproducto' => $request_producto, 'msg' => 'Datos guardados correctamente.');
+							$arrResponse = array('status' => true, 'idMantenimiento' => $request_Mantenimiento, 'msg' => 'Datos guardados correctamente.');
 						}else{
-							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
+							$arrResponse = array('status' => true, 'idMantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados correctamente.');
 						}
-					}else if($request_producto == 'exist'){
+					}else if($request_Mantenimiento == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
 					}else{
 						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
@@ -113,13 +108,13 @@ class Recepciones extends Controllers{
 					//$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);
 
 					if($_SESSION['permisosMod']['r']){
-						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idproducto'].')" title="Ver recepción"><i class="far fa-eye"></i></button>';
+						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idMantenimiento'].')" title="Ver recepción"><i class="far fa-eye"></i></button>';
 					}
 					if($_SESSION['permisosMod']['u']){
-						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idproducto'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idMantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
 					}
 					if($_SESSION['permisosMod']['d']){	
-						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idproducto'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
+						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idMantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
 					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
@@ -128,15 +123,15 @@ class Recepciones extends Controllers{
 			die();	
 	}
 
-	public function getProducto($idproducto){
+	public function getMantenimiento($idMantenimiento){
 		if($_SESSION['permisosMod']['r']){
-			$idproducto = intval($idproducto);
-			if($idproducto > 0){
-				$arrData = $this->model->selectProducto($idproducto);
+			$idMantenimiento = intval($idMantenimiento);
+			if($idMantenimiento > 0){
+				$arrData = $this->model->selectMantenimiento($idMantenimiento);
 				if(empty($arrData)){
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 				}else{
-					$arrImg = $this->model->selectImages($idproducto);
+					$arrImg = $this->model->selectImages($idMantenimiento);
 					if(count($arrImg) > 0){
 						for ($i=0; $i < count($arrImg); $i++) { 
 							$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
@@ -153,13 +148,13 @@ class Recepciones extends Controllers{
 
 	public function setImage(){
 			if($_POST){
-				if(empty($_POST['idproducto'])){
+				if(empty($_POST['idMantenimiento'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de dato.');
 				}else{
-					$idProducto = intval($_POST['idproducto']);
+					$idMantenimiento = intval($_POST['idMantenimiento']);
 					$foto      = $_FILES['foto'];
 					$imgNombre = 'pro_'.md5(date('d-m-Y H:i:s')).'.jpg';
-					$request_image = $this->model->insertImage($idProducto,$imgNombre);
+					$request_image = $this->model->insertImage($idMantenimiento,$imgNombre);
 					if($request_image){
 						$uploadImage = uploadImage($foto,$imgNombre);
 						$arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
@@ -174,13 +169,13 @@ class Recepciones extends Controllers{
 	
 		public function delFile(){
 			if($_POST){
-				if(empty($_POST['idproducto']) || empty($_POST['file'])){
+				if(empty($_POST['idMantenimiento']) || empty($_POST['file'])){
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					//Eliminar de la DB
-					$idProducto = intval($_POST['idproducto']);
+					$idMantenimiento = intval($_POST['idMantenimiento']);
 					$imgNombre  = strClean($_POST['file']);
-					$request_image = $this->model->deleteImage($idProducto,$imgNombre);
+					$request_image = $this->model->deleteImage($idMantenimiento,$imgNombre);
 
 					if($request_image){
 						$deleteFile =  deleteFile($imgNombre);
@@ -194,11 +189,11 @@ class Recepciones extends Controllers{
 			die();
 		}
 
-		public function delProducto(){
+		public function delMantenimiento(){
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
-					$intIdproducto = intval($_POST['idProducto']);
-					$requestDelete = $this->model->deleteProducto($intIdproducto);
+					$intIdMantenimiento = intval($_POST['idMantenimiento']);
+					$requestDelete = $this->model->deleteMantenimiento($intIdMantenimiento);
 					if($requestDelete)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la recepción');

@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
             <form id="formRecepciones" name="formRecepciones" class="form-horizontal">
-              <input type="hidden" id="idProducto" name="idProducto" value="">
+              <input type="hidden" id="idMantenimiento" name="idMantenimiento" value="">
              
               <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
               <div class="row">
@@ -60,8 +60,8 @@
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="listProveedor">Proveedor <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listProveedor" name="listProveedor" required=""></select>
+                            <label for="listPersona">Proveedor <span class="required">*</span></label>
+                            <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
                         </div>
                         <div class="form-group col-md-6">
                             
@@ -95,7 +95,7 @@
                         <!--
                          <div id="div24">
                              <div class="prevImage">
-                                 <img src="<?= media(); ?>/images/uploads/producto1.jpg">
+                                 <img src="<?= media(); ?>/images/uploads/Mantenimiento1.jpg">
                              </div>
                              <input type="file" name="foto" id="img1" class="inputUploadfile">
                              <label for="img1" class="btnUploadfile"><i class="fas fa-upload "></i></label>
@@ -122,7 +122,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalViewProducto" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalViewMantenimiento" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl" >
     <div class="modal-content">
       <div class="modal-header header-primary">

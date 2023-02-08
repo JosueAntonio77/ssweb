@@ -26,10 +26,10 @@
                         <tr>
                           <th>ID</th>
                           <th>Recepción</th>
+                          <th>Personal</th>
+                          <th>Categoria</th>
                           <th>Descripción</th>
-                          <th>Teléfono</th>
-                          <th>Modelo</th>
-                          <th>Dimensiones</th>
+                          <th>Equipo</th>
                           <th>Status</th>
                           <th>Acciones</th>
                         </tr>

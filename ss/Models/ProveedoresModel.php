@@ -43,14 +43,23 @@
 	        return $return;
 		}
 
-		public function selectProveedores()
+		public function selectPersonas()
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " and p.idproveedor != 1 ";
+				$whereAdmin = " and p.idpersona != 1 ";
 			}
-			$sql = "SELECT p.idproveedor,p.nombre,p.email,p.telefono,p.direccion,p.status 
-					FROM proveedor p 
+			$sql = "SELECT p.idpersona,
+						p.nombres,
+						p.apellidos,
+						p.email_user,
+						p.direccionid, 
+						p.telefono,
+						p.cargo,
+						p.area, 
+						p.rolid,
+						p.status 
+					FROM persona p 
 					WHERE p.status != 0 ".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;

@@ -89,13 +89,13 @@ class Proveedores extends Controllers{
 			die();
 	}
 
-	public function getSelectProveedores(){
+	public function getSelectPersonas(){
 			$htmlOptions = "";
-			$arrData = $this->model->selectProveedores();
+			$arrData = $this->model->selectPersonas();
 			if(count($arrData) > 0 ){
 				for ($i=0; $i < count($arrData); $i++) { 
 					if($arrData[$i]['status'] == 1 ){
-					$htmlOptions .= '<option value="'.$arrData[$i]['idproveedor'].'">'.$arrData[$i]['nombre'].'</option>';
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
 					}
 				}
 			}

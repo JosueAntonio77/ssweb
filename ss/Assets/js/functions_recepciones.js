@@ -19,18 +19,18 @@ window.addEventListener('load', function(e){
             "dataSrc":""
         },
         "columns":[
-            {"data":"idproducto"},
+            {"data":"idMantenimiento"},
             {"data":"nombre"},
+            {"data":"personal"},
+            {"data":"categoria"},
             {"data":"descripcion"},
-            {"data":"precio"},
-            {"data":"modelo"},
-            {"data":"dimensiones"},
+            {"data":"equipo"},
             {"data":"status"},
             {"data":"options"}
         ],
         "columnDefs": [
                     { 'className': "textright", "targets": [ 3 ] },
-                    { 'className': "textcenter", "targets": [ 6 ] }
+                    { 'className': "textcenter", "targets": [ 7 ] }
                   ],  
         'dom': 'lBfrtip',
         'buttons': [
@@ -40,7 +40,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -48,7 +48,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -56,7 +56,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -64,7 +64,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             }
         ],
@@ -78,13 +78,16 @@ window.addEventListener('load', function(e){
         let formRecepciones = document.querySelector("#formRecepciones");
         formRecepciones.onsubmit = function(e) {
             e.preventDefault();
+
             let strNombre = document.querySelector('#txtNombre').value;
             let strDescripcion = document.querySelector('#txtDescripcion').value;
-            let strModelo = document.querySelector('#txtModelo').value;
-            let strPrecio = document.querySelector('#txtPrecio').value;
-            let strDimensiones = document.querySelector('#txtDimensiones').value;
+            let strDiagnostico = document.querySelector('#txtDiagnostico').value;
+            let intCategoriaid = document.querySelector('#listCategoria').value;
+            let intIdUsuarioid = document.querySelector('#listPersona').value;
+            let strEquipo = document.querySelector('#txtEquipo').value;
             let intStatus = document.querySelector('#listStatus').value;
-            if(strNombre == '' || strModelo == '' || strPrecio == '' || strDimensiones == '' )
+
+            if(strNombre == '' || intCategoriaid == '' || intIdUsuarioid == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -95,7 +98,7 @@ window.addEventListener('load', function(e){
             let request = (window.XMLHttpRequest) ? 
                             new XMLHttpRequest() : 
                             new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Recepciones/setProducto'; 
+            let ajaxUrl = base_url+'/Recepciones/setMantenimiento'; 
             let formData = new FormData(formRecepciones);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -105,7 +108,7 @@ window.addEventListener('load', function(e){
                     if(objData.status)
                     {
                         swal("", objData.msg ,"success");
-                        document.querySelector("#idProducto").value = objData.idproducto;
+                        document.querySelector("#idMantenimiento").value = objData.idMantenimiento;
                         document.querySelector("#containerGallery").classList.remove("notblock");
                         //tableRecepciones.api().ajax.reload();
                         if(rowTable == ""){
@@ -116,10 +119,10 @@ window.addEventListener('load', function(e){
                             '<span class="badge badge-danger">Inactivo</span>';
                             
                             rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = strDescripcion;
-                            rowTable.cells[3].textContent = SMONEY+strPrecio;
-                            rowTable.cells[4].textContent = strModelo;
-                            rowTable.cells[5].textContent = strDimensiones;
+                            rowTable.cells[2].textContent = intIdUsuarioid;
+                            rowTable.cells[3].textContent = intCategoriaid;
+                            rowTable.cells[4].textContent = strDescripcion;
+                            rowTable.cells[5].textContent = strEquipo;
                             rowTable.cells[6].innerHTML =  htmlStatus;
                             rowTable = ""; 
                         }
@@ -151,7 +154,7 @@ window.addEventListener('load', function(e){
     }
 
     ftnCategorias();
-    ftnProveedor();
+    ftnPersona();
 }, false);
 
 function ftnCategorias() {
@@ -171,9 +174,9 @@ function ftnCategorias() {
     }
 }
 
-function ftnProveedor() {
-    if(document.querySelector('#listProveedor')){
-        let ajaxUrl = base_url+'/Proveedores/getSelectProveedores';
+function ftnPersona() {
+    if(document.querySelector('#listPersona')){
+        let ajaxUrl = base_url+'/Proveedores/getSelectPersonas';
         let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
@@ -181,19 +184,19 @@ function ftnProveedor() {
         request.send();
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
-                document.querySelector('#listProveedor').innerHTML = request.responseText;
-                $('#listProveedor').selectpicker('render');
+                document.querySelector('#listPersona').innerHTML = request.responseText;
+                $('#listPersona').selectpicker('render');
             }
         }
     }
 }
 
-function fntViewInfo(idProducto){
+function fntViewInfo(idMantenimiento){
 
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Recepciones/getProducto/'+idProducto;
+    let ajaxUrl = base_url+'/Recepciones/getMantenimiento/'+idMantenimiento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -202,27 +205,27 @@ function fntViewInfo(idProducto){
             if(objData.status)
             {
                 let htmlImage = "";
-                let objProducto = objData.data;
-                let estadoProducto = objProducto.status == 1 ?
+                let objMantenimiento = objData.data;
+                let estadoMantenimiento = objMantenimiento.status == 1 ?
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>';
 
-                document.querySelector("#celNombre").innerHTML = objProducto.nombre;
-                document.querySelector("#celPrecio").innerHTML = objProducto.precio;
-                document.querySelector("#celModelo").innerHTML = objProducto.modelo;
-                document.querySelector("#celCategoria").innerHTML = objProducto.categoria;
-                document.querySelector("#celProveedor").innerHTML = objProducto.proveedor;
-                document.querySelector("#celStatus").innerHTML = estadoProducto;
-                document.querySelector("#celDescripcion").innerHTML = objProducto.descripcion;
+                document.querySelector("#celNombre").innerHTML = objMantenimiento.nombre;
+                document.querySelector("#celPrecio").innerHTML = objMantenimiento.precio;
+                document.querySelector("#celModelo").innerHTML = objMantenimiento.modelo;
+                document.querySelector("#celCategoria").innerHTML = objMantenimiento.categoria;
+                document.querySelector("#celProveedor").innerHTML = objMantenimiento.proveedor;
+                document.querySelector("#celStatus").innerHTML = estadoMantenimiento;
+                document.querySelector("#celDescripcion").innerHTML = objMantenimiento.descripcion;
 
-                if(objProducto.images.length > 0){
-                    let objProductos = objProducto.images;
-                    for (let p = 0; p < objProductos.length; p++) {
-                        htmlImage +=`<img src="${objProductos[p].url_image}"></img>`;
+                if(objMantenimiento.images.length > 0){
+                    let objMantenimientos = objMantenimiento.images;
+                    for (let p = 0; p < objMantenimientos.length; p++) {
+                        htmlImage +=`<img src="${objMantenimientos[p].url_image}"></img>`;
                     }
                 }
                 document.querySelector("#celFotos").innerHTML = htmlImage;
-                $('#modalViewProducto').modal('show');
+                $('#modalViewMantenimiento').modal('show');
 
             }else{
                 swal("Error", objData.msg , "error");
@@ -231,7 +234,7 @@ function fntViewInfo(idProducto){
     }
 }
 
-function fntEditInfo(element,idProducto){
+function fntEditInfo(element,idMantenimiento){
     rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar Recepción";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
@@ -241,7 +244,7 @@ function fntEditInfo(element,idProducto){
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Recepciones/getProducto/'+idProducto;
+    let ajaxUrl = base_url+'/Recepciones/getMantenimiento/'+idMantenimiento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -250,31 +253,31 @@ function fntEditInfo(element,idProducto){
             if(objData.status)
             {
                 let htmlImage = "";
-                let objProducto = objData.data;
+                let objMantenimiento = objData.data;
 
-                document.querySelector("#idProducto").value = objProducto.idproducto;
-                document.querySelector("#txtNombre").value = objProducto.nombre;
-                document.querySelector("#txtDescripcion").value = objProducto.descripcion;
-                document.querySelector("#txtModelo").value = objProducto.modelo;
-                document.querySelector("#txtPrecio").value = objProducto.precio;
-                document.querySelector("#txtDimensiones").value = objProducto.dimensiones;
-                document.querySelector("#listCategoria").value = objProducto.categoriaid;
-                document.querySelector("#listStatus").value = objProducto.status;
-                document.querySelector("#listProveedor").value = objProducto.proveedorid;
+                document.querySelector("#idMantenimiento").value = objMantenimiento.idMantenimiento;
+                document.querySelector("#txtNombre").value = objMantenimiento.nombre;
+                document.querySelector("#txtDescripcion").value = objMantenimiento.descripcion;
+                document.querySelector("#txtModelo").value = objMantenimiento.modelo;
+                document.querySelector("#txtPrecio").value = objMantenimiento.precio;
+                document.querySelector("#txtDimensiones").value = objMantenimiento.dimensiones;
+                document.querySelector("#listCategoria").value = objMantenimiento.categoriaid;
+                document.querySelector("#listStatus").value = objMantenimiento.status;
+                document.querySelector("#listPersona").value = objMantenimiento.proveedorid;
 
-                tinymce.activeEditor.setContent(objProducto.descripcion);
+                tinymce.activeEditor.setContent(objMantenimiento.descripcion);
                 $('#listCategoria').selectpicker('render');
                 $('#listStatus').selectpicker('render');
 
-                if(objProducto.images.length > 0){
-                    let objProductos = objProducto.images;
-                    for (let p = 0; p < objProductos.length; p++) {
+                if(objMantenimiento.images.length > 0){
+                    let objMantenimientos = objMantenimiento.images;
+                    for (let p = 0; p < objMantenimientos.length; p++) {
                         let key = Date.now()+p;
                         htmlImage +=`<div id="div${key}">
                             <div class="prevImage">
-                            <img src="${objProductos[p].url_image}"></img>
+                            <img src="${objMantenimientos[p].url_image}"></img>
                             </div>
-                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objProductos[p].img}">
+                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objMantenimientos[p].img}">
                             <i class="fas fa-trash-alt"></i></button></div>`;
                     }
                 }
@@ -290,7 +293,7 @@ function fntEditInfo(element,idProducto){
     
 }
 
-function fntDelInfo(idProducto){
+function fntDelInfo(idMantenimiento){
     swal({
         title: "Eliminar Recepción",
         text: "¿Realmente quiere eliminar la recepción?",
@@ -305,8 +308,8 @@ function fntDelInfo(idProducto){
         if (isConfirm) 
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Recepciones/delProducto';
-            let strData = "idProducto="+idProducto;
+            let ajaxUrl = base_url+'/Recepciones/delMantenimiento';
+            let strData = "idMantenimiento="+idMantenimiento;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -346,7 +349,7 @@ function fntInputFile(){
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
     inputUploadfile.forEach(function(inputUploadfile) {
         inputUploadfile.addEventListener('change', function(){
-            let idProducto = document.querySelector("#idProducto").value;
+            let idMantenimiento = document.querySelector("#idMantenimiento").value;
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");            
             let uploadFoto = document.querySelector("#"+idFile).value;
@@ -367,7 +370,7 @@ function fntInputFile(){
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
                     let ajaxUrl = base_url+'/Recepciones/setImage'; 
                     let formData = new FormData();
-                    formData.append('idproducto',idProducto);
+                    formData.append('idMantenimiento',idMantenimiento);
                     formData.append("foto", this.files[0]);
                     request.open("POST",ajaxUrl,true);
                     request.send(formData);
@@ -395,12 +398,12 @@ function fntInputFile(){
 
 function fntDelItem(element){
     let nameImg = document.querySelector(element+' .btnDeleteImage').getAttribute("imgname");
-    let idProducto = document.querySelector("#idProducto").value;
+    let idMantenimiento = document.querySelector("#idMantenimiento").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Recepciones/delFile'; 
 
     let formData = new FormData();
-    formData.append('idproducto',idProducto);
+    formData.append('idMantenimiento',idMantenimiento);
     formData.append("file",nameImg);
     request.open("POST",ajaxUrl,true);
     request.send(formData);
@@ -422,7 +425,7 @@ function fntDelItem(element){
 function openModal()
 {
     rowTable = "";
-    document.querySelector('#idProducto').value ="";
+    document.querySelector('#idMantenimiento').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Guardar";
