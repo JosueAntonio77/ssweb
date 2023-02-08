@@ -21,7 +21,7 @@ window.addEventListener('load', function(e){
         "columns":[
             {"data":"idMantenimiento"},
             {"data":"nombre"},
-            {"data":"personal"},
+            {"data":"persona"},
             {"data":"categoria"},
             {"data":"descripcion"},
             {"data":"equipo"},
@@ -40,7 +40,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -48,7 +48,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -56,7 +56,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -64,7 +64,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             }
         ],
