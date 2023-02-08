@@ -7,7 +7,7 @@
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "db_ssweb";
+	const DB_NAME = "db_mgdakava";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
@@ -24,7 +24,7 @@
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
 	const NOMBRE_EMPRESA = "H. AYUNTAMIENTO DE PROGRESO";
 	const WEB_EMPRESA = "http://www.ayuntamientodeprogreso.gob.mx";
-	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización. ";
+	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización.";
 	const SHAREDHASH = "MgDakava";
 	
 	//Constantes de las Categorías para el Slider
@@ -47,8 +47,8 @@
 	const MPEDIDOS = 5;
 	const MCATEGORIAS = 6;
 	const MREUNIONES = 7;
-	const MCOTIZACIONES = 8;
-	const MPROVEEDORES = 9;
+	const MENTREGAS = 8;
+	
 
 	//Roles
 	const RADMINISTRADOR = 1;

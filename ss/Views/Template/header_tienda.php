@@ -62,7 +62,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-					<a href="https://ayuntamientodeprogreso.gob.mx/" class="flex-c-m p-lr-10 trans-04">
+					<a href="<?=WEB_EMPRESA?>" class="semibold-text mb-2" target="_blanck">
 					H. AYUNTAMIENTO DE PROGRESO 
 						</a>
 					</div>

@@ -17,7 +17,7 @@
               <div class="tile">
                 <div class="tile-body">
                   <div class="table-responsive">
-                    <table class="table table-hover table-bordered" id="tableCotizaciones">
+                    <table class="table table-hover table-bordered" id="tableEntregas">
                       <thead>
                         <tr>
                           <th>ID</th>

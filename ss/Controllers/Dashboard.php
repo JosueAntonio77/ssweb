@@ -27,7 +27,7 @@
 			//$data['pedidos'] = $this->model->cantPedidos();
 			//$data['pedidos'] = $this->model->cantPedidos();
 			//$data['lastOrders'] = $this->model->lastOrders();
-			$data['productosTen'] = $this->model->productosTen();
+			//$data['productosTen'] = $this->model->productosTen();
 
 			$anio = date('Y');
 			$mes = date('m');

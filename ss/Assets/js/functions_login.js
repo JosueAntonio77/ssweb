@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			if(strEmail == "" || strPassword == "")
 			{
-				swal("Por favor", "Escribe usuario y contraseñaa.", "error");
+				swal("Por favor", "Escribe usuario y contraseña.", "error");
 				return false;
 			}else{
 				divLoading.style.display = "flex";

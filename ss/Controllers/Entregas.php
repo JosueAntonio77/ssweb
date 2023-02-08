@@ -1,5 +1,5 @@
 <?php
-class Cotizaciones extends Controllers{
+class Entregas extends Controllers{
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,7 +12,7 @@ class Cotizaciones extends Controllers{
 		getPermisos(MPEDIDOS);
 	}
 
-	public function Cotizaciones()
+	public function Entregas()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
@@ -20,16 +20,16 @@ class Cotizaciones extends Controllers{
 		$data['page_tag'] = "Entregas";
 		$data['page_title'] = "Entregas <small>Ayuntamiento de Progreso</small>";
 		$data['page_name'] = "entregas";
-		$data['page_functions_js'] = "functions_cotizaciones.js";
-		$this->views->getView($this,"cotizaciones",$data); 
+		$data['page_functions_js'] = "functions_entregas.js";
+		$this->views->getView($this,"entregas",$data); 
 	} 
-	public function getCotizaciones(){
+	public function getEntregas(){
 					if($_SESSION['permisosMod']['r']){
 						$idpersona = "";
 						if ($_SESSION['userData']['idrol'] == RCLIENTES){
 							$idpersona = $_SESSION['userData']['idpersona'];
 					}
-					$arrData = $this->model->selectCotizaciones($idpersona);
+					$arrData = $this->model->selectEntregas($idpersona);
 					//dep($arrData);
 					//exit();
 					for ($i=0; $i < count($arrData); $i++) {
@@ -40,7 +40,7 @@ class Cotizaciones extends Controllers{
 						$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
 
 						if($_SESSION['permisosMod']['r']){
-							$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/cotizaciones/orden/'.$arrData[$i]['idpedido'].'" target="_blanck"
+							$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idpedido'].'" target="_blanck"
 								class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
 
 								<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idpedido'].')"
@@ -68,10 +68,10 @@ class Cotizaciones extends Controllers{
 				$idpersona = $_SESSION['userData']['idpersona'];
 			}
 
-		$data['page_tag'] = "Cotizacion";
-		$data['page_title'] = "COTIZACION <small>Mgdakava</small>";
-		$data['page_name'] = "cotizacion";
-		$data['arrPedido'] = $this->model->selectCotizacion($idpedido,$idpersona);
+		$data['page_tag'] = "Entrega";
+		$data['page_title'] = "ENTREGA <small>H. Ayuntamiento de Progreso</small>";
+		$data['page_name'] = "entrega";
+		$data['arrPedido'] = $this->model->selectEntrega($idpedido,$idpersona);
 		$this->views->getView($this,"orden",$data);
 	}
 }

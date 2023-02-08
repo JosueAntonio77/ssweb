@@ -1,12 +1,12 @@
 <?php 
-	class CotizacionesModel extends Mysql
+	class EntregasModel extends Mysql
 	{
 		private $objCategoria;
 		public function __construct()
 		{
 			parent::__construct();		
 		}	
-		public function selectCotizaciones($idpersona = null){
+		public function selectEntregas($idpersona = null){
 			$where = "";
 			if($idpersona != null){
 				$where = "WHERE personaid = ".$idpersona;
@@ -22,7 +22,7 @@
 
 		}
 
-		public function selectCotizacion(int $idpedido, $idpersona = NULL){
+		public function selectEntrega(int $idpedido, $idpersona = NULL){
 			$busqueda = "";
 			if($idpersona != NULL){
 				$busqueda = "AND personaid =".$idpersona;
