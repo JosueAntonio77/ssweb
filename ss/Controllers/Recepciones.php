@@ -84,7 +84,7 @@ class Recepciones extends Controllers{
 							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
 						}
 					}else if($request_producto == 'exist'){
-						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con ese nombre.');		
+						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
 					}else{
 						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 					}
@@ -201,9 +201,9 @@ class Recepciones extends Controllers{
 					$requestDelete = $this->model->deleteProducto($intIdproducto);
 					if($requestDelete)
 					{
-						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
+						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la recepción');
 					}else{
-						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');
+						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la recepción.');
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}

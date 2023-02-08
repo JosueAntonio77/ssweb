@@ -292,8 +292,8 @@ function fntEditInfo(element,idProducto){
 
 function fntDelInfo(idProducto){
     swal({
-        title: "Eliminar Producto",
-        text: "¿Realmente quiere eliminar el producto?",
+        title: "Eliminar Recepción",
+        text: "¿Realmente quiere eliminar la recepción?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
