@@ -83,11 +83,11 @@ window.addEventListener('load', function(e){
             let strDescripcion = document.querySelector('#txtDescripcion').value;
             let strDiagnostico = document.querySelector('#txtDiagnostico').value;
             let intCategoriaid = document.querySelector('#listCategoria').value;
-            let intIdUsuarioid = document.querySelector('#listPersona').value;
+            let intPersonaid = document.querySelector('#listPersona').value;
             let strEquipo = document.querySelector('#txtEquipo').value;
             let intStatus = document.querySelector('#listStatus').value;
 
-            if(strNombre == '' || intCategoriaid == '' || intIdUsuarioid == '' )
+            if(strNombre == '' || intCategoriaid == '' || intPersonaid == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -119,7 +119,7 @@ window.addEventListener('load', function(e){
                             '<span class="badge badge-danger">Inactivo</span>';
                             
                             rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = intIdUsuarioid;
+                            rowTable.cells[2].textContent = intPersonaid;
                             rowTable.cells[3].textContent = intCategoriaid;
                             rowTable.cells[4].textContent = strDescripcion;
                             rowTable.cells[5].textContent = strEquipo;
@@ -211,12 +211,12 @@ function fntViewInfo(idMantenimiento){
                 '<span class="badge badge-danger">Inactivo</span>';
 
                 document.querySelector("#celNombre").innerHTML = objMantenimiento.nombre;
-                document.querySelector("#celPrecio").innerHTML = objMantenimiento.precio;
-                document.querySelector("#celModelo").innerHTML = objMantenimiento.modelo;
+                document.querySelector("#celPersona").innerHTML = objMantenimiento.persona;
                 document.querySelector("#celCategoria").innerHTML = objMantenimiento.categoria;
-                document.querySelector("#celProveedor").innerHTML = objMantenimiento.proveedor;
+                document.querySelector("#celEquipo").innerHTML = objMantenimiento.equipo;
                 document.querySelector("#celStatus").innerHTML = estadoMantenimiento;
                 document.querySelector("#celDescripcion").innerHTML = objMantenimiento.descripcion;
+                document.querySelector("#celDiagnostico").innerHTML = objMantenimiento.diagnostico;
 
                 if(objMantenimiento.images.length > 0){
                     let objMantenimientos = objMantenimiento.images;
@@ -258,15 +258,14 @@ function fntEditInfo(element,idMantenimiento){
                 document.querySelector("#idMantenimiento").value = objMantenimiento.idMantenimiento;
                 document.querySelector("#txtNombre").value = objMantenimiento.nombre;
                 document.querySelector("#txtDescripcion").value = objMantenimiento.descripcion;
-                document.querySelector("#txtModelo").value = objMantenimiento.modelo;
-                document.querySelector("#txtPrecio").value = objMantenimiento.precio;
-                document.querySelector("#txtDimensiones").value = objMantenimiento.dimensiones;
                 document.querySelector("#listCategoria").value = objMantenimiento.categoriaid;
+                document.querySelector("#listPersona").value = objMantenimiento.personaid;
+                document.querySelector("#txtEquipo").value = objMantenimiento.equipo;
                 document.querySelector("#listStatus").value = objMantenimiento.status;
-                document.querySelector("#listPersona").value = objMantenimiento.proveedorid;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
                 $('#listCategoria').selectpicker('render');
+                $('#listPersona').selectpicker('render');
                 $('#listStatus').selectpicker('render');
 
                 if(objMantenimiento.images.length > 0){

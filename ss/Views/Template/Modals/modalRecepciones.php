@@ -60,7 +60,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="listPersona">Proveedor <span class="required">*</span></label>
+                            <label for="listPersona">Personal <span class="required">*</span></label>
                             <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
                         </div>
                         <div class="form-group col-md-6">

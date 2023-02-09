@@ -105,11 +105,11 @@
 							p.personaid,
 							p.categoriaid,
 							c.nombre as categoria,
-							pd.nombres as persona,
+							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
 							p.descripcion,
 							p.equipo,
 							p.status 
-					FROM Mantenimiento p
+					FROM Mantenimientos p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
 					WHERE p.status != 0 ".$whereAdmin;
@@ -124,10 +124,11 @@
 							p.personaid, 
 							p.categoriaid,
 							c.nombre as categoria,
-							pd.nombres as persona,
-							p.descripcion,
+							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
 							p.equipo,
-							p.status 
+							p.status, 
+							p.descripcion,
+							p.diagnostico 
 					FROM Mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona

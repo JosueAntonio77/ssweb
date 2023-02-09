@@ -23,10 +23,10 @@
 			$data['page_functions_js'] = "functions_dashboard.js";
 			$data['usuarios'] = $this->model->cantUsuarios();
 			$data['clientes'] = $this->model->cantClientes();
-			$data['productos'] = $this->model->cantProductos();
+			$data['mantenimientos'] = $this->model->cantMantenimientos();
+			$data['entregas'] = $this->model->cantEntregas();
 			//$data['pedidos'] = $this->model->cantPedidos();
-			//$data['pedidos'] = $this->model->cantPedidos();
-			//$data['lastOrders'] = $this->model->lastOrders();
+			$data['lastOrders'] = $this->model->lastOrders();
 			//$data['productosTen'] = $this->model->productosTen();
 
 			$anio = date('Y');

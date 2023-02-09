@@ -36,11 +36,11 @@
     <?php } ?>
     <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
       <div class="col-md-6 col-lg-3">
-        <a href="<?= base_url() ?>/productos" class="linkw">
+        <a href="<?= base_url() ?>/recepciones" class="linkw">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
             <div class="info">
               <h4>Recepciones</h4>
-              <p><b><?= $data['productos'] ?></b></p>
+              <p><b><?= $data['mantenimientos'] ?></b></p>
             </div>
           </div>
         </a>
@@ -52,7 +52,7 @@
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
             <div class="info">
               <h4>Entregas</h4>
-              <p><b><?= $data['pedidos'] ?></b></p>
+              <p><b><?= $data['entregas'] ?></b></p>
             </div>
           </div>
         </a>
@@ -70,21 +70,27 @@
                 <th>#</th>
                 <th>Cliente</th>
                 <th>Estado</th>
+                <th>Problema</th>
+                <!--
                 <th class="text-right">Problema</th>
+                -->
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <?php
               if (count($data['lastOrders']) > 0) {
-                foreach ($data['lastOrders'] as $pedido) {
+                foreach ($data['lastOrders'] as $mantenimiento) {
               ?>
                   <tr>
-                    <td><?= $pedido['idpedido'] ?></td>
-                    <td><?= $pedido['nombre'] ?></td>
-                    <td><?= $pedido['status'] ?></td>
-                    <td class="text-right"><?= SMONEY . " " . formatMoney($pedido['monto']) ?></td>
-                    <td><a href="<?= base_url() ?>/pedidos/orden/<?= $pedido['idpedido'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                    <td><?= $mantenimiento['idmantenimiento'] ?></td>
+                    <td><?= $mantenimiento['nombre'] ?></td>
+                    <td><?= $mantenimiento['status'] ?></td>
+                    <td><?= $mantenimiento['categoria'] ?></td>
+                    <!--
+                    <td class="text-right"><?= SMONEY . " " . formatMoney($mantenimiento['monto']) ?></td>
+                    -->
+                    <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                   </tr>
               <?php }
               } ?>

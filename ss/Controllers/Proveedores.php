@@ -10,7 +10,7 @@ class Proveedores extends Controllers{
 		{
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(9);
+		getPermisos(7);
 	}
 
 	public function Proveedores()

@@ -57,15 +57,6 @@
         </li>
         <?php } ?> 
 
-         <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/Views/Reuniones/reuniones.php">
-                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                <span class="app-menu__label">Calendario</span>
-            </a>
-        </li>
-        <?php } ?>
-
         <!--<?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
@@ -75,17 +66,8 @@
         </li>
          <?php } ?>-->
 
-         
-         <?php if(!empty($_SESSION['permisos'][10]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/suscriptores">
-                <i class="app-menu__icon fas fa-user-tie" aria-hidden="true"></i>
-                <span class="app-menu__label">Suscriptores</span>
-            </a>
-        </li>
-        <?php } ?>
 
-         <?php if(!empty($_SESSION['permisos'][11]['r'])){ ?>
+         <?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/contactos">
                 <i class="app-menu__icon fas fa-envelope" aria-hidden="true"></i>

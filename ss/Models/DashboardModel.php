@@ -12,19 +12,22 @@
 			$total = $request['total']; 
 			return $total;
 		}
+
 		public function cantClientes(){
 			$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = ".RCLIENTES;
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
 		}
-		public function cantProductos(){
-			$sql = "SELECT COUNT(*) as total FROM producto WHERE status != 0 ";
+		
+		public function cantMantenimientos(){
+			$sql = "SELECT COUNT(*) as total FROM mantenimientos WHERE status != 0 ";
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
 		}
-		/*public function cantPedidos(){
+		
+		public function cantEntregas(){
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
@@ -32,11 +35,12 @@
 				$where = " WHERE personaid = ".$idUser;
 			}
 
-			$sql = "SELECT COUNT(*) as total FROM pedido ".$where;
+			$sql = "SELECT COUNT(*) as total FROM mantenimientos ".$where;
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
 		}
+		
 		public function lastOrders(){
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
@@ -45,15 +49,19 @@
 				$where = " WHERE p.personaid = ".$idUser;
 			}
 
-			$sql = "SELECT p.idpedido, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, p.status 
-					FROM pedido p
-					INNER JOIN persona pr
-					ON p.personaid = pr.idpersona
+			$sql = "SELECT p.idmantenimiento, 
+							CONCAT(pr.nombres,' ',pr.apellidos) AS nombre,
+							c.nombre AS categoria,  
+							p.status 
+					FROM mantenimientos p
+					INNER JOIN persona pr ON p.personaid = pr.idpersona
+					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					$where
-					ORDER BY p.idpedido DESC LIMIT 10 ";
+					ORDER BY p.idmantenimiento DESC LIMIT 10 ";
 			$request = $this->select_all($sql);
 			return $request;
 		}	
+		/*
 		
 		public function selectVentasMes(int $anio, int $mes){
 			$rolid = $_SESSION['userData']['idrol'];
@@ -111,7 +119,7 @@
 			return $arrVentas;
 		}*/
 		public function productosTen(){
-			$sql = "SELECT * FROM producto WHERE status = 1 ORDER BY idproducto DESC LIMIT 1,10 ";
+			$sql = "SELECT * FROM mantenimientos WHERE status = 1 ORDER BY idmantenimientos DESC LIMIT 1,10 ";
 			$request = $this->select_all($sql);
 			return $request;
 		}

@@ -7,7 +7,7 @@
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "db_mgdakava";
+	const DB_NAME = "db_ss";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
@@ -43,11 +43,11 @@
 	const MDASHBOARD = 1;
 	const MUSUARIOS = 2;
 	const MCLIENTES = 3;
-	const MPRODUCTOS = 4;
-	const MPEDIDOS = 5;
+	const MRECEPCIONES = 4;
+	const MENTREGAS = 5;
 	const MCATEGORIAS = 6;
-	const MREUNIONES = 7;
-	const MENTREGAS = 8;
+	const MPROVEEDORES = 7;
+	const MCONTACTOS = 8;
 	
 
 	//Roles
