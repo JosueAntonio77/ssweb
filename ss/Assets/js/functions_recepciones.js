@@ -19,7 +19,7 @@ window.addEventListener('load', function(e){
             "dataSrc":""
         },
         "columns":[
-            {"data":"idMantenimiento"},
+            {"data":"idmantenimiento"},
             {"data":"nombre"},
             {"data":"persona"},
             {"data":"categoria"},
@@ -81,11 +81,10 @@ window.addEventListener('load', function(e){
 
             let strNombre = document.querySelector('#txtNombre').value;
             let strDescripcion = document.querySelector('#txtDescripcion').value;
-            let strDiagnostico = document.querySelector('#txtDiagnostico').value;
+            //let strDiagnostico = document.querySelector('#txtDiagnostico').value;
             let intCategoriaid = document.querySelector('#listCategoria').value;
             let intPersonaid = document.querySelector('#listPersona').value;
             let strEquipo = document.querySelector('#txtEquipo').value;
-            let intStatus = document.querySelector('#listStatus').value;
 
             if(strNombre == '' || intCategoriaid == '' || intPersonaid == '' )
             {
@@ -108,11 +107,11 @@ window.addEventListener('load', function(e){
                     if(objData.status)
                     {
                         swal("", objData.msg ,"success");
-                        document.querySelector("#idMantenimiento").value = objData.idMantenimiento;
+                        document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
                         document.querySelector("#containerGallery").classList.remove("notblock");
                         //tableRecepciones.api().ajax.reload();
                         if(rowTable == ""){
-                             tableRecepciones.api().ajax.reload();
+                            tableRecepciones.api().ajax.reload();
                         }else{
                            htmlStatus = intStatus == 1 ? 
                             '<span class="badge badge-success">Activo</span>' : 
@@ -176,10 +175,8 @@ function ftnCategorias() {
 
 function ftnPersona() {
     if(document.querySelector('#listPersona')){
-        let ajaxUrl = base_url+'/Proveedores/getSelectPersonas';
-        let request = (window.XMLHttpRequest) ? 
-                    new XMLHttpRequest() : 
-                    new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Recepciones/getSelectPersonas';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET",ajaxUrl,true);
         request.send();
         request.onreadystatechange = function(){
@@ -257,15 +254,19 @@ function fntEditInfo(element,idMantenimiento){
 
                 document.querySelector("#idMantenimiento").value = objMantenimiento.idMantenimiento;
                 document.querySelector("#txtNombre").value = objMantenimiento.nombre;
-                document.querySelector("#txtDescripcion").value = objMantenimiento.descripcion;
-                document.querySelector("#listCategoria").value = objMantenimiento.categoriaid;
-                document.querySelector("#listPersona").value = objMantenimiento.personaid;
+                document.querySelector("#listCategoria").value = objMantenimiento.categoria;
+                document.querySelector("#listPersona").value = objMantenimiento.persona;
                 document.querySelector("#txtEquipo").value = objMantenimiento.equipo;
                 document.querySelector("#listStatus").value = objMantenimiento.status;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
                 $('#listCategoria').selectpicker('render');
                 $('#listPersona').selectpicker('render');
+                if(objData.data.status == 1){
+                    document.querySelector("#listStatus").value = 1;
+                }else{
+                    document.querySelector("#listStatus").value = 2;
+                }
                 $('#listStatus').selectpicker('render');
 
                 if(objMantenimiento.images.length > 0){

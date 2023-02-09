@@ -21,7 +21,7 @@
 		}
 		
 		public function cantMantenimientos(){
-			$sql = "SELECT COUNT(*) as total FROM mantenimientos WHERE status != 0 ";
+			$sql = "SELECT COUNT(*) as total FROM mantenimiento WHERE status != 0 ";
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
@@ -35,7 +35,7 @@
 				$where = " WHERE personaid = ".$idUser;
 			}
 
-			$sql = "SELECT COUNT(*) as total FROM mantenimientos ".$where;
+			$sql = "SELECT COUNT(*) as total FROM mantenimiento ".$where;
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
@@ -53,7 +53,7 @@
 							CONCAT(pr.nombres,' ',pr.apellidos) AS nombre,
 							c.nombre AS categoria,  
 							p.status 
-					FROM mantenimientos p
+					FROM mantenimiento p
 					INNER JOIN persona pr ON p.personaid = pr.idpersona
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					$where
@@ -119,7 +119,7 @@
 			return $arrVentas;
 		}*/
 		public function productosTen(){
-			$sql = "SELECT * FROM mantenimientos WHERE status = 1 ORDER BY idmantenimientos DESC LIMIT 1,10 ";
+			$sql = "SELECT * FROM mantenimiento WHERE status = 1 ORDER BY idmantenimiento DESC LIMIT 1,10 ";
 			$request = $this->select_all($sql);
 			return $request;
 		}

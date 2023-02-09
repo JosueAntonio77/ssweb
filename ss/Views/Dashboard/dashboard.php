@@ -74,7 +74,7 @@
                 <!--
                 <th class="text-right">Problema</th>
                 -->
-                <th></th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>

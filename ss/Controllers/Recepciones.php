@@ -28,13 +28,13 @@ class Recepciones extends Controllers{
    public function setMantenimiento(){
 			if($_POST){
 
-				if(empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['listPersona']) || empty($_POST['listStatus']) )
+				if(empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['listPersona']) )
 				{
-					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+					$arrResponse = array("status" => false, "msg" => 'Llene todos los campos.');
 				}else{
-					 
+					/*
 					$idMantenimiento = intval($_POST['idMantenimiento']);
-					$strNombre =  strClean($_POST['txtNombre']);
+					$strNombre = ucwords(strClean($_POST['txtNombre']));
 					$strDescripcion = strClean($_POST['txtDescripcion']);
 					$strDiagnostico = strClean($_POST['txtDiagnostico']);
 					$intCategoriaId = intval($_POST['listCategoria']);
@@ -44,7 +44,17 @@ class Recepciones extends Controllers{
 
 					$ruta = strtolower(clear_cadena($strNombre));
 					$ruta = str_replace(" ","-",$ruta);
-
+					*/
+					$idMantenimiento = intval($_POST['idMantenimiento']);
+					$strNombre = ucwords(strClean($_POST['txtNombre']));
+					$strDescripcion = ucwords(strClean($_POST['txtDescripcion']));
+					//$strDiagnostico = ucwords(strClean($_POST['txtDiagnostico']));
+					$strDiagnostico = ' ';
+					$intCategoriaId = intval(strClean($_POST['listCategoria']));
+					$intPersonaId = intval(strClean($_POST['listPersona']));
+					$strEquipo = ucwords(strClean($_POST['txtEquipo']));
+					$intStatus = 1;
+					//$intStatus = intval(strClean($_POST['listStatus']));
 					if($idMantenimiento == 0)
 					{
 						$option = 1;
@@ -60,7 +70,7 @@ class Recepciones extends Controllers{
 					}else{
 						$option = 2;
 						if($_SESSION['permisosMod']['u']){
-							$request_Mantenimiento = $this->model->updateMantenimiento($idMantenimiento,
+							$request_mantenimiento = $this->model->updateMantenimiento($idMantenimiento,
 																		$strNombre, 
 																		$strDescripcion, 
 																		$strDiagnostico, 
@@ -71,14 +81,14 @@ class Recepciones extends Controllers{
 						}
 					}
 
-					if($request_Mantenimiento > 0 )
+					if($request_mantenimiento > 0 )
 					{
 						if($option == 1){
-							$arrResponse = array('status' => true, 'idMantenimiento' => $request_Mantenimiento, 'msg' => 'Datos guardados correctamente.');
+							$arrResponse = array('status' => true, 'idmantenimiento' => $request_mantenimiento, 'msg' => 'Datos guardados correctamente.');
 						}else{
-							$arrResponse = array('status' => true, 'idMantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados correctamente.');
+							$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados correctamente.');
 						}
-					}else if($request_Mantenimiento == 'exist'){
+					}else if($request_mantenimiento == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
 					}else{
 						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
@@ -108,13 +118,13 @@ class Recepciones extends Controllers{
 					//$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);
 
 					if($_SESSION['permisosMod']['r']){
-						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idMantenimiento'].')" title="Ver recepción"><i class="far fa-eye"></i></button>';
+						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idmantenimiento'].')" title="Ver recepción"><i class="far fa-eye"></i></button>';
 					}
 					if($_SESSION['permisosMod']['u']){
-						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idMantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
 					}
 					if($_SESSION['permisosMod']['d']){	
-						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idMantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
+						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
 					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
@@ -123,15 +133,15 @@ class Recepciones extends Controllers{
 			die();	
 	}
 
-	public function getMantenimiento($idMantenimiento){
+	public function getMantenimiento($idmantenimiento){
 		if($_SESSION['permisosMod']['r']){
-			$idMantenimiento = intval($idMantenimiento);
-			if($idMantenimiento > 0){
-				$arrData = $this->model->selectMantenimiento($idMantenimiento);
+			$idmantenimiento = intval($idmantenimiento);
+			if($idmantenimiento > 0){
+				$arrData = $this->model->selectMantenimiento($idmantenimiento);
 				if(empty($arrData)){
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 				}else{
-					$arrImg = $this->model->selectImages($idMantenimiento);
+					$arrImg = $this->model->selectImages($idmantenimiento);
 					if(count($arrImg) > 0){
 						for ($i=0; $i < count($arrImg); $i++) { 
 							$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
@@ -148,10 +158,10 @@ class Recepciones extends Controllers{
 
 	public function setImage(){
 			if($_POST){
-				if(empty($_POST['idMantenimiento'])){
+				if(empty($_POST['idmantenimiento'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de dato.');
 				}else{
-					$idMantenimiento = intval($_POST['idMantenimiento']);
+					$idMantenimiento = intval($_POST['idmantenimiento']);
 					$foto      = $_FILES['foto'];
 					$imgNombre = 'pro_'.md5(date('d-m-Y H:i:s')).'.jpg';
 					$request_image = $this->model->insertImage($idMantenimiento,$imgNombre);
@@ -169,11 +179,11 @@ class Recepciones extends Controllers{
 	
 		public function delFile(){
 			if($_POST){
-				if(empty($_POST['idMantenimiento']) || empty($_POST['file'])){
+				if(empty($_POST['idmantenimiento']) || empty($_POST['file'])){
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					//Eliminar de la DB
-					$idMantenimiento = intval($_POST['idMantenimiento']);
+					$idMantenimiento = intval($_POST['idmantenimiento']);
 					$imgNombre  = strClean($_POST['file']);
 					$request_image = $this->model->deleteImage($idMantenimiento,$imgNombre);
 
@@ -192,8 +202,8 @@ class Recepciones extends Controllers{
 		public function delMantenimiento(){
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
-					$intIdMantenimiento = intval($_POST['idMantenimiento']);
-					$requestDelete = $this->model->deleteMantenimiento($intIdMantenimiento);
+					$intIdmantenimiento = intval($_POST['idMantenimiento']);
+					$requestDelete = $this->model->deleteMantenimiento($intIdmantenimiento);
 					if($requestDelete)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la recepción');
@@ -204,6 +214,20 @@ class Recepciones extends Controllers{
 				}
 			}
 			die();
+		}
+
+		public function getSelectPersonas(){
+			$htmlOptions = "";
+			$arrData = $this->model->selectPersonas();
+			if(count($arrData) > 0 ){
+				for ($i=0; $i < count($arrData); $i++) { 
+					if($arrData[$i]['status'] == 1 ){
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombres'].'</option>';
+					}
+				}
+			}
+			echo $htmlOptions;
+			die();	 
 		}
 
 }

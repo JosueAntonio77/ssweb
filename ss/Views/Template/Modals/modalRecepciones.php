@@ -24,9 +24,16 @@
                       <label class="control-label">Descripción</label>
                       <textarea class="form-control" id="txtDescripcion" name="txtDescripcion"></textarea>
                     </div>
+                    <!--
+                    <div class="form-group">
+                      <label class="control-label">Diagnostico</label>
+                      <textarea class="form-control" id="txtDescripcion" name="txtDescripcion"></textarea>
+                    </div>
+                    -->
                 </div>
 
                 <div class="col-md-4">
+                    <!--
                     <div class="form-group">
                       <label class="control-label">Usuario <span class="required">*</span></label>
                       <input class="form-control" id="txtModelo" name="txtModelo" type="text" placeholder="Nombre" required="">
@@ -43,6 +50,7 @@
                             <input class="form-control" id="txtDimensiones" name="txtDimensiones" type="text" placeholder="Dirección" required="">
                         </div>
                     </div>
+                    -->
 
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -50,24 +58,26 @@
                             <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
                         </div>
                         <div class="form-group col-md-6">
+                            <label class="control-label">Equipo <span class="required">*</span></label>
+                            <input class="form-control" id="txtEquipo" name="txtEquipo" type="text" required="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="form-group col-md-6">
+                            <label for="listPersona">Personal <span class="required">*</span></label>
+                            <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
+                        </div>
+                        <!--
+                        <div class="form-group col-md-6">
                             <label for="listStatus">Estado <span class="required">*</span></label>
                             <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
                               <option value="1">Activo</option>
                               <option value="2">Inactivo</option>
                         </select>
                         </div>
+                        -->
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="listPersona">Personal <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            
-                        </div>
-                    </div>
-
                     
                     <div class="row">
                        <div class="form-group col-md-6">

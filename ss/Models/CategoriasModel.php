@@ -44,8 +44,7 @@
 
 		public function selectCategorias()
 		{
-			$sql = "SELECT * FROM categoria 
-					WHERE status != 0 ";
+			$sql = "SELECT * FROM categoria LIMIT 0, 25";
 			$request = $this->select_all($sql);
 			return $request;
 		}

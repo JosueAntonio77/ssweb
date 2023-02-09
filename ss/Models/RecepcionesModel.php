@@ -26,11 +26,11 @@
 			$this->strEquipo = $equipo;
 			$this->intStatus = $status;
 			$return = 0;
-			$sql = "SELECT * FROM Mantenimiento WHERE nombre = '{$this->strNombre}'";
+			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}'";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO Mantenimiento(nombre, 
+				$query_insert  = "INSERT INTO mantenimiento(nombre, 
 														descripcion,
 														diagnostico, 
 														categoriaid,
@@ -53,9 +53,9 @@
 	        return $return;
 		}
 
-		public function updateMantenimiento(int $idMantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
+		public function updateMantenimiento(int $idmantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
 			
-			$this->intIdMantenimiento = $idMantenimiento;
+			$this->intIdMantenimiento = $idmantenimiento;
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
 			$this->strDiagnostico = $diagnostico;
@@ -64,11 +64,11 @@
 			$this->strEquipo = $equipo;
 			$this->intStatus = $status;
 			$return = 0;
-			$sql = "SELECT * FROM Mantenimiento WHERE nombre = '{$this->strNombre}' AND idMantenimiento != $this->intIdMantenimiento ";
+			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}' AND idmantenimiento != $this->intIdMantenimiento ";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$sql = "UPDATE Mantenimiento 
+				$sql = "UPDATE mantenimiento 
 						SET nombre=?,
 							descripcion=?,
 							diagnostico=?,
@@ -76,7 +76,7 @@
 							personaid=?,
 							equipo=?,
 							status=?
-						WHERE idMantenimiento = $this->intIdMantenimiento ";
+						WHERE idmantenimiento = $this->intIdMantenimiento ";
 				$arrData = array($this->strNombre,
 								$this->strDescripcion,
 								$this->strDiagnostico,
@@ -98,9 +98,9 @@
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " and p.idMantenimiento != 1 ";
+				$whereAdmin = " and p.idmantenimiento != 1 ";
 			}
-			$sql = "SELECT p.idMantenimiento,
+			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							p.personaid,
 							p.categoriaid,
@@ -109,7 +109,7 @@
 							p.descripcion,
 							p.equipo,
 							p.status 
-					FROM Mantenimientos p
+					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
 					WHERE p.status != 0 ".$whereAdmin;
@@ -117,9 +117,9 @@
 					return $request;
 		}
 
-		public function selectMantenimiento(int $idMantenimiento){
-			$this->intIdMantenimiento = $idMantenimiento;
-			$sql = "SELECT p.idMantenimiento,
+		public function selectMantenimiento(int $idmantenimiento){
+			$this->intIdMantenimiento = $idmantenimiento;
+			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							p.personaid, 
 							p.categoriaid,
@@ -129,47 +129,83 @@
 							p.status, 
 							p.descripcion,
 							p.diagnostico 
-					FROM Mantenimiento p
+					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
-					WHERE idMantenimiento = $this->intIdMantenimiento";
+					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;
 
 		}
+		
+		public function selectPersonas()
+		{
+			$whereAdmin = "";
+			if($_SESSION['idUser'] != 1 ){
+				$whereAdmin = " and p.idpersona != 1 ";
+			}
+			$sql = "SELECT p.idpersona,
+						CONCAT(p.nombres,' ',p.apellidos) AS nombres,
+						p.apellidos,
+						p.email_user,
+						p.direccionid, 
+						p.telefono,
+						p.cargo,
+						p.area, 
+						p.rolid,
+						p.status 
+					FROM persona p 
+					WHERE p.status != 0 ".$whereAdmin;
+					$request = $this->select_all($sql);
+					return $request;
+		}
 
-		public function insertImage(int $idMantenimiento, string $imagen){
-			$this->intIdMantenimiento = $idMantenimiento;
+		/*
+		public function selectPersonas()
+		{
+			$whereAdmin = "";
+			if($_SESSION['idUser'] != 1 ){
+				$whereAdmin = " and idpersona != 1 ";
+			}
+			//EXTRAE ROLES
+			$sql = "SELECT * FROM persona WHERE status != 0".$whereAdmin;
+			$request = $this->select_all($sql);
+			return $request;
+		}
+		*/
+
+		public function insertImage(int $idmantenimiento, string $imagen){
+			$this->intIdMantenimiento = $idmantenimiento;
 			$this->strImagen = $imagen;
-			$query_insert  = "INSERT INTO imagen(Mantenimientoid,img) VALUES(?,?)";
+			$query_insert  = "INSERT INTO imagen(mantenimientoid,img) VALUES(?,?)";
 	        $arrData = array($this->intIdMantenimiento,
         					$this->strImagen);
 	        $request_insert = $this->insert($query_insert,$arrData);
 	        return $request_insert;
 		}
 
-		public function selectImages(int $idMantenimiento){
-			$this->intIdMantenimiento = $idMantenimiento;
-			$sql = "SELECT Mantenimientoid,img
+		public function selectImages(int $idmantenimiento){
+			$this->intIdMantenimiento = $idmantenimiento;
+			$sql = "SELECT mantenimientoid,img
 					FROM imagen
-					WHERE Mantenimientoid = $this->intIdMantenimiento";
+					WHERE mantenimientoid = $this->intIdMantenimiento";
 			$request = $this->select_all($sql);
 			return $request;
 		}
 
-		public function deleteImage(int $idMantenimiento, string $imagen){
-			$this->intIdMantenimiento = $idMantenimiento;
+		public function deleteImage(int $idmantenimiento, string $imagen){
+			$this->intIdMantenimiento = $idmantenimiento;
 			$this->strImagen = $imagen;
 			$query  = "DELETE FROM imagen 
-						WHERE Mantenimientoid = $this->intIdMantenimiento 
+						WHERE mantenimientoid = $this->intIdMantenimiento 
 						AND img = '{$this->strImagen}'";
 	        $request_delete = $this->delete($query);
 	        return $request_delete;
 		}
 
-		public function deleteMantenimiento(int $idMantenimiento){
-			$this->intIdMantenimiento = $idMantenimiento;
-			$sql = "UPDATE Mantenimiento SET status = ? WHERE idMantenimiento = $this->intIdMantenimiento ";
+		public function deletemantenimiento(int $idmantenimiento){
+			$this->intIdMantenimiento = $idmantenimiento;
+			$sql = "UPDATE mantenimiento SET status = ? WHERE idmantenimiento = $this->intIdMantenimiento ";
 			$arrData = array(0);
 			$request = $this->update($sql,$arrData);
 			return $request;

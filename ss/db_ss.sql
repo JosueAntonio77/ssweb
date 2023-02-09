@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-02-2023 a las 02:20:20
+-- Tiempo de generación: 09-02-2023 a las 21:52:31
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -78,10 +78,22 @@ CREATE TABLE `direcciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mantenimientos`
+-- Estructura de tabla para la tabla `imagen`
 --
 
-CREATE TABLE `mantenimientos` (
+CREATE TABLE `imagen` (
+  `id` bigint(20) NOT NULL,
+  `mantenimientoid` bigint(20) NOT NULL,
+  `img` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mantenimiento`
+--
+
+CREATE TABLE `mantenimiento` (
   `idmantenimiento` bigint(20) NOT NULL,
   `nombre` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
@@ -95,11 +107,12 @@ CREATE TABLE `mantenimientos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `mantenimientos`
+-- Volcado de datos para la tabla `mantenimiento`
 --
 
-INSERT INTO `mantenimientos` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
-(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-08 10:36:57', '2023-02-08 16:36:57', 1, 'HP', 1);
+INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
+(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-08 10:36:57', '2023-02-08 16:36:57', 1, 'HP', 1),
+(2, 'Sistema', '<p>jbjhb</p>', ' ', 1, '2023-02-09 14:24:30', '2023-02-09 20:24:13', 1, 'HP', 0);
 
 -- --------------------------------------------------------
 
@@ -155,14 +168,14 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (233, 2, 4, 0, 0, 0, 0),
 (234, 2, 5, 0, 0, 0, 0),
 (235, 2, 6, 0, 0, 0, 0),
-(355, 1, 1, 1, 1, 1, 1),
-(356, 1, 2, 1, 1, 1, 1),
-(357, 1, 3, 1, 1, 1, 1),
-(358, 1, 4, 1, 1, 1, 1),
-(359, 1, 5, 1, 1, 1, 1),
-(360, 1, 6, 1, 1, 1, 1),
-(363, 1, 7, 1, 1, 1, 1),
-(365, 1, 8, 1, 1, 1, 1);
+(368, 1, 1, 1, 1, 1, 1),
+(369, 1, 2, 1, 1, 1, 1),
+(370, 1, 3, 1, 1, 1, 1),
+(371, 1, 4, 1, 1, 1, 1),
+(372, 1, 5, 1, 1, 1, 1),
+(373, 1, 6, 1, 1, 1, 1),
+(374, 1, 7, 1, 1, 1, 1),
+(375, 1, 8, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -242,9 +255,16 @@ ALTER TABLE `direcciones`
   ADD PRIMARY KEY (`id_direccion`);
 
 --
--- Indices de la tabla `mantenimientos`
+-- Indices de la tabla `imagen`
 --
-ALTER TABLE `mantenimientos`
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `mantenimientoid` (`mantenimientoid`);
+
+--
+-- Indices de la tabla `mantenimiento`
+--
+ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`idmantenimiento`),
   ADD KEY `idcategoria` (`categoriaid`),
   ADD KEY `personaid` (`personaid`);
@@ -291,7 +311,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
@@ -300,10 +320,10 @@ ALTER TABLE `direcciones`
   MODIFY `id_direccion` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `mantenimientos`
+-- AUTO_INCREMENT de la tabla `mantenimiento`
 --
-ALTER TABLE `mantenimientos`
-  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `mantenimiento`
+  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -315,7 +335,7 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
@@ -340,11 +360,17 @@ ALTER TABLE `direcciones`
   ADD CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_direccion`) REFERENCES `persona` (`direccionid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `mantenimientos`
+-- Filtros para la tabla `imagen`
 --
-ALTER TABLE `mantenimientos`
-  ADD CONSTRAINT `mantenimientos_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimientos_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `imagen`
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`mantenimientoid`) REFERENCES `mantenimiento` (`idmantenimiento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `mantenimiento`
+--
+ALTER TABLE `mantenimiento`
+  ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos`
