@@ -57,17 +57,7 @@
         </li>
         <?php } ?> 
 
-        <!--<?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/cotizaciones">
-                <i class="app-menu__icon fa fa-shopping-cart" aria-hidden="true"></i>
-                <span class="app-menu__label">Cotizaciones</span>
-            </a>
-        </li>
-         <?php } ?>-->
-
-
-         <?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
+         <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/contactos">
                 <i class="app-menu__icon fas fa-envelope" aria-hidden="true"></i>

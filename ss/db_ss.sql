@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-02-2023 a las 21:52:31
+-- Tiempo de generación: 09-02-2023 a las 22:12:08
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -137,9 +137,8 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (3, 'Clientes', 'Clientes de tienda', 1),
 (4, 'Recepciones', 'Todas las recepciones', 1),
 (5, 'Entregas', 'Entregas', 1),
-(6, 'Caterogías', 'Caterogías Productos', 1),
-(7, 'Proveedores', 'modulo de los proveedores', 1),
-(8, 'Contactos', 'Contactos de posibles usuarios que se comunican con MG DAKAVA.', 1);
+(6, 'Caterogías', 'Caterogías de los problemas', 1),
+(7, 'Contactos', 'Contactos de posibles usuarios que se comunican con H. Ayuntamiento Progreso.', 1);
 
 -- --------------------------------------------------------
 
@@ -174,8 +173,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (371, 1, 4, 1, 1, 1, 1),
 (372, 1, 5, 1, 1, 1, 1),
 (373, 1, 6, 1, 1, 1, 1),
-(374, 1, 7, 1, 1, 1, 1),
-(375, 1, 8, 1, 1, 1, 1);
+(375, 1, 7, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 

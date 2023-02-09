@@ -9,7 +9,7 @@
 			{
 				header('Location: '.base_url().'/login');
 			}
-			getPermisos(11);
+			getPermisos(7);
 		}
 
 		public function Contactos()

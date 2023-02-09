@@ -46,8 +46,7 @@
 	const MRECEPCIONES = 4;
 	const MENTREGAS = 5;
 	const MCATEGORIAS = 6;
-	const MPROVEEDORES = 7;
-	const MCONTACTOS = 8;
+	const MCONTACTOS = 7;
 	
 
 	//Roles
