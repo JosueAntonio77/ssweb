@@ -121,7 +121,10 @@
                       <br>
                       <div class="form-group">
                         <div class="utility">
+                          <!--
                           <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto"  target="_blanck">Contactate con nosotros aquí.</a></p>
+                          -->
+                          <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto"  target="">Contactate con nosotros aquí.</a></p>
                         </div>
                       </div>
                     </form>
