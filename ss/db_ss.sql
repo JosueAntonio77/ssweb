@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-02-2023 a las 22:47:44
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Servidor: localhost
+-- Tiempo de generación: 09-02-2023 a las 02:20:20
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_ssweb`
+-- Base de datos: `db_ss`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `idcategoria` bigint(20) NOT NULL,
-  `nombrecategoria` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL
+  `nombre` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`idcategoria`, `nombre`) VALUES
+(1, 'Pantalla Azul');
 
 -- --------------------------------------------------------
 
@@ -71,10 +78,10 @@ CREATE TABLE `direcciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mantenimiento`
+-- Estructura de tabla para la tabla `mantenimientos`
 --
 
-CREATE TABLE `mantenimiento` (
+CREATE TABLE `mantenimientos` (
   `idmantenimiento` bigint(20) NOT NULL,
   `nombre` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
@@ -86,6 +93,13 @@ CREATE TABLE `mantenimiento` (
   `equipo` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `mantenimientos`
+--
+
+INSERT INTO `mantenimientos` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
+(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-08 10:36:57', '2023-02-08 16:36:57', 1, 'HP', 1);
 
 -- --------------------------------------------------------
 
@@ -108,16 +122,11 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (1, 'Dashboard', 'Dashboard', 1),
 (2, 'Usuarios', 'Usuarios del sistema', 1),
 (3, 'Clientes', 'Clientes de tienda', 1),
-(4, 'Productos', 'Todos los productos', 1),
-(5, 'Pedidos', 'Pedidos', 1),
+(4, 'Recepciones', 'Todas las recepciones', 1),
+(5, 'Entregas', 'Entregas', 1),
 (6, 'Caterogías', 'Caterogías Productos', 1),
-(7, 'Reuniones', 'Modulo de las reuniones', 1),
-(8, 'Cotizaciones', 'Modulo de las cotizaciones', 1),
-(9, 'Proveedores', 'modulo de los proveedores', 1),
-(10, 'Suscriptores', 'Suscriptores a MG DAKAVA CRM.', 1),
-(11, 'Contactos', 'Contactos de posibles usuarios que se comunican con MG DAKAVA.', 1),
-(12, 'Compras', 'Módulo para el registro de compras', 1),
-(13, 'Ventas', 'Módulo para el registro de ventas', 1);
+(7, 'Proveedores', 'modulo de los proveedores', 1),
+(8, 'Contactos', 'Contactos de posibles usuarios que se comunican con MG DAKAVA.', 1);
 
 -- --------------------------------------------------------
 
@@ -152,13 +161,8 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (358, 1, 4, 1, 1, 1, 1),
 (359, 1, 5, 1, 1, 1, 1),
 (360, 1, 6, 1, 1, 1, 1),
-(361, 1, 7, 0, 1, 1, 1),
-(362, 1, 8, 1, 1, 1, 1),
-(363, 1, 9, 1, 1, 1, 1),
-(364, 1, 10, 0, 1, 1, 1),
-(365, 1, 11, 1, 1, 1, 1),
-(366, 1, 12, 1, 1, 1, 1),
-(367, 1, 13, 1, 1, 1, 1);
+(363, 1, 7, 1, 1, 1, 1),
+(365, 1, 8, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -192,27 +196,6 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`, `segmento`, `tipocliente`) VALUES
 (1, '2409198920', 'Carlos', 'Gio', 0, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `producto`
---
-
-CREATE TABLE `producto` (
-  `idproducto` bigint(20) NOT NULL,
-  `categoriaid` bigint(20) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
-  `precio` bigint(20) NOT NULL,
-  `modelo` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `dimensiones` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
-  `ruta` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `proveedorid` bigint(20) DEFAULT NULL,
-  `stock` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -259,9 +242,9 @@ ALTER TABLE `direcciones`
   ADD PRIMARY KEY (`id_direccion`);
 
 --
--- Indices de la tabla `mantenimiento`
+-- Indices de la tabla `mantenimientos`
 --
-ALTER TABLE `mantenimiento`
+ALTER TABLE `mantenimientos`
   ADD PRIMARY KEY (`idmantenimiento`),
   ADD KEY `idcategoria` (`categoriaid`),
   ADD KEY `personaid` (`personaid`);
@@ -289,14 +272,6 @@ ALTER TABLE `persona`
   ADD KEY `direccionid` (`direccionid`);
 
 --
--- Indices de la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idproducto`),
-  ADD KEY `categoriaid` (`categoriaid`),
-  ADD KEY `proveedorid` (`proveedorid`);
-
---
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -310,7 +285,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -325,10 +300,10 @@ ALTER TABLE `direcciones`
   MODIFY `id_direccion` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `mantenimiento`
+-- AUTO_INCREMENT de la tabla `mantenimientos`
 --
-ALTER TABLE `mantenimiento`
-  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `mantenimientos`
+  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -349,12 +324,6 @@ ALTER TABLE `persona`
   MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -371,11 +340,11 @@ ALTER TABLE `direcciones`
   ADD CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_direccion`) REFERENCES `persona` (`direccionid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `mantenimiento`
+-- Filtros para la tabla `mantenimientos`
 --
-ALTER TABLE `mantenimiento`
-  ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `mantenimientos`
+  ADD CONSTRAINT `mantenimientos_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mantenimientos_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos`
@@ -389,12 +358,6 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
