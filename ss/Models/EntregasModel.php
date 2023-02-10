@@ -11,11 +11,12 @@
 			if($idpersona != null){
 				$where = "WHERE personaid = ".$idpersona;
 			}
-					$sql = "SELECT idpedido,
-        	                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
-                            monto,
+					$sql = "SELECT m.idmantenimiento,
+							m.equipo,
+							m.diagnostico,
+        	                DATE_FORMAT(datefinish, '%d/%m/%Y') as datefinish,
                             status
-                    FROM pedido 
+                    FROM mantenimiento as m
 					$where";
             $request = $this ->select_all($sql);
             return $request;

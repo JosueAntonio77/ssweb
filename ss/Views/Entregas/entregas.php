@@ -21,8 +21,11 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Fecha</th>
-                          <th>Monto</th>
+                          <th>Equipo</th>
+                          <th>Dirección</th>
+                          <th>Diagnóstico</th>
+                          <th>Recibió</th>
+                          <th>Fecha Entrega</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>

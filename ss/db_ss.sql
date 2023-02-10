@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 09-02-2023 a las 22:12:08
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.4.29
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-02-2023 a las 05:58:25
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,9 +71,20 @@ INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`,
 --
 
 CREATE TABLE `direcciones` (
-  `id_direccion` bigint(20) NOT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_swedish_ci NOT NULL
+  `iddireccion` bigint(20) NOT NULL,
+  `direccion` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `direcciones`
+--
+
+INSERT INTO `direcciones` (`iddireccion`, `direccion`) VALUES
+(1, 'Recursos Humanos'),
+(2, 'Ventas'),
+(5, 'Mercadotecnia'),
+(6, 'Presidencia'),
+(7, 'Casa de la cultura');
 
 -- --------------------------------------------------------
 
@@ -206,7 +217,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`, `segmento`, `tipocliente`) VALUES
-(1, '2409198920', 'Carlos', 'Gio', 0, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', '');
+(1, '2409198920', 'Carlos', 'Gio', 1, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -250,7 +261,7 @@ ALTER TABLE `contacto`
 -- Indices de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  ADD PRIMARY KEY (`id_direccion`);
+  ADD PRIMARY KEY (`iddireccion`);
 
 --
 -- Indices de la tabla `imagen`
@@ -287,7 +298,7 @@ ALTER TABLE `permisos`
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
   ADD KEY `rolid` (`rolid`),
-  ADD KEY `direccionid` (`direccionid`);
+  ADD KEY `iddireccion` (`direccionid`);
 
 --
 -- Indices de la tabla `rol`
@@ -315,7 +326,7 @@ ALTER TABLE `contacto`
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddireccion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
@@ -352,12 +363,6 @@ ALTER TABLE `rol`
 --
 
 --
--- Filtros para la tabla `direcciones`
---
-ALTER TABLE `direcciones`
-  ADD CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_direccion`) REFERENCES `persona` (`direccionid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `imagen`
 --
 ALTER TABLE `imagen`
@@ -381,7 +386,8 @@ ALTER TABLE `permisos`
 -- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
-  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `persona_ibfk_2` FOREIGN KEY (`direccionid`) REFERENCES `direcciones` (`iddireccion`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

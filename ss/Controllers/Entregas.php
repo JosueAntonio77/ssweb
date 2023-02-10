@@ -9,7 +9,7 @@ class Entregas extends Controllers{
 		{
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MPEDIDOS);
+		getPermisos(MENTREGAS);
 	}
 
 	public function Entregas()

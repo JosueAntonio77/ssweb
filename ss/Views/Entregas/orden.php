@@ -31,7 +31,7 @@
               <h2 class="page-header"><i ></i> <img src="<?= media(); ?> /images/logo.png" width="150px" heigh="200px"> </h2>
             </div>
             <div class="col-6">
-              <h5 class="text-right">Fecha: <?= $data['orden']['fecha'] ?></h5>
+              <h5 class="text-right">Fecha: <?= $data['fecha'] ?></h5>
             </div>
           </div>
           <div class="row invoice-info">

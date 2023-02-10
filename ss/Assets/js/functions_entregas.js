@@ -10,9 +10,12 @@ tableEntregas = $('#tableEntregas').dataTable( {
         "dataSrc":""
     },
     "columns":[
-        {"data":"idpedido"},
-        {"data":"fecha"},
-        {"data":"monto"},
+        {"data":"idmantenimiento"},
+        {"data":"equipo"},
+        {"data":"direccion"},
+        {"data":"diagnostico"},
+        {"data":"nombres"},
+        {"data":"datefinish"},
         {"data":"status"},
         {"data":"options"}
     ],
@@ -28,7 +31,7 @@ tableEntregas = $('#tableEntregas').dataTable( {
             "titleAttr":"Copiar",
             "className": "btn btn-secondary",
             "exportOptions": { 
-            "columns": [ 0, 1, 2, 3, 4] 
+            "columns": [ 0, 1, 2, 3, 4, 5, 6] 
             }
         },{
             "extend": "excelHtml5",
@@ -36,7 +39,7 @@ tableEntregas = $('#tableEntregas').dataTable( {
             "titleAttr":"Esportar a Excel",
             "className": "btn btn-success",
             "exportOptions": { 
-            "columns": [ 0, 1, 2, 3, 4] 
+            "columns": [ 0, 1, 2, 3, 4, 5, 6] 
             }
         },{
             "extend": "pdfHtml5",
@@ -44,7 +47,7 @@ tableEntregas = $('#tableEntregas').dataTable( {
             "titleAttr":"Esportar a PDF",
             "className": "btn btn-danger",
             "exportOptions": { 
-            "columns": [ 0, 1, 2, 3, 4] 
+            "columns": [ 0, 1, 2, 3, 4, 5, 6] 
             }
         },{
             "extend": "csvHtml5",
@@ -52,7 +55,7 @@ tableEntregas = $('#tableEntregas').dataTable( {
             "titleAttr":"Esportar a CSV",
             "className": "btn btn-info",
             "exportOptions": { 
-            "columns": [ 0, 1, 2, 3, 4] 
+            "columns": [ 0, 1, 2, 3, 4, 5, 6] 
             }
         }
     ],
