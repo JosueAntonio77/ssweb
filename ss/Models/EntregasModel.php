@@ -12,11 +12,14 @@
 				$where = "WHERE personaid = ".$idpersona;
 			}
 					$sql = "SELECT m.idmantenimiento,
-							m.equipo,
+							m.nombre,
 							m.diagnostico,
         	                DATE_FORMAT(datefinish, '%d/%m/%Y') as datefinish,
+							d.direccion,
                             status
                     FROM mantenimiento as m
+					INNER JOIN direcciones d
+                	ON m.direccionid = d.iddireccion
 					$where";
             $request = $this ->select_all($sql);
             return $request;

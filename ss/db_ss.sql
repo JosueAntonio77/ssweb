@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2023 a las 05:58:25
+-- Tiempo de generación: 10-02-2023 a las 06:21:47
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -72,7 +72,7 @@ INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`,
 
 CREATE TABLE `direcciones` (
   `iddireccion` bigint(20) NOT NULL,
-  `direccion` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL
+  `direccion` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
@@ -114,6 +114,7 @@ CREATE TABLE `mantenimiento` (
   `datefinish` timestamp NOT NULL DEFAULT current_timestamp(),
   `personaid` bigint(20) NOT NULL,
   `equipo` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `direccionid` bigint(20) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
@@ -121,9 +122,9 @@ CREATE TABLE `mantenimiento` (
 -- Volcado de datos para la tabla `mantenimiento`
 --
 
-INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
-(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-08 10:36:57', '2023-02-08 16:36:57', 1, 'HP', 1),
-(2, 'Sistema', '<p>jbjhb</p>', ' ', 1, '2023-02-09 14:24:30', '2023-02-09 20:24:13', 1, 'HP', 0);
+INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `direccionid`, `status`) VALUES
+(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-09 23:14:49', '2023-02-08 16:36:57', 1, 'HP', 1, 1),
+(2, 'Sistema', 'jbjhb', ' ', 1, '2023-02-09 23:14:49', '2023-02-09 20:24:13', 1, 'HP', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -276,7 +277,8 @@ ALTER TABLE `imagen`
 ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`idmantenimiento`),
   ADD KEY `idcategoria` (`categoriaid`),
-  ADD KEY `personaid` (`personaid`);
+  ADD KEY `personaid` (`personaid`),
+  ADD KEY `iddireccion` (`direccionid`);
 
 --
 -- Indices de la tabla `modulo`
@@ -373,7 +375,8 @@ ALTER TABLE `imagen`
 --
 ALTER TABLE `mantenimiento`
   ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mantenimiento_ibfk_3` FOREIGN KEY (`direccionid`) REFERENCES `direcciones` (`iddireccion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos`
