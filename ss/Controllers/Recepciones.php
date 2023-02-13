@@ -110,9 +110,9 @@ class Recepciones extends Controllers{
 
 					if($arrData[$i]['status'] == 1)
 					{
-						$arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';
+						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}else{
-						$arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
+						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
 					}
 
 					//$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);

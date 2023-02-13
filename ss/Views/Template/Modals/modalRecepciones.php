@@ -149,20 +149,16 @@
               <td id="celNombre"></td>
             </tr>
             <tr>
-              <td>Precio:</td>
-              <td id="celPrecio"></td>
-            </tr>
-            <tr>
-              <td>Modelo:</td>
-              <td id="celModelo"></td>
+              <td>Personal Encargado:</td>
+              <td id="celPersona"></td>
             </tr>
             <tr>
               <td>Categoría:</td>
               <td id="celCategoria"></td>
             </tr>
             <tr>
-              <td>Proveedor:</td>
-              <td id="celProveedor"></td>
+              <td>Equipo:</td>
+              <td id="celEquipo"></td>
             </tr>
             <tr>
               <td>Status:</td>
@@ -173,7 +169,11 @@
               <td id="celDescripcion"></td>
             </tr>
             <tr>
-              <td>Fotos de referencia:</td>
+              <td>Diagnóstivo:</td>
+              <td id="celDiagnostico"></td>
+            </tr>
+            <tr>
+              <td>Fotos de evidencia:</td>
               <td id="celFotos"></td>
             </tr>
           </tbody>

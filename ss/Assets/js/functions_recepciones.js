@@ -114,8 +114,8 @@ window.addEventListener('load', function(e){
                             tableRecepciones.api().ajax.reload();
                         }else{
                            htmlStatus = intStatus == 1 ? 
-                            '<span class="badge badge-success">Activo</span>' : 
-                            '<span class="badge badge-danger">Inactivo</span>';
+                            '<span class="badge badge-success">Entregado</span>' : 
+                            '<span class="badge badge-danger">Pendiente</span>';
                             
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = intPersonaid;
@@ -204,8 +204,8 @@ function fntViewInfo(idMantenimiento){
                 let htmlImage = "";
                 let objMantenimiento = objData.data;
                 let estadoMantenimiento = objMantenimiento.status == 1 ?
-                '<span class="badge badge-success">Activo</span>' : 
-                '<span class="badge badge-danger">Inactivo</span>';
+                '<span class="badge badge-success">Entregado</span>' : 
+                '<span class="badge badge-danger">Pendiente</span>';
 
                 document.querySelector("#celNombre").innerHTML = objMantenimiento.nombre;
                 document.querySelector("#celPersona").innerHTML = objMantenimiento.persona;

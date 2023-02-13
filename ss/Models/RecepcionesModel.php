@@ -121,10 +121,8 @@
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
-							p.personaid, 
-							p.categoriaid,
-							c.nombre as categoria,
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							c.nombre as categoria,
 							p.equipo,
 							p.status, 
 							p.descripcion,
