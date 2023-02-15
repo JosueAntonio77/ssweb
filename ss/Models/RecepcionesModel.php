@@ -26,8 +26,8 @@
 			$this->intPersonaId 	= $personaid;
 			$this->strEquipo 		= $equipo;
 			$this->intStatus 		= $status;
-
 			$return = 0;
+
 			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}'";
 			$request = $this->select_all($sql);
 			if(empty($request))
@@ -65,8 +65,8 @@
 			$this->intPersonaId 		= $personaid;
 			$this->strEquipo 			= $equipo;
 			$this->intStatus 			= $status;
-
 			$return = 0;
+			
 			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}' AND idmantenimiento != $this->intIdMantenimiento ";
 			$request = $this->select_all($sql);
 			if(empty($request))
@@ -109,12 +109,13 @@
 							d.direccion AS direcciones,
 							c.nombre AS categoria,
 							p.descripcion,
+							p.diagnostico,
 							p.equipo,
 							p.status 
 					FROM mantenimiento p
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
-					INNER JOIN direcciones d ON pd.idpersona = d.iddireccion
+					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
 					WHERE p.status != 0".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
@@ -135,7 +136,7 @@
 					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
-					INNER JOIN direcciones d ON pd.idpersona = d.iddireccion
+					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
 					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;

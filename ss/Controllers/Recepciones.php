@@ -33,14 +33,6 @@ class Recepciones extends Controllers{
 					$arrResponse = array("status" => false, "msg" => 'Llene todos los campos.');
 				}else{
 					/*
-					$idMantenimiento = intval($_POST['idMantenimiento']);
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strDescripcion = strClean($_POST['txtDescripcion']);
-					$strDiagnostico = strClean($_POST['txtDiagnostico']);
-					$intCategoriaId = intval($_POST['listCategoria']);
-					$intPersonaId = intval($_POST['listPersona']);
-					$strEquipo = strClean($_POST['txtEquipo']);
-					$intStatus = intval($_POST['listStatus']);
 
 					$ruta = strtolower(clear_cadena($strNombre));
 					$ruta = str_replace(" ","-",$ruta);
@@ -48,13 +40,14 @@ class Recepciones extends Controllers{
 					$idMantenimiento 	= intval($_POST['idMantenimiento']);
 					$strNombre 			= ucwords(strClean($_POST['txtNombre']));
 					$strDescripcion 	= ucwords(strClean($_POST['txtDescripcion']));
-					//$strDiagnostico 	= ucwords(strClean($_POST['txtDiagnostico']));
-					$strDiagnostico 	= ' ';
+					$strDiagnostico 	= ucwords(strClean($_POST['txtDiagnostico']));
+					//$strDiagnostico 	= ' ';
 					$intCategoriaId 	= intval(strClean($_POST['listCategoria']));
 					$intPersonaId 		= intval(strClean($_POST['listPersona']));
 					$strEquipo 			= ucwords(strClean($_POST['txtEquipo']));
-					//$intStatus 		= 1;
 					$intStatus 			= intval(strClean($_POST['listStatus']));
+
+					$ruta = strtolower(clear_cadena($strNombre));
 
 					if($idMantenimiento == 0)
 					{
@@ -111,9 +104,9 @@ class Recepciones extends Controllers{
 
 					if($arrData[$i]['status'] == 1)
 					{
-						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
-					}else{
 						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
+					}else{
+						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}
 
 					//$arrData[$i]['precio'] = SMONEY.' '.formatMoney($arrData[$i]['precio']);

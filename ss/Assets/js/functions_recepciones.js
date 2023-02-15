@@ -41,7 +41,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -49,7 +49,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -57,7 +57,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -65,7 +65,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Esportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
                 }
             }
         ],
@@ -82,7 +82,7 @@ window.addEventListener('load', function(e){
 
             let strNombre = document.querySelector('#txtNombre').value;
             let strDescripcion = document.querySelector('#txtDescripcion').value;
-            //let strDiagnostico = document.querySelector('#txtDiagnostico').value;
+            let strDiagnostico = document.querySelector('#txtDiagnostico').value;
             let intCategoriaid = document.querySelector('#listCategoria').value;
             let intPersonaid = document.querySelector('#listPersona').value;
             let strEquipo = document.querySelector('#txtEquipo').value;
@@ -116,16 +116,15 @@ window.addEventListener('load', function(e){
                             tableRecepciones.api().ajax.reload();
                         }else{
                            htmlStatus = intStatus == 1 ? 
-                            '<span class="badge badge-success">Entregado</span>' : 
-                            '<span class="badge badge-danger">Pendiente</span>';
+                            '<span class="badge badge-danger">Pendiente</span>' :
+                            '<span class="badge badge-success">Entregado</span>';
                             
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = intPersonaid;
-                            rowTable.cells[3].textContent = intDireccionesid;
-                            rowTable.cells[4].textContent = intCategoriaid;
-                            rowTable.cells[5].textContent = strDescripcion;
-                            rowTable.cells[6].textContent = strEquipo;
-                            rowTable.cells[7].innerHTML =  htmlStatus;
+                            rowTable.cells[3].textContent = intCategoriaid;
+                            rowTable.cells[4].textContent = strDescripcion;
+                            rowTable.cells[5].textContent = strEquipo;
+                            rowTable.cells[6].innerHTML =  htmlStatus;
                             rowTable = ""; 
                         }
                     }else{
@@ -207,8 +206,8 @@ function fntViewInfo(idMantenimiento){
                 let htmlImage = "";
                 let objMantenimiento = objData.data;
                 let estadoMantenimiento = objMantenimiento.status == 1 ?
-                '<span class="badge badge-success">Entregado</span>' : 
-                '<span class="badge badge-danger">Pendiente</span>';
+                '<span class="badge badge-danger">Pendiente</span>'  :
+                '<span class="badge badge-success">Entregado</span>';
 
                 document.querySelector("#celNombre").innerHTML = objMantenimiento.nombre;
                 document.querySelector("#celPersona").innerHTML = objMantenimiento.persona;
@@ -217,7 +216,7 @@ function fntViewInfo(idMantenimiento){
                 document.querySelector("#celEquipo").innerHTML = objMantenimiento.equipo;
                 document.querySelector("#celStatus").innerHTML = estadoMantenimiento;
                 document.querySelector("#celDescripcion").innerHTML = objMantenimiento.descripcion;
-                //document.querySelector("#celDiagnostico").innerHTML = objMantenimiento.diagnostico;
+                document.querySelector("#celDiagnostico").innerHTML = objMantenimiento.diagnostico;
 
                 if(objMantenimiento.images.length > 0){
                     let objMantenimientos = objMantenimiento.images;
@@ -258,14 +257,18 @@ function fntEditInfo(element,idMantenimiento){
 
                 document.querySelector("#idMantenimiento").value = objMantenimiento.idMantenimiento;
                 document.querySelector("#txtNombre").value = objMantenimiento.nombre;
+                document.querySelector("#txtDescripcion").value = objMantenimiento.descripcion;
+                document.querySelector("#txtDiagnostico").value = objMantenimiento.diagnostico;
                 document.querySelector("#listCategoria").value = objMantenimiento.categoria;
                 document.querySelector("#listPersona").value = objMantenimiento.persona;
                 document.querySelector("#txtEquipo").value = objMantenimiento.equipo;
                 document.querySelector("#listStatus").value = objMantenimiento.status;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
+                tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
                 $('#listCategoria').selectpicker('render');
                 $('#listPersona').selectpicker('render');
+
                 if(objData.data.status == 1){
                     document.querySelector("#listStatus").value = 1;
                 }else{
@@ -339,7 +342,20 @@ function fntDelInfo(idMantenimiento){
 tinymce.init({
     selector: '#txtDescripcion',
     width: "100%",
-    height: 400,    
+    height: 250,    
+    statubar: true,
+    plugins: [
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+        "save table contextmenu directionality emoticons template paste textcolor"
+    ],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+});
+
+tinymce.init({
+    selector: '#txtDiagnostico',
+    width: "100%",
+    height: 250,    
     statubar: true,
     plugins: [
         "advlist autolink link image lists charmap print preview hr anchor pagebreak",
