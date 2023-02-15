@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2023 a las 06:21:47
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 15-02-2023 a las 15:30:07
+-- Versión del servidor: 10.9.2-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -114,7 +114,6 @@ CREATE TABLE `mantenimiento` (
   `datefinish` timestamp NOT NULL DEFAULT current_timestamp(),
   `personaid` bigint(20) NOT NULL,
   `equipo` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `direccionid` bigint(20) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
@@ -122,9 +121,9 @@ CREATE TABLE `mantenimiento` (
 -- Volcado de datos para la tabla `mantenimiento`
 --
 
-INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `direccionid`, `status`) VALUES
-(1, 'HP Azul', 'No me deja ver nada. ', '', 1, '2023-02-09 23:14:49', '2023-02-08 16:36:57', 1, 'HP', 1, 1),
-(2, 'Sistema', 'jbjhb', ' ', 1, '2023-02-09 23:14:49', '2023-02-09 20:24:13', 1, 'HP', 1, 1);
+INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
+(12, 'Noce', '<p>sdfgsdfgsdfgd</p>', '<p>sdfhjhjhjhjhjhd</p>', 1, '2023-02-15 01:47:33', '2023-02-15 07:47:33', 1, 'Lenovo', 1),
+(13, 'Sistema', '<p>Hola Mundo</p>', '<p>Hola</p>', 1, '2023-02-15 01:50:45', '2023-02-15 07:50:45', 14, 'MAC', 1);
 
 -- --------------------------------------------------------
 
@@ -218,7 +217,8 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`, `segmento`, `tipocliente`) VALUES
-(1, '2409198920', 'Carlos', 'Gio', 1, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', '');
+(1, '2409198920', 'Carlos', 'Gio', 1, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', ''),
+(14, '', 'Josue Antonio', 'Castro Colli', 7, 9993815121, 'josue@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '', '', 3, '2023-02-14 22:29:18', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -277,8 +277,7 @@ ALTER TABLE `imagen`
 ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`idmantenimiento`),
   ADD KEY `idcategoria` (`categoriaid`),
-  ADD KEY `personaid` (`personaid`),
-  ADD KEY `iddireccion` (`direccionid`);
+  ADD KEY `personaid` (`personaid`);
 
 --
 -- Indices de la tabla `modulo`
@@ -334,7 +333,7 @@ ALTER TABLE `direcciones`
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -352,7 +351,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -375,8 +374,7 @@ ALTER TABLE `imagen`
 --
 ALTER TABLE `mantenimiento`
   ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimiento_ibfk_3` FOREIGN KEY (`direccionid`) REFERENCES `direcciones` (`iddireccion`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos`
