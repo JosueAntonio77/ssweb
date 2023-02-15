@@ -45,16 +45,17 @@ class Recepciones extends Controllers{
 					$ruta = strtolower(clear_cadena($strNombre));
 					$ruta = str_replace(" ","-",$ruta);
 					*/
-					$idMantenimiento = intval($_POST['idMantenimiento']);
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strDescripcion = ucwords(strClean($_POST['txtDescripcion']));
-					//$strDiagnostico = ucwords(strClean($_POST['txtDiagnostico']));
-					$strDiagnostico = ' ';
-					$intCategoriaId = intval(strClean($_POST['listCategoria']));
-					$intPersonaId = intval(strClean($_POST['listPersona']));
-					$strEquipo = ucwords(strClean($_POST['txtEquipo']));
-					$intStatus = 1;
-					//$intStatus = intval(strClean($_POST['listStatus']));
+					$idMantenimiento 	= intval($_POST['idMantenimiento']);
+					$strNombre 			= ucwords(strClean($_POST['txtNombre']));
+					$strDescripcion 	= ucwords(strClean($_POST['txtDescripcion']));
+					//$strDiagnostico 	= ucwords(strClean($_POST['txtDiagnostico']));
+					$strDiagnostico 	= ' ';
+					$intCategoriaId 	= intval(strClean($_POST['listCategoria']));
+					$intPersonaId 		= intval(strClean($_POST['listPersona']));
+					$strEquipo 			= ucwords(strClean($_POST['txtEquipo']));
+					//$intStatus 		= 1;
+					$intStatus 			= intval(strClean($_POST['listStatus']));
+
 					if($idMantenimiento == 0)
 					{
 						$option = 1;
@@ -76,7 +77,7 @@ class Recepciones extends Controllers{
 																		$strDiagnostico, 
 																		$intCategoriaId,
 																		$intPersonaId,   
-																		$strEquipo, 
+																		$strEquipo,
 																		$intStatus);	
 						}
 					}
@@ -133,9 +134,9 @@ class Recepciones extends Controllers{
 			die();	
 	}
 
-	public function getMantenimiento($idmantenimiento){
+	public function getMantenimiento($idMantenimiento){
 		if($_SESSION['permisosMod']['r']){
-			$idmantenimiento = intval($idmantenimiento);
+			$idmantenimiento = intval($idMantenimiento);
 			if($idmantenimiento > 0){
 				$arrData = $this->model->selectMantenimiento($idmantenimiento);
 				if(empty($arrData)){

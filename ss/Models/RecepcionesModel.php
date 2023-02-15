@@ -18,13 +18,15 @@
 		}	
 
 		public function insertMantenimiento(string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
-			$this->strNombre = $nombre;
-			$this->strDescripcion = $descripcion;
-			$this->strDiagnostico = $diagnostico;
-			$this->intCategoriaId = $categoriaid;
-			$this->intPersonaId = $personaid;
-			$this->strEquipo = $equipo;
-			$this->intStatus = $status;
+
+			$this->strNombre 		= $nombre;
+			$this->strDescripcion 	= $descripcion;
+			$this->strDiagnostico 	= $diagnostico;
+			$this->intCategoriaId 	= $categoriaid;
+			$this->intPersonaId 	= $personaid;
+			$this->strEquipo 		= $equipo;
+			$this->intStatus 		= $status;
+
 			$return = 0;
 			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}'";
 			$request = $this->select_all($sql);
@@ -55,14 +57,15 @@
 
 		public function updateMantenimiento(int $idmantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
 			
-			$this->intIdMantenimiento = $idmantenimiento;
-			$this->strNombre = $nombre;
-			$this->strDescripcion = $descripcion;
-			$this->strDiagnostico = $diagnostico;
-			$this->intCategoriaId = $categoriaid;
-			$this->intPersonaId = $personaid;
-			$this->strEquipo = $equipo;
-			$this->intStatus = $status;
+			$this->intIdMantenimiento 	= $idmantenimiento;
+			$this->strNombre 			= $nombre;
+			$this->strDescripcion 		= $descripcion;
+			$this->strDiagnostico 		= $diagnostico;
+			$this->intCategoriaId 		= $categoriaid;
+			$this->intPersonaId 		= $personaid;
+			$this->strEquipo 			= $equipo;
+			$this->intStatus 			= $status;
+
 			$return = 0;
 			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}' AND idmantenimiento != $this->intIdMantenimiento ";
 			$request = $this->select_all($sql);
@@ -102,17 +105,17 @@
 			}
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
-							p.personaid,
-							p.categoriaid,
-							c.nombre as categoria,
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							d.direccion AS direcciones,
+							c.nombre AS categoria,
 							p.descripcion,
 							p.equipo,
 							p.status 
 					FROM mantenimiento p
-					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
-					WHERE p.status != 0 ".$whereAdmin;
+					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
+					INNER JOIN direcciones d ON pd.idpersona = d.iddireccion
+					WHERE p.status != 0".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}
@@ -122,6 +125,8 @@
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							pd.direccionid as direccion,
+							d.direccion AS direcciones,
 							c.nombre as categoria,
 							p.equipo,
 							p.status, 
@@ -130,6 +135,7 @@
 					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
+					INNER JOIN direcciones d ON pd.idpersona = d.iddireccion
 					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;
@@ -159,7 +165,7 @@
 		}
 
 		/*
-		public function selectPersonas()
+		public function selectDirecciones()
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){

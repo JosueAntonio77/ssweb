@@ -27,6 +27,7 @@
                           <th>ID</th>
                           <th>Recepción</th>
                           <th>Personal</th>
+                          <th>Dirección</th>
                           <th>Categoria</th>
                           <th>Descripción</th>
                           <th>Equipo</th>

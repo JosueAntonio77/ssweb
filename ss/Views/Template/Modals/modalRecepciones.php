@@ -68,15 +68,13 @@
                             <label for="listPersona">Personal <span class="required">*</span></label>
                             <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
                         </div>
-                        <!--
                         <div class="form-group col-md-6">
                             <label for="listStatus">Estado <span class="required">*</span></label>
                             <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
-                              <option value="1">Activo</option>
-                              <option value="2">Inactivo</option>
+                              <option value="1">Pendiente</option>
+                              <option value="2">Entregado</option>
                         </select>
                         </div>
-                        -->
                     </div>
                     
                     <div class="row">
@@ -153,6 +151,10 @@
               <td id="celPersona"></td>
             </tr>
             <tr>
+              <td>Dirección:</td>
+              <td id="celDirecciones"></td>
+            </tr>
+            <tr>
               <td>Categoría:</td>
               <td id="celCategoria"></td>
             </tr>
@@ -168,10 +170,12 @@
               <td>Descripción:</td>
               <td id="celDescripcion"></td>
             </tr>
+            <!--
             <tr>
               <td>Diagnóstivo:</td>
               <td id="celDiagnostico"></td>
             </tr>
+            -->
             <tr>
               <td>Fotos de evidencia:</td>
               <td id="celFotos"></td>
