@@ -80,13 +80,13 @@ window.addEventListener('load', function(e){
         formRecepciones.onsubmit = function(e) {
             e.preventDefault();
 
-            let strNombre = document.querySelector('#txtNombre').value;
-            let strDescripcion = document.querySelector('#txtDescripcion').value;
-            let strDiagnostico = document.querySelector('#txtDiagnostico').value;
-            let intCategoriaid = document.querySelector('#listCategoria').value;
-            let intPersonaid = document.querySelector('#listPersona').value;
-            let strEquipo = document.querySelector('#txtEquipo').value;
-            let intStatus = document.querySelector('#listStatus').value;
+            let strNombre       = document.querySelector('#txtNombre').value;
+            let strDescripcion  = document.querySelector('#txtDescripcion').value;
+            let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
+            let intCategoriaid  = document.querySelector('#listCategoria').value;
+            let intPersonaid    = document.querySelector('#listPersona').value;
+            let strEquipo       = document.querySelector('#txtEquipo').value;
+            let intStatus       = document.querySelector('#listStatus').value;
 
             if(strNombre == '' || intCategoriaid == '' || intPersonaid == '' )
             {
@@ -121,10 +121,11 @@ window.addEventListener('load', function(e){
                             
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = intPersonaid;
-                            rowTable.cells[3].textContent = intCategoriaid;
-                            rowTable.cells[4].textContent = strDescripcion;
-                            rowTable.cells[5].textContent = strEquipo;
-                            rowTable.cells[6].innerHTML =  htmlStatus;
+                            rowTable.cells[3].textContent = strDireccion;
+                            rowTable.cells[4].textContent = intCategoriaid;
+                            rowTable.cells[5].textContent = strDescripcion;
+                            rowTable.cells[6].textContent = strEquipo;
+                            rowTable.cells[7].innerHTML =  htmlStatus;
                             rowTable = ""; 
                         }
                     }else{
@@ -155,7 +156,7 @@ window.addEventListener('load', function(e){
     }
 
     ftnCategorias();
-    ftnPersona();
+    ftnPersonas();
 }, false);
 
 function ftnCategorias() {
@@ -175,7 +176,7 @@ function ftnCategorias() {
     }
 }
 
-function ftnPersona() {
+function ftnPersonas() {
     if(document.querySelector('#listPersona')){
         let ajaxUrl = base_url+'/Recepciones/getSelectPersonas';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -209,12 +210,12 @@ function fntViewInfo(idMantenimiento){
                 '<span class="badge badge-danger">Pendiente</span>'  :
                 '<span class="badge badge-success">Entregado</span>';
 
-                document.querySelector("#celNombre").innerHTML = objMantenimiento.nombre;
-                document.querySelector("#celPersona").innerHTML = objMantenimiento.persona;
+                document.querySelector("#celNombre").innerHTML      = objMantenimiento.nombre;
+                document.querySelector("#celPersona").innerHTML     = objMantenimiento.persona;
                 document.querySelector("#celDirecciones").innerHTML = objMantenimiento.direcciones;
-                document.querySelector("#celCategoria").innerHTML = objMantenimiento.categoria;
-                document.querySelector("#celEquipo").innerHTML = objMantenimiento.equipo;
-                document.querySelector("#celStatus").innerHTML = estadoMantenimiento;
+                document.querySelector("#celCategoria").innerHTML   = objMantenimiento.categoria;
+                document.querySelector("#celEquipo").innerHTML      = objMantenimiento.equipo;
+                document.querySelector("#celStatus").innerHTML      = estadoMantenimiento;
                 document.querySelector("#celDescripcion").innerHTML = objMantenimiento.descripcion;
                 document.querySelector("#celDiagnostico").innerHTML = objMantenimiento.diagnostico;
 
@@ -255,14 +256,14 @@ function fntEditInfo(element,idMantenimiento){
                 let htmlImage = "";
                 let objMantenimiento = objData.data;
 
-                document.querySelector("#idMantenimiento").value = objMantenimiento.idMantenimiento;
-                document.querySelector("#txtNombre").value = objMantenimiento.nombre;
-                document.querySelector("#txtDescripcion").value = objMantenimiento.descripcion;
-                document.querySelector("#txtDiagnostico").value = objMantenimiento.diagnostico;
-                document.querySelector("#listCategoria").value = objMantenimiento.categoria;
-                document.querySelector("#listPersona").value = objMantenimiento.persona;
-                document.querySelector("#txtEquipo").value = objMantenimiento.equipo;
-                document.querySelector("#listStatus").value = objMantenimiento.status;
+                document.querySelector("#idMantenimiento").value    = objMantenimiento.idMantenimiento;
+                document.querySelector("#txtNombre").value          = objMantenimiento.nombre;
+                document.querySelector("#txtDescripcion").value     = objMantenimiento.descripcion;
+                document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
+                document.querySelector("#listCategoria").value      = objMantenimiento.categoria;
+                document.querySelector("#listPersona").value        = objMantenimiento.persona;
+                document.querySelector("#txtEquipo").value          = objMantenimiento.equipo;
+                document.querySelector("#listStatus").value         = objMantenimiento.status;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
                 tinymce.activeEditor.setContent(objMantenimiento.diagnostico);

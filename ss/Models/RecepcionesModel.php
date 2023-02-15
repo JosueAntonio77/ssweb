@@ -150,14 +150,11 @@
 				$whereAdmin = " and p.idpersona != 1 ";
 			}
 			$sql = "SELECT p.idpersona,
-						CONCAT(p.nombres,' ',p.apellidos) AS nombres,
-						p.apellidos,
+						CONCAT(p.nombres,' ',p.apellidos) AS nombre,
 						p.email_user,
 						p.direccionid, 
 						p.telefono,
-						p.cargo,
 						p.area, 
-						p.rolid,
 						p.status 
 					FROM persona p 
 					WHERE p.status != 0 ".$whereAdmin;
