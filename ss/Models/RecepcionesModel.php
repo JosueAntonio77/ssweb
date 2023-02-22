@@ -79,7 +79,7 @@
 							personaid=?,
 							equipo=?,
 							status=?
-						WHERE idmantenimiento = $this->intIdMantenimiento ";
+						WHERE idmantenimiento = $this->intIdMantenimiento";
 				$arrData = array($this->strNombre,
 								$this->strDescripcion,
 								$this->strDiagnostico,
@@ -105,8 +105,10 @@
 			}
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
+							p.personaid, 
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
 							d.direccion AS direcciones,
+							p.categoriaid, 
 							c.nombre AS categoria,
 							p.descripcion,
 							p.diagnostico,
@@ -125,14 +127,15 @@
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
+							p.personaid,
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
-							pd.direccionid as direccion,
-							d.direccion AS direcciones,
-							c.nombre as categoria,
-							p.equipo,
-							p.status, 
+							d.direccion AS direcciones, 
+							p.categoriaid, 
+							c.nombre AS categoria, 
 							p.descripcion,
-							p.diagnostico 
+							p.diagnostico,  
+							p.equipo,  
+							p.status 
 					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
@@ -140,7 +143,6 @@
 					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;
-
 		}
 		
 		public function selectPersonas()
@@ -205,7 +207,7 @@
 	        return $request_delete;
 		}
 
-		public function deletemantenimiento(int $idmantenimiento){
+		public function deleteMantenimiento(int $idmantenimiento){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "UPDATE mantenimiento SET status = ? WHERE idmantenimiento = $this->intIdMantenimiento ";
 			$arrData = array(0);

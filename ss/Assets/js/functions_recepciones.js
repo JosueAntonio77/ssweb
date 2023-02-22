@@ -46,7 +46,7 @@ window.addEventListener('load', function(e){
             },{
                 "extend": "excelHtml5",
                 "text": "<i class='fas fa-file-excel'></i> Excel",
-                "titleAttr":"Esportar a Excel",
+                "titleAttr":"Exportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
                 "columns": [ 0, 1, 2, 3, 4, 5, 6] 
@@ -54,7 +54,7 @@ window.addEventListener('load', function(e){
             },{
                 "extend": "pdfHtml5",
                 "text": "<i class='fas fa-file-pdf'></i> PDF",
-                "titleAttr":"Esportar a PDF",
+                "titleAttr":"Exportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
                 "columns": [ 0, 1, 2, 3, 4, 5, 6] 
@@ -62,7 +62,7 @@ window.addEventListener('load', function(e){
             },{
                 "extend": "csvHtml5",
                 "text": "<i class='fas fa-file-csv'></i> CSV",
-                "titleAttr":"Esportar a CSV",
+                "titleAttr":"Exportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
                 "columns": [ 0, 1, 2, 3, 4, 5, 6] 
@@ -82,13 +82,13 @@ window.addEventListener('load', function(e){
 
             let strNombre       = document.querySelector('#txtNombre').value;
             let strDescripcion  = document.querySelector('#txtDescripcion').value;
-            let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
+            //let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
             let intCategoriaid  = document.querySelector('#listCategoria').value;
             let intPersonaid    = document.querySelector('#listPersona').value;
             let strEquipo       = document.querySelector('#txtEquipo').value;
             let intStatus       = document.querySelector('#listStatus').value;
 
-            if(strNombre == '' || intCategoriaid == '' || intPersonaid == '' )
+            if(strNombre == '' || strEquipo == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -99,7 +99,7 @@ window.addEventListener('load', function(e){
             let request = (window.XMLHttpRequest) ? 
                             new XMLHttpRequest() : 
                             new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Recepciones/setMantenimiento'; 
+            let ajaxUrl = base_url+'/Recepciones/setRecepcion'; 
             let formData = new FormData(formRecepciones);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -121,7 +121,7 @@ window.addEventListener('load', function(e){
                             
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = intPersonaid;
-                            rowTable.cells[3].textContent = strDireccion;
+                            //rowTable.cells[3].textContent = strDireccion;
                             rowTable.cells[4].textContent = intCategoriaid;
                             rowTable.cells[5].textContent = strDescripcion;
                             rowTable.cells[6].textContent = strEquipo;
@@ -179,7 +179,9 @@ function ftnCategorias() {
 function ftnPersonas() {
     if(document.querySelector('#listPersona')){
         let ajaxUrl = base_url+'/Recepciones/getSelectPersonas';
-        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET",ajaxUrl,true);
         request.send();
         request.onreadystatechange = function(){
@@ -226,7 +228,7 @@ function fntViewInfo(idMantenimiento){
                     }
                 }
                 document.querySelector("#celFotos").innerHTML = htmlImage;
-                $('#modalViewMantenimiento').modal('show');
+                $('#modalViewRecepcion').modal('show');
 
             }else{
                 swal("Error", objData.msg , "error");
@@ -256,25 +258,19 @@ function fntEditInfo(element,idMantenimiento){
                 let htmlImage = "";
                 let objMantenimiento = objData.data;
 
-                document.querySelector("#idMantenimiento").value    = objMantenimiento.idMantenimiento;
+                document.querySelector("#idMantenimiento").value    = objMantenimiento.idmantenimiento;
                 document.querySelector("#txtNombre").value          = objMantenimiento.nombre;
                 document.querySelector("#txtDescripcion").value     = objMantenimiento.descripcion;
                 document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
-                document.querySelector("#listCategoria").value      = objMantenimiento.categoria;
-                document.querySelector("#listPersona").value        = objMantenimiento.persona;
+                document.querySelector("#listPersona").value        = objMantenimiento.personaid;
+                document.querySelector("#listCategoria").value      = objMantenimiento.categoriaid;
                 document.querySelector("#txtEquipo").value          = objMantenimiento.equipo;
                 document.querySelector("#listStatus").value         = objMantenimiento.status;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
-                tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
+                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
                 $('#listCategoria').selectpicker('render');
                 $('#listPersona').selectpicker('render');
-
-                if(objData.data.status == 1){
-                    document.querySelector("#listStatus").value = 1;
-                }else{
-                    document.querySelector("#listStatus").value = 2;
-                }
                 $('#listStatus').selectpicker('render');
 
                 if(objMantenimiento.images.length > 0){
@@ -339,9 +335,8 @@ function fntDelInfo(idMantenimiento){
 
 }
 
-
 tinymce.init({
-    selector: '#txtDescripcion',
+    selector: '#txtDescripcion', 
     width: "100%",
     height: 250,    
     statubar: true,
@@ -352,7 +347,7 @@ tinymce.init({
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
 });
-
+/*
 tinymce.init({
     selector: '#txtDiagnostico',
     width: "100%",
@@ -365,6 +360,7 @@ tinymce.init({
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
 });
+*/
 
 function fntInputFile(){
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
@@ -391,7 +387,7 @@ function fntInputFile(){
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
                     let ajaxUrl = base_url+'/Recepciones/setImage'; 
                     let formData = new FormData();
-                    formData.append('idMantenimiento',idMantenimiento);
+                    formData.append('idmantenimiento',idMantenimiento);
                     formData.append("foto", this.files[0]);
                     request.open("POST",ajaxUrl,true);
                     request.send(formData);
@@ -446,7 +442,7 @@ function fntDelItem(element){
 function openModal()
 {
     rowTable = "";
-    document.querySelector('#idMantenimiento').value ="";
+    document.querySelector('#idMantenimiento').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Guardar";

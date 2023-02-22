@@ -14,7 +14,6 @@
              
               <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
               <div class="row">
-
                 <div class="col-md-8">
                     <div class="form-group">
                       <label class="control-label">Nombre de la recepción <span class="required">*</span></label>
@@ -32,12 +31,6 @@
 
                 <div class="col-md-4">
                     <!--
-                    <div class="form-group">
-                      <label class="control-label">Usuario <span class="required">*</span></label>
-                      <input class="form-control" id="txtModelo" name="txtModelo" type="text" placeholder="Nombre" required="">
-                      <br>
-                    </div>
-
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Teléfono <span class="required">*</span></label>
@@ -49,30 +42,30 @@
                         </div>
                     </div>
                     -->
-
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="listCategoria">Categoría <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Equipo <span class="required">*</span></label>
-                            <input class="form-control" id="txtEquipo" name="txtEquipo" type="text" required="">
-                        </div>
+                      <div class="form-group col-md-6">
+                        <label for="listPersona">Personal <span class="required">*</span></label>
+                        <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="listCategoria">Categoría <span class="required">*</span></label>
+                          <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label">Equipo <span class="required">*</span></label>
+                      <input class="form-control" id="txtEquipo" name="txtEquipo" type="text" placeholder="Equipo" required="">
                     </div>
 
                     <div class="row">
-                    <div class="form-group col-md-6">
-                            <label for="listPersona">Personal <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="listStatus">Estado <span class="required">*</span></label>
-                            <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
-                              <option value="1">Pendiente</option>
-                              <option value="2">Entregado</option>
+                      <div class="form-group col-md-6">
+                        <label for="listStatus">Estado<span class="required">*</span></label>
+                        <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
+                          <option value="1">Pendiente</option>
+                          <option value="2">Entregado</option>
                         </select>
-                        </div>
+                      </div>
                     </div>
                     
                     <div class="row">
@@ -128,7 +121,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalViewMantenimiento" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalViewRecepcion" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl" >
     <div class="modal-content">
       <div class="modal-header header-primary">
@@ -187,7 +180,7 @@
 </div>
 
  <!-- Modal 
- <div class="modal fade" id="modalFormRecepcionesEntrega" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal fade" id="modalFormEntregaRecepcion" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl" >
     <div class="modal-content">
       <div class="modal-header headerRegister">

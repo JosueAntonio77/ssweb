@@ -20,15 +20,15 @@ class Recepciones extends Controllers{
 		}
 		$data['page_tag'] = "Recepciones";
 		$data['page_title'] = "Recepciones <small>Ayuntamiento de Progreso</small>";
-		$data['page_name'] = "proveedores";
+		$data['page_name'] = "recepciones";
 		$data['page_functions_js'] = "functions_recepciones.js";
 		$this->views->getView($this,"recepciones",$data); 
 	} 
 
-   public function setMantenimiento(){
+   public function setRecepcion(){
 			if($_POST){
-
-				if(empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['txtDiagnostico']) || empty($_POST['listPersona']) )
+				
+				if( empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['txtDiagnostico']) || empty($_POST['listPersona']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Llene todos los campos.');
 				}else{
