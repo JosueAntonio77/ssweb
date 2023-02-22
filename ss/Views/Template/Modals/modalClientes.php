@@ -42,7 +42,7 @@
                 </div>
               </div>
               <hr>
-              <p class="text-primary">Datos Fiscales.</p>
+              <p class="text-primary">Datos Empresa.</p>
 
               <div class="form-row">
                 <div class="form-group col-md-6">
@@ -50,8 +50,8 @@
                   <input class="form-control" type="text" id="txtNit" name="txtNit" required="">
                 </div>
                 <div class="form-group col-md-6">
-                  <label>Nombre fiscal <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtNombreFiscal" name="txtNombreFiscal" required="">
+                  <label>Cargo <span class="required">*</span></label>
+                  <input class="form-control" type="text" id="txtCargo" name="txtCargo" required="">
                 </div>
 
                 <div class="form-group col-md-6">
@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label>Dirección fiscal <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal" required="">
+                  <label>Área <span class="required">*</span></label>
+                  <input class="form-control" type="text" id="txtArea" name="txtArea" required="">
                 </div>
 
                 <div class="form-group col-md-6">
@@ -125,12 +125,12 @@
               <td id="celIde">Larry</td>
             </tr>
             <tr>
-              <td>Nombre Fiscal:</td>
-              <td id="celNomFiscal">Larry</td>
+              <td>Cargo:</td>
+              <td id="celCargo">Larry</td>
             </tr>
             <tr>
-              <td>Dirección Fiscal:</td>
-              <td id="celDirFiscal">Larry</td>
+              <td>Área:</td>
+              <td id="celArea">Larry</td>
             </tr>
             <tr>
               <td>Industria:</td>

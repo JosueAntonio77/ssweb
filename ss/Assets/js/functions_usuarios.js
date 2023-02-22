@@ -32,17 +32,17 @@ document.addEventListener('DOMContentLoaded', function(){
             },{
                 "extend": "excelHtml5",
                 "text": "<i class='fas fa-file-excel'></i> Excel",
-                "titleAttr":"Esportar a Excel",
+                "titleAttr":"Exportar a Excel",
                 "className": "btn btn-success"
             },{
                 "extend": "pdfHtml5",
                 "text": "<i class='fas fa-file-pdf'></i> PDF",
-                "titleAttr":"Esportar a PDF",
+                "titleAttr":"Exportar a PDF",
                 "className": "btn btn-danger"
             },{
                 "extend": "csvHtml5",
                 "text": "<i class='fas fa-file-csv'></i> CSV",
-                "titleAttr":"Esportar a CSV",
+                "titleAttr":"Exportar a CSV",
                 "className": "btn btn-info"
             }
         ],
@@ -171,24 +171,24 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
     }
-    //Actualizar Datos Fiscales
-    if(document.querySelector("#formDataFiscal")){
-        var formDataFiscal = document.querySelector("#formDataFiscal");
-        formDataFiscal.onsubmit = function(e) {
+    //Actualizar Datos Empresa
+    if(document.querySelector("#formDataEmpresa")){
+        var formDataEmpresa = document.querySelector("#formDataEmpresa");
+        formDataEmpresa.onsubmit = function(e) {
             e.preventDefault();
             var strNit = document.querySelector('#txtNit').value;
-            var strNombreFiscal = document.querySelector('#txtNombreFiscal').value;
-            var strDirFiscal = document.querySelector('#txtDirFiscal').value;
+            var strCargo = document.querySelector('#txtCargo').value;
+            var strArea = document.querySelector('#txtArea').value;
            
-            if(strNit == '' || strNombreFiscal == '' || strDirFiscal == '' )
+            if(strNit == '' || strCargo == '' || strArea == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
             }
             divLoading.style.display = "flex";
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url+'/Usuarios/putDFical'; 
-            var formData = new FormData(formDataFiscal);
+            var ajaxUrl = base_url+'/Usuarios/putDEmpresa'; 
+            var formData = new FormData(formDataEmpresa);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){

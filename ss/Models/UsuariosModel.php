@@ -13,8 +13,8 @@
 		private $intTipoId;
 		private $intStatus;
 		private $strNit;
-		private $strNomFiscal;
-		private $strDirFiscal;
+		private $strCargo;
+		private $strArea;
 
 		public function __construct()
 		{
@@ -73,7 +73,7 @@
 		}
 		public function selectUsuario(int $idpersona){
 			$this->intIdUsuario = $idpersona;
-			$sql = "SELECT p.idpersona,p.identificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.nit,p.nombrefiscal,p.direccionfiscal,r.idrol,r.nombrerol,p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
+			$sql = "SELECT p.idpersona,p.identificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.nit,p.cargo,p.area,r.idrol,r.nombrerol,p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
 					FROM persona p
 					INNER JOIN rol r
 					ON p.rolid = r.idrol
@@ -168,16 +168,16 @@
 		    return $request;
 		}
 
-		public function updateDataFiscal(int $idUsuario, string $strNit, string $strNomFiscal, string $strDirFiscal){
+		public function updateDataEmpresa(int $idUsuario, string $strNit, string $strCargo, string $strArea){
 			$this->intIdUsuario = $idUsuario;
 			$this->strNit = $strNit;
-			$this->strNomFiscal = $strNomFiscal;
-			$this->strDirFiscal = $strDirFiscal;
-			$sql = "UPDATE persona SET nit=?, nombrefiscal=?, direccionfiscal=? 
+			$this->strCargo = $strCargo;
+			$this->strArea = $strArea;
+			$sql = "UPDATE persona SET nit=?, cargo=?, area=? 
 						WHERE idpersona = $this->intIdUsuario ";
 			$arrData = array($this->strNit,
-							$this->strNomFiscal,
-							$this->strDirFiscal);
+							$this->strCargo,
+							$this->strArea);
 			$request = $this->update($sql,$arrData);
 		    return $request;
 		}

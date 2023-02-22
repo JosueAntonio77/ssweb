@@ -202,21 +202,21 @@
 			die();
 		}
 
-		public function putDFical(){
+		public function putDEmpresa(){
 			if($_POST){
-				if(empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) )
+				if(empty($_POST['txtNit']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					$idUsuario = $_SESSION['idUser'];
 					$strNit = strClean($_POST['txtNit']);
-					$strNomFiscal = strClean($_POST['txtNombreFiscal']);
-					$strDirFiscal = strClean($_POST['txtDirFiscal']);
-					$request_datafiscal = $this->model->updateDataFiscal($idUsuario,
+					$strCargo = strClean($_POST['txtCargo']);
+					$strArea = strClean($_POST['txtArea']);
+					$request_dataempresa = $this->model->updateDataEmpresa($idUsuario,
 																		$strNit,
-																		$strNomFiscal, 
-																		$strDirFiscal);
-					if($request_datafiscal)
+																		$strCargo, 
+																		$strArea);
+					if($request_dataempresa)
 					{
 						sessionUser($_SESSION['idUser']);
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');

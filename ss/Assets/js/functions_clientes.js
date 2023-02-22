@@ -33,17 +33,17 @@ document.addEventListener('DOMContentLoaded', function(){
             },{
                 "extend": "excelHtml5",
                 "text": "<i class='fas fa-file-excel'></i> Excel",
-                "titleAttr":"Esportar a Excel",
+                "titleAttr":"Exportar a Excel",
                 "className": "btn btn-success"
             },{
                 "extend": "pdfHtml5",
                 "text": "<i class='fas fa-file-pdf'></i> PDF",
-                "titleAttr":"Esportar a PDF",
+                "titleAttr":"Exportar a PDF",
                 "className": "btn btn-danger"
             },{
                 "extend": "csvHtml5",
                 "text": "<i class='fas fa-file-csv'></i> CSV",
-                "titleAttr":"Esportar a CSV",
+                "titleAttr":"Exportar a CSV",
                 "className": "btn btn-info"
             }
         ],
@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', function(){
             let strEmail = document.querySelector('#txtEmail').value;
             let intTelefono = document.querySelector('#txtTelefono').value;
             let strNit = document.querySelector('#txtNit').value;
-            let strNomFical = document.querySelector('#txtNombreFiscal').value;
-            let strDirFiscal = document.querySelector('#txtDirFiscal').value;
+            let strCargo = document.querySelector('#txtCargo').value;
+            let strArea = document.querySelector('#txtArea').value;
 
             let strIndustria = document.querySelector('#txtIndustria').value;
             let strSegmento = document.querySelector('#txtSegmento').value;
             let strTipoCliente = document.querySelector('#txtTipoCliente').value;
             let strPassword = document.querySelector('#txtPassword').value;
 
-            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strNit == '' || strDirFiscal == '' || strNomFical=='' || strIndustria == '' || strSegmento == ''  || strTipoCliente == '')
+            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strNit == '' || strArea == '' || strCargo=='' || strIndustria == '' || strSegmento == ''  || strTipoCliente == '')
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -139,8 +139,8 @@ function fntViewInfo(idpersona){
                 document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
                 document.querySelector("#celEmail").innerHTML = objData.data.email_user;
                 document.querySelector("#celIde").innerHTML = objData.data.nit;
-                document.querySelector("#celNomFiscal").innerHTML = objData.data.nombrefiscal;
-                document.querySelector("#celDirFiscal").innerHTML = objData.data.direccionfiscal;
+                document.querySelector("#celCargo").innerHTML = objData.data.cargo;
+                document.querySelector("#celArea").innerHTML = objData.data.area;
                 document.querySelector("#celIndustria").innerHTML = objData.data.industria;
                 document.querySelector("#celSegmento").innerHTML = objData.data.segmento;
                 document.querySelector("#celTipoCliente").innerHTML = objData.data.tipocliente;
@@ -176,8 +176,8 @@ function fntEditInfo(element, idpersona){
                 document.querySelector("#txtTelefono").value = objData.data.telefono;
                 document.querySelector("#txtEmail").value = objData.data.email_user;
                 document.querySelector("#txtNit").value =objData.data.nit;
-                document.querySelector("#txtNombreFiscal").value =objData.data.nombrefiscal;
-                document.querySelector("#txtDirFiscal").value =objData.data.direccionfiscal;
+                document.querySelector("#txtCargo").value =objData.data.cargo;
+                document.querySelector("#txtArea").value =objData.data.area;
                 document.querySelector("#txtIndustria").value =objData.data.industria;
                 document.querySelector("#txtSegmento").value =objData.data.segmento;
                 document.querySelector("#txtTipoCliente").value =objData.data.tipocliente;

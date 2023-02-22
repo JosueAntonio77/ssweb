@@ -60,7 +60,7 @@
         <div class="tab-pane fade" id="user-settings">
           <div class="tile user-settings">
             <h4 class="line-head">Datos Empresa</h4>
-            <form id="formDataFiscal" name="formDataFiscal">
+            <form id="formDataEmpresa" name="formDataEmpresa">
               <div class="row mb-4">
                 <div class="col-md-6">
                   <label>Dirección</label>
@@ -68,13 +68,13 @@
                 </div>
                 <div class="col-md-6">
                   <label>Cargo</label>
-                  <input class="form-control" type="text" id="txtNombreFiscal" name="txtNombreFiscal" value="<?= $_SESSION['userData']['nombrefiscal']; ?>" >
+                  <input class="form-control" type="text" id="txtCargo" name="txtCargo" value="<?= $_SESSION['userData']['cargo']; ?>" >
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 mb-4">
                   <label>Área</label>
-                  <input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal" value="<?= $_SESSION['userData']['direccionfiscal']; ?>">
+                  <input class="form-control" type="text" id="txtArea" name="txtArea" value="<?= $_SESSION['userData']['area']; ?>">
                 </div>
               </div>
               <div class="row mb-10">
