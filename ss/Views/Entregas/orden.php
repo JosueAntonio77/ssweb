@@ -13,16 +13,16 @@
     <div class="col-md-12">
       <div class="tile">
         
-      <?php dep($data['arrPedido']); ?>
-        <?php $data['arrPedido']; 
+      <?php dep($data['arrMantenimiento']); ?>
+        <?php $data['arrMantenimiento']; 
                     
-                    if(empty($data['arrPedido'])){
+                    if(empty($data['arrMantenimiento'])){
 
                     ?>
                     <p>Datos no encontrados</p>
                     <?php }else{ 
                  //       $estudiante = $data['arrPedido']['estudiante']; 
-                        $pago = $data['arrPedido']['orden'];
+                        $pago = $data['arrMantenimiento']['orden'];
                         ?>
       
         <section class="invoice">

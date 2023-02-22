@@ -37,20 +37,20 @@ class Entregas extends Controllers{
 						$btnEdit = '';
 						$btnDelete = '';
 
-						$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
+						//$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
 
 						if($_SESSION['permisosMod']['r']){
-							$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idpedido'].'" target="_blanck"
+							$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"
 								class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
 
-								<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idpedido'].')"
+								<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idmantenimiento'].')"
 									title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
 						}
 						if($_SESSION['permisosMod']['u']){
-							$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpedido'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
+							$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
 						}
 						if($_SESSION['permisosMod']['d']){	
-							$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpedido'].')" title="Eliminar cotización"><i class="far fa-trash-alt"></i></button>';
+							$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar cotización"><i class="far fa-trash-alt"></i></button>';
 						}
 						$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 					}
@@ -58,7 +58,7 @@ class Entregas extends Controllers{
 				}
 				die();	
 	}
-	public function orden(int $idpedido){
+	public function orden(int $idmantenimiento){
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
 		}
@@ -71,7 +71,7 @@ class Entregas extends Controllers{
 		$data['page_tag'] = "Entrega";
 		$data['page_title'] = "ENTREGA <small>H. Ayuntamiento de Progreso</small>";
 		$data['page_name'] = "entrega";
-		$data['arrPedido'] = $this->model->selectEntrega($idpedido,$idpersona);
+		$data['arrMantenimiento'] = $this->model->selectEntrega($idmantenimiento,$idpersona);
 		$this->views->getView($this,"orden",$data);
 	}
 }

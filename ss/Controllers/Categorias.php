@@ -110,6 +110,13 @@
 					}else{
 						$arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
 					}
+					if($_SESSION['permisosMod']['r']){
+						$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idpedido'].'" target="_blanck"
+							class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
+
+							<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idpedido'].')"
+								title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
+					}
 
 					if($_SESSION['permisosMod']['r']){
 						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver categoría"><i class="far fa-eye"></i></button>';

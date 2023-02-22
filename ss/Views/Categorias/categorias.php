@@ -24,10 +24,13 @@
                     <table class="table table-hover table-bordered" id="tableCategorias">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Status</th>
+                        <th>ID</th>
+                          <th>Equipo</th>
+                          <th>Dirección</th>
+                          <th>Diagnóstico</th>
+                          <th>Recibió</th>
+                          <th>Fecha Entrega</th>
+                          <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
