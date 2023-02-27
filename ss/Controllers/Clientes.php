@@ -101,7 +101,7 @@ class Clientes extends Controllers{
 											 'asunto' => 'Bienvenido a tu tienda en línea');
 						sendEmail($dataUsuario,'email_bienvenida');
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
 					}
 				}else if($request_user == 'exist'){
 					$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		

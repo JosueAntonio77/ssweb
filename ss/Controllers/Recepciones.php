@@ -28,7 +28,7 @@ class Recepciones extends Controllers{
    public function setRecepcion(){
 			if($_POST){
 				
-				if( empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['txtDiagnostico']) || empty($_POST['listPersona']) || empty($_POST['listStatus']) )
+				if( empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['listPersona']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Llene todos los campos.');
 				}else{
@@ -73,7 +73,7 @@ class Recepciones extends Controllers{
 						if($option == 1){
 							$arrResponse = array('status' => true, 'idmantenimiento' => $request_mantenimiento, 'msg' => 'Datos guardados correctamente.');
 						}else{
-							$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados correctamente.');
+							$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados Correctamente.');
 						}
 					}else if($request_mantenimiento == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
