@@ -96,6 +96,32 @@
 	        return $return;
 		}
 
+		public function updateEntregaMantenimiento(int $idmantenimiento, string $diagnostico, int $status){
+			
+			$this->intIdMantenimiento 	= $idmantenimiento;
+			$this->strDiagnostico 		= $diagnostico;
+			$this->intStatus 			= $status;
+			$return = 0;
+			
+			$sql = "SELECT * FROM mantenimiento WHERE idmantenimiento != $this->intIdMantenimiento ";
+			$request = $this->select_all($sql);
+			if(empty($request))
+			{
+				$sql = "UPDATE mantenimiento 
+						SET diagnostico=?,
+							status=?
+						WHERE idmantenimiento = $this->intIdMantenimiento";
+				$arrData = array($this->strDiagnostico,
+								$this->intStatus);
+
+	        	$request = $this->update($sql,$arrData);
+	        	$return = $request;
+			}else{
+				$return = "exist";
+			}
+	        return $return;
+		}
+
 
 		public function selectRecepciones()
 		{
@@ -140,6 +166,16 @@
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
 					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
+					WHERE idmantenimiento = $this->intIdMantenimiento";
+			$request = $this->select($sql);
+			return $request;
+		}
+
+		public function selectEntregaMantenimiento(int $idmantenimiento){
+			$this->intIdMantenimiento = $idmantenimiento;
+			$sql = "SELECT p.diagnostico,  
+							p.status 
+					FROM mantenimiento p
 					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
 			return $request;

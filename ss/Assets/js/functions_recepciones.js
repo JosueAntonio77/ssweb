@@ -20,6 +20,7 @@ window.addEventListener('load', function(e){
         },
         "columns":[
             {"data":"idmantenimiento"},
+            {"data":"btnEntrega"},
             {"data":"nombre"},
             {"data":"persona"},
             {"data":"direcciones"},
@@ -41,7 +42,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -49,7 +50,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -57,7 +58,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -65,7 +66,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 1, 2, 3, 4, 5, 6] 
+                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
                 }
             }
         ],
@@ -119,13 +120,62 @@ window.addEventListener('load', function(e){
                             '<span class="badge badge-danger">Pendiente</span>' :
                             '<span class="badge badge-success">Entregado</span>';
                             
-                            rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = intPersonaid;
-                            //rowTable.cells[3].textContent = strDireccion;
-                            rowTable.cells[4].textContent = intCategoriaid;
-                            rowTable.cells[5].textContent = strDescripcion;
-                            rowTable.cells[6].textContent = strEquipo;
-                            rowTable.cells[7].innerHTML =  htmlStatus;
+                            rowTable.cells[2].textContent = strNombre;
+                            rowTable.cells[3].textContent = intPersonaid;
+                            rowTable.cells[5].textContent = intCategoriaid;
+                            rowTable.cells[6].textContent = strDescripcion;
+                            rowTable.cells[7].textContent = strEquipo;
+                            rowTable.cells[8].innerHTML =  htmlStatus;
+                            rowTable = ""; 
+                        }
+                    }else{
+                        swal("Error", objData.msg , "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+
+    if(document.querySelector("#formEntregaRecepciones")){
+        let formEntregaRecepciones = document.querySelector("#formEntregaRecepciones");
+        formEntregaRecepciones.onsubmit = function(e) {
+            e.preventDefault();
+
+            let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
+
+            if(strDiagnostico == '' )
+            {
+                swal("Atención", "Todos los campos son obligatorios." , "error");
+                return false;
+            }
+            
+            divLoading.style.display = "flex";
+            tinyMCE.triggerSave();
+            let request = (window.XMLHttpRequest) ? 
+                            new XMLHttpRequest() : 
+                            new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Recepciones/setEntregaRecepcion'; 
+            let formData = new FormData(formEntregaRecepciones);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("", objData.msg ,"success");
+                        document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
+                        document.querySelector("#containerGallery").classList.remove("notblock");
+                        if(rowTable == ""){
+                            tableRecepciones.api().ajax.reload();
+                        }else{
+                           htmlStatus = intStatus == 1 ? 
+                            '<span class="badge badge-danger">Pendiente</span>' :
+                            '<span class="badge badge-success">Entregado</span>';
+                            
+                            rowTable.cells[8].innerHTML =  htmlStatus;
                             rowTable = ""; 
                         }
                     }else{
@@ -154,7 +204,6 @@ window.addEventListener('load', function(e){
         fntInputFile();
         }
     }
-
     ftnCategorias();
     ftnPersonas();
 }, false);
@@ -193,8 +242,42 @@ function ftnPersonas() {
     }
 }
 
-function fntViewInfo(idMantenimiento){
+function fntDelivInfo(element,idMantenimiento){
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML ="Entregar Recepción";
+    //document.querySelector('.modal-header').classList.replace("headerEntregar", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML ="Entregar";
 
+    let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Recepciones/getEntregaMantenimiento/'+idMantenimiento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                let objMantenimiento = objData.data;
+
+                document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
+                document.querySelector("#listStatus").value         = objMantenimiento.status;
+
+                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
+
+                $('#modalFormEntregaRecepciones').modal('show');
+                
+            }else{
+                swal("Error", objData.msg , "error");
+            }
+        }
+    }
+    
+}
+
+function fntViewInfo(idMantenimiento){
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
@@ -347,6 +430,7 @@ tinymce.init({
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
 });
+
 /*
 tinymce.init({
     selector: '#txtDiagnostico',
@@ -420,7 +504,7 @@ function fntDelItem(element){
     let ajaxUrl = base_url+'/Recepciones/delFile'; 
 
     let formData = new FormData();
-    formData.append('idMantenimiento',idMantenimiento);
+    formData.append('idmantenimiento',idMantenimiento);
     formData.append("file",nameImg);
     request.open("POST",ajaxUrl,true);
     request.send(formData);

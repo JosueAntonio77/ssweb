@@ -25,6 +25,7 @@
                       <thead>
                         <tr>
                           <th>ID</th>
+                          <th>Entregar</th>
                           <th>Recepción</th>
                           <th>Personal</th>
                           <th>Dirección</th>
