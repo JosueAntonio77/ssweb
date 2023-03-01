@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-02-2023 a las 15:30:07
+-- Tiempo de generación: 01-03-2023 a las 14:52:10
 -- Versión del servidor: 10.9.2-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -37,7 +37,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idcategoria`, `nombre`) VALUES
-(1, 'Pantalla Azul');
+(1, 'Pantalla Azul'),
+(2, 'Falla en el Sistema');
 
 -- --------------------------------------------------------
 
@@ -122,8 +123,8 @@ CREATE TABLE `mantenimiento` (
 --
 
 INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
-(12, 'Noce', '<p>sdfgsdfgsdfgd</p>', '<p>sdfhjhjhjhjhjhd</p>', 1, '2023-02-15 01:47:33', '2023-02-15 07:47:33', 1, 'Lenovo', 1),
-(13, 'Sistema', '<p>Hola Mundo</p>', '<p>Hola</p>', 1, '2023-02-15 01:50:45', '2023-02-15 07:50:45', 14, 'MAC', 1);
+(15, 'Prueba Recepcion', '<p>Des</p>', 'Prueba', 1, '2023-02-28 13:14:46', '2023-02-27 00:57:51', 14, 'MAC', 2),
+(16, 'Windows 11', '<p>Actualizar</p>', 'No Se Ve El Diag', 1, '2023-02-28 13:54:34', '2023-02-28 19:15:32', 14, 'HP', 1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +146,7 @@ CREATE TABLE `modulo` (
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (1, 'Dashboard', 'Dashboard', 1),
 (2, 'Usuarios', 'Usuarios del sistema', 1),
-(3, 'Clientes', 'Clientes de tienda', 1),
+(3, 'Clientes', 'Clientes del Ayuntamiento', 1),
 (4, 'Recepciones', 'Todas las recepciones', 1),
 (5, 'Entregas', 'Entregas', 1),
 (6, 'Caterogías', 'Caterogías de los problemas', 1),
@@ -315,7 +316,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -330,10 +331,16 @@ ALTER TABLE `direcciones`
   MODIFY `iddireccion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`

@@ -83,7 +83,6 @@ window.addEventListener('load', function(e){
 
             let strNombre       = document.querySelector('#txtNombre').value;
             let strDescripcion  = document.querySelector('#txtDescripcion').value;
-            //let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
             let intCategoriaid  = document.querySelector('#listCategoria').value;
             let intPersonaid    = document.querySelector('#listPersona').value;
             let strEquipo       = document.querySelector('#txtEquipo').value;
@@ -167,7 +166,6 @@ window.addEventListener('load', function(e){
                     {
                         swal("", objData.msg ,"success");
                         document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
-                        document.querySelector("#containerGallery").classList.remove("notblock");
                         if(rowTable == ""){
                             tableRecepciones.api().ajax.reload();
                         }else{
@@ -240,41 +238,6 @@ function ftnPersonas() {
             }
         }
     }
-}
-
-function fntDelivInfo(element,idMantenimiento){
-    rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML ="Entregar Recepción";
-    //document.querySelector('.modal-header').classList.replace("headerEntregar", "headerUpdate");
-    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML ="Entregar";
-
-    let request = (window.XMLHttpRequest) ? 
-                    new XMLHttpRequest() : 
-                    new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Recepciones/getEntregaMantenimiento/'+idMantenimiento;
-    request.open("GET",ajaxUrl,true);
-    request.send();
-    request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-            if(objData.status)
-            {
-                let objMantenimiento = objData.data;
-
-                document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
-                document.querySelector("#listStatus").value         = objMantenimiento.status;
-
-                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
-
-                $('#modalFormEntregaRecepciones').modal('show');
-                
-            }else{
-                swal("Error", objData.msg , "error");
-            }
-        }
-    }
-    
 }
 
 function fntViewInfo(idMantenimiento){
@@ -377,7 +340,40 @@ function fntEditInfo(element,idMantenimiento){
             }
         }
     }
-    
+}
+
+function fntDelivInfo(element,idMantenimiento){
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML ="Entregar Recepción";
+    document.querySelector('.modal-header').classList.replace("headerEntregar", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML ="Entregar";
+
+    let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Recepciones/getEntregaMantenimiento/'+idMantenimiento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                let objMantenimiento = objData.data;
+                
+                document.querySelector("#idMantenimiento").value    = objMantenimiento.idmantenimiento;
+                document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
+
+                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
+
+                $('#modalFormEntregaRecepciones').modal('show');
+                
+            }else{
+                swal("Error", objData.msg , "error");
+            }
+        }
+    }
 }
 
 function fntDelInfo(idMantenimiento){
@@ -535,4 +531,16 @@ function openModal()
     document.querySelector("#containerGallery").classList.add("notblock");
     document.querySelector("#containerImages").innerHTML = "";
     $('#modalFormRecepciones').modal('show');
+}
+
+function openModalEntrega()
+{
+    rowTable = "";
+    document.querySelector('#idMantenimiento').value = "";
+    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerEntregar");
+    document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
+    document.querySelector('#btnText').innerHTML ="Guardar";
+    document.querySelector('#titleModal').innerHTML = "Nueva Entrega";
+    document.querySelector("#formEntregaRecepciones").reset();
+    $('#modalFormEntregaRecepciones').modal('show');
 }

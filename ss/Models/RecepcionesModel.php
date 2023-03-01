@@ -173,7 +173,8 @@
 
 		public function selectEntregaMantenimiento(int $idmantenimiento){
 			$this->intIdMantenimiento = $idmantenimiento;
-			$sql = "SELECT p.diagnostico,  
+			$sql = "SELECT p.idmantenimiento,
+							p.diagnostico,
 							p.status 
 					FROM mantenimiento p
 					WHERE idmantenimiento = $this->intIdMantenimiento";

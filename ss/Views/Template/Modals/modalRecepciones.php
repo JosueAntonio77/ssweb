@@ -77,7 +77,6 @@
                        </div> 
                     </div>  
                     
-
                 </div>
               </div>
               
@@ -124,8 +123,8 @@
  <div class="modal fade" id="modalFormEntregaRecepciones" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl" >
     <div class="modal-content">
-      <div class="modal-header headerUpdate">
-        <h5 class="modal-title" id="titleModal">Entregar recepción</h5>
+      <div class="modal-header headerEntregar">
+        <h5 class="modal-title" id="titleModal">Nueva Entrega</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -143,8 +142,8 @@
                       <textarea class="form-control" id="txtDiagnostico" name="txtDiagnostico"></textarea>
                     </div>
                     <div class="form-group col-md-6">
-                    <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Entregar</span></button>
-                  </div> 
+                      <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>
+                    </div> 
                   <div class="form-group col-md-6">
                     <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                   </div> 

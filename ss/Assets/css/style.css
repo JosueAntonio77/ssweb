@@ -20,8 +20,12 @@
 	background: #009688;
 	color: #FFF;
 }
+.headerEntregar, .header-primary{
+	background: #009688;
+	color: #FFF;
+}
 .headerUpdate{
-	background: #007bff;
+	background: #0b65a1;
 	color: #FFF;
 }
 .textcenter{

@@ -202,25 +202,18 @@ class Recepciones extends Controllers{
 	}
 
 	public function getEntregaMantenimiento($idmantenimiento){
-		//if($_SESSION['permisosMod']['r']){
+		if($_SESSION['permisosMod']['r']){
 			$idmantenimiento = intval($idmantenimiento);
 			if($idmantenimiento > 0){
 				$arrData = $this->model->selectEntregaMantenimiento($idmantenimiento);
 				if(empty($arrData)){
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 				}else{
-					$arrImg = $this->model->selectImages($idmantenimiento);
-					if(count($arrImg) > 0){
-						for ($i=0; $i < count($arrImg); $i++) { 
-							$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
-						}
-					}
-					$arrData['images'] = $arrImg;
 					$arrResponse = array('status' => true, 'data' => $arrData);
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
-		//}
+		}
 		die();
 	}
 
