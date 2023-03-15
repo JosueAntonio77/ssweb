@@ -1,6 +1,7 @@
 <?php 
 	
 	const BASE_URL = "http://localhost/ssweb/ss";
+	//const BASE_URL = "http://scpi.progreso.tecnm.mx/scpi";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -20,12 +21,14 @@
 	const SMONEY = "$";
 
 	//Datos envio de correo
-	const NOMBRE_REMITENTE = "MG DAKAVA";
+	const NOMBRE_REMITENTE = "H. AYUNTAMIENTO DE PROGRESO";
 	const EMAIL_REMITENTE = "no-reply@abelosh.com";
 	const NOMBRE_EMPRESA = "H. AYUNTAMIENTO DE PROGRESO";
 	const WEB_EMPRESA = "http://www.ayuntamientodeprogreso.gob.mx";
 	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización.";
-	const SHAREDHASH = "MgDakava";
+	const SHAREDHASH = "H. AYUNTAMIENTO DE PROGRESO";
+	const CALLE = "CALLE 25 POR 80 CENTRO CP 97320, PROGRESO, YUCATÁN.";
+	const TEL_EMPRESA = "969 103 6000";
 	
 	//Constantes de las Categorías para el Slider
 	const CAT_SLIDER = "1,2,3";
@@ -33,16 +36,15 @@
 
 
 	//Datos para Encriptar / Desencriptar
-	const KEY = 'mgdakava';
+	const KEY = 'hayuntamiento';
 	const METHODENCRIPT = "AES-128-ECB";
 
-	//Envio
-	const COSTOENVIO = 100;
+
 
 	//Módulos
 	const MDASHBOARD = 1;
 	const MUSUARIOS = 2;
-	const MCLIENTES = 3;
+	const MSOLICITANTES = 14;
 	const MRECEPCIONES = 4;
 	const MENTREGAS = 5;
 	const MCATEGORIAS = 6;
@@ -51,6 +53,6 @@
 
 	//Roles
 	const RADMINISTRADOR = 1;
-	const RCLIENTES = 7;
-	
+	const RTECNICO = 2;
+	const RSOLICITANTE = 3;
  ?>

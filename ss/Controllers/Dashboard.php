@@ -22,7 +22,7 @@
 			$data['page_name'] = "dashboard";
 			$data['page_functions_js'] = "functions_dashboard.js";
 			$data['usuarios'] = $this->model->cantUsuarios();
-			$data['clientes'] = $this->model->cantClientes();
+			$data['solicitantes'] = $this->model->cantSolicitantes();
 			$data['mantenimientos'] = $this->model->cantMantenimientos();
 			$data['entregas'] = $this->model->cantEntregas();
 			//$data['pedidos'] = $this->model->cantPedidos();
@@ -36,8 +36,8 @@
 			//dep($data['ventasMDia']);exit;
 			//$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
 			//dep($data['ventasAnio']);exit;
-			if( $_SESSION['userData']['idrol'] == RCLIENTES ){
-				$this->views->getView($this,"dashboardCliente",$data);
+			if( $_SESSION['userData']['idrol'] == RSOLICITANTE ){
+				$this->views->getView($this,"dashboardSolicitante",$data);
 			}else{
 				$this->views->getView($this,"dashboard",$data);
 			}

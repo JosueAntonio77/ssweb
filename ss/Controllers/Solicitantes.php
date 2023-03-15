@@ -1,6 +1,6 @@
-<!--<?php 
+<?php 
 
-class Clientes extends Controllers{
+class Solicitantes extends Controllers{
 	public function __construct()
 	{
 		parent::__construct();
@@ -13,23 +13,24 @@ class Clientes extends Controllers{
 		getPermisos(RSOLICITANTE);
 	}
 
-	public function Clientes()
+	public function Solicitantes()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
 		}
-		$data['page_tag'] = "Clientes";
-		$data['page_title'] = "CLIENTES <small>Ayuntamiento de Progreso</small>";
-		$data['page_name'] = "clientes";
-		$data['page_functions_js'] = "functions_clientes.js";
-		$this->views->getView($this,"clientes",$data);
+		$data['page_tag'] = "Solicitantes";
+		$data['page_title'] = "SOLICITANTES <small>Ayuntamiento de Progreso</small>";
+		$data['page_name'] = "solicitantes";
+		$data['page_functions_js'] = "functions_solicitantes.js";
+		$this->views->getView($this,"solicitantes",$data);
 	}
 
-	public function setCliente(){
+	public function setSolicitante(){
 
 		error_reporting(0);
 		if($_POST){
-			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) || empty($_POST['txtIndustria']) || empty($_POST['txtSegmento']) || empty($_POST['txtTipoCliente']))
+			dep($_POST);exit;
+			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{ 
@@ -40,12 +41,8 @@ class Clientes extends Controllers{
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail = strtolower(strClean($_POST['txtEmail']));
 				$strNit = strClean($_POST['txtNit']);
-				$strNomFiscal = strClean($_POST['txtNombreFiscal']);
-				$strDirFiscal = strClean($_POST['txtDirFiscal']);
-
-				$strIndustria = strClean($_POST['txtIndustria']);
-				$strSegmento = strClean($_POST['txtSegmento']);
-				$strTipoCliente = strClean($_POST['txtTipoCliente']);
+				$strNomFiscal = strClean($_POST['txtCargo']);
+				$strDirFiscal = strClean($_POST['txtArea']);
 				
 				$intTipoId = 3;
 				$request_user = "";
@@ -55,7 +52,7 @@ class Clientes extends Controllers{
 					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
 					$strPasswordEncript = hash("SHA256",$strPassword);
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertCliente($strIdentificacion,
+						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
 																			$strApellido, 
 																			$intTelefono, 
@@ -63,32 +60,25 @@ class Clientes extends Controllers{
 																			$strPasswordEncript,
 																			$intTipoId, 
 																			$strNit,
-																			$strNomFiscal,
-																			$strDirFiscal,
-																			$strIndustria,
-																			$strSegmento,
-																			$strTipoCliente);
+																			$strCargo,
+																			$strArea);
 					}
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateCliente($idUsuario,
-																	$strIdentificacion, 
-																	$strNombre,
-																	$strApellido, 
-																	$intTelefono, 
-																	$strEmail,
-																	$strPassword, 
-																	$strNit,
-																	$strNomFiscal, 
-																	$strDirFiscal,
-																	$strIndustria,
-																	$strSegmento,
-																	$strTipoCliente);
-					}
+						$request_user = $this->model->updateSolicitante($strIdentificacion,
+						$strNombre, 
+						$strApellido, 
+						$intTelefono, 
+						$strEmail,
+						$strPassword,
+						$strNit,
+						$strCargo,
+						$strArea);
 					}
 				}
+			}
 
 				if($request_user > 0 )
 				{
@@ -116,22 +106,22 @@ class Clientes extends Controllers{
 		
 	
 
-	public function getClientes()
+	public function getSolicitantes()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectClientes();
+			$arrData = $this->model->selectSolicitantes();
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver cliente"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver solicitante"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Editar cliente"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Editar solicitante"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Eliminar cliente"><i class="far fa-trash-alt"></i></button>';
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Eliminar solicitante"><i class="far fa-trash-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
@@ -139,13 +129,13 @@ class Clientes extends Controllers{
 		}
 		die();
 	}
-
-	public function getCliente($idpersona){
+// Método para visualizar los datos del solicitante
+	public function getSolicitante($idpersona){
 		if($_SESSION['permisosMod']['r']){
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectCliente($idusuario);
+				$arrData = $this->model->selectSolicitante($idusuario);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
@@ -158,17 +148,17 @@ class Clientes extends Controllers{
 		die();
 	}
 
-	public function delCliente()
+	public function delSolicitante()
 	{
 		if($_POST){
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
-				$requestDelete = $this->model->deleteCliente($intIdpersona);
+				$requestDelete = $this->model->deleteSolicitante($intIdpersona);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el cliente');
+					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el solicitante');
 				}else{
-					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar al cliente.');
+					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar al solicitante.');
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
@@ -180,4 +170,4 @@ class Clientes extends Controllers{
 
 }
 
-?> -->
+?>

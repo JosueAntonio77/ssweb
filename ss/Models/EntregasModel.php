@@ -20,22 +20,24 @@
 									m.status
 							FROM mantenimiento as m
 							INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-							INNER JOIN persona  as p ON m.personaid = p.idpersona $where";
+							INNER JOIN persona as p ON m.personaid = p.idpersona $where AND m.status = 1";
             $request = $this ->select_all($sql);
             return $request;
 
 		}
-
+		
+		//Para la parte de la vista de detalles entrega
 		public function selectEntrega(int $idmantenimiento, $idpersona = NULL){
 			$busqueda = "";
 			if($idpersona != NULL){
-				$busqueda = "AND personaid =".$idpersona;
+				$busqueda = "AND m.personaid =".$idpersona;
 			}
 		$request = array();
 		$sql = "SELECT m.idmantenimiento,
 						m.equipo,
 						d.direccion as direcciones,
 						m.diagnostico,
+						m.personaid,
 						p.nombres as persona,
 						DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
 						m.status
@@ -45,28 +47,44 @@
 			$requestMantenimiento = $this->select($sql);
 			if(!empty($requestMantenimiento)){
 				$idpersona = $requestMantenimiento['personaid'];
-				$sql_cliente = "SELECT p.idpersona,
+				$sql_solicitante = "SELECT p.idpersona,
 										p.nombres,
 										p.apellidos,
 										p.telefono,
 										p.email_user,
 										p.nit,
 										p.cargo,
-										p.area
-					FROM persona  as p WHERE idpersona = $idpersona";
-					$requestcliente = $this->select($sql_cliente);
-					$sql_detalle = "SELECT p.idproducto,
-											p.nombre as producto,
-											d.precio,
-											d.cantidad
-									FROM detalle_pedido d
-									INNER JOIN producto p
-									ON d.productoid = p.idproducto
-									WHERE d.pedidoid = $idpedido";
-					$requestProductos = $this->select_all($sql_detalle);
-					$request = array('cliente' =>$requestcliente,
-									'orden' => $requestPedido,
-									'detalle' => $requestProductos);
+										p.area,
+										m.idmantenimiento,
+										m.equipo,
+										d.direccion,
+										m.diagnostico,
+										m.personaid,
+										DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
+										m.status
+									FROM persona as p
+									INNER JOIN mantenimiento as m ON p.idpersona = m.personaid
+									INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
+									WHERE m.idmantenimiento = $idmantenimiento AND m.status = 1";
+					$requestsolicitante = $this->select($sql_solicitante);
+					$sql_detalle = "SELECT m.idmantenimiento,
+											m.equipo,
+											d.direccion as direcciones,
+											m.diagnostico,
+											m.personaid,
+											p.nombres,
+											p.apellidos,
+											DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
+											m.status
+									FROM mantenimiento as m
+									INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
+									INNER JOIN persona as p ON m.personaid = p.idpersona
+									WHERE m.idmantenimiento = $idmantenimiento
+									/*WHERE d.pedidoid = $idmantenimiento*/";
+					$requestEntregas = $this->select_all($sql_detalle);
+					$request = array('solicitante' =>$requestMantenimiento,
+									'orden' => $requestsolicitante,
+									'detalle' => $requestEntregas);
 			}
 			return $request;
 		}

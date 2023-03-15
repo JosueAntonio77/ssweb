@@ -2,7 +2,7 @@
     <main class="app-content">
             <div class="app-title">
                 <div>
-                <h1><i class="fa fa-file-text-o"></i> Reporte de Entrega</h1>  
+                <h1><i class="fa fa-file-text-o"></i> <?= $data['page_title'] ?></h1>  
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -13,7 +13,8 @@
     <div class="col-md-12">
       <div class="tile">
         
-      <?php dep($data['arrMantenimiento']); ?>
+     <!-- <?php dep($data['arrMantenimiento']); ?> -->
+     
         <?php $data['arrMantenimiento']; 
                     
                     if(empty($data['arrMantenimiento'])){
@@ -31,28 +32,28 @@
               <h2 class="page-header"><i ></i> <img src="<?= media(); ?> /images/logo.png" width="150px" heigh="200px"> </h2>
             </div>
             <div class="col-6">
-              <h5 class="text-right">Fecha: <?= $data['fecha'] ?></h5>
+              <h5 class="text-right">Fecha entrega: <?= $pago['datefinish'] ?>
+                 </h5>
             </div>
           </div>
           <div class="row invoice-info">
-            <div class="col-4">From
-              <address><strong>MG DAKAVA</strong><br>
-                Avenue pemex<br>
-                DAKAVA<br>
-                goku@gmail.com<br>
-                www.hola.com
+            <div class="col-4"><strong>Solicita:</strong>
+              <address><?=$pago['nombres'].' '.$pago['apellidos']?> <br>
+              <strong>Dirección: </strong><?=$pago['direccion']?><br>
+              <strong>Área: </strong><?=$pago['area']?><br>
+              <strong>Cargo: </strong><?=$pago['cargo']?><br>
+                <?=$pago['email_user']?><br>
               </address>
             </div>
             <div class="col-4">To
-              <address><strong>MG DAKAVA</strong><br>
-                Envío: <br>
-                Tel: <br>
-                Email: 
+              <address><strong><?= NOMBRE_EMPRESA ?></strong><br>
+              <strong>Web: </strong> <?= WEB_EMPRESA ?><br>
+              <strong>Ubicación: </strong> <?= CALLE ?>
                </address>
             </div>
-            <div class="col-4">Invoice</b><br> 
-                <b>Estado: <br>
-                <b>Monto:</b> 
+            <div class="col-4">Contactos</b><br> 
+            <strong>Tel: </strong> <?= TEL_EMPRESA ?><br>
+                <b>Email: </b> 
             </div>
           </div>
           <div class="row">
@@ -60,19 +61,20 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Descripción</th>
-                    <th >Producto</th>
-                    <th >Serial</th>
-                    <th >Descripción</th>
-                    <th >Subtotal</th>
+                    <th>ID</th>
+                    <th >Equipo</th>
+                    <th >Dirección</th>
+                    <th >Diagnóstico</th>
+                    <th >Atendió</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>Juego de mesa</td>
-                    <td>455-211-431</td>
-                    <td>$49.99</td>
+                    <td><?= $pago['idmantenimiento'] ?></td>
+                    <td><?= $pago['equipo'] ?></td>
+                    <td><?= $pago['direccion'] ?></td>
+                    <td><?= $pago['diagnostico'] ?></td>
+                    <td><?=$pago['nombres'].' '.$pago['apellidos']?></td>
                   </tr>
                 </tbody>
               </table>

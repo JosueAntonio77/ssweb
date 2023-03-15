@@ -1,6 +1,5 @@
 <!-- Modal -->
-<!--
-<div class="modal fade" id="modalFormCliente" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalFormSolicitante" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header headerRegister">
@@ -10,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-            <form id="formCliente" name="formCliente" class="form-horizontal">
+            <form id="formSolicitante" name="formSolicitante" class="form-horizontal">
               <input type="hidden" id="idUsuario" name="idUsuario" value="">
               <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
 
@@ -47,35 +46,20 @@
 
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label>Identificación Tributaria <span class="required">*</span></label>
+                  <label>Dirección <span class="required">*</span></label>
                   <input class="form-control" type="text" id="txtNit" name="txtNit" required="">
                 </div>
                 <div class="form-group col-md-6">
                   <label>Cargo <span class="required">*</span></label>
                   <input class="form-control" type="text" id="txtCargo" name="txtCargo" required="">
                 </div>
-
-                <div class="form-group col-md-6">
-                  <label>Industria <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtIndustria" name="txtIndustria" required="">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Segmento <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtSegmento" name="txtSegmento" required="">
-                </div>
-
                 <div class="form-group col-md-6">
                   <label>Área <span class="required">*</span></label>
                   <input class="form-control" type="text" id="txtArea" name="txtArea" required="">
                 </div>
-
-                <div class="form-group col-md-6">
-                  <label>Tipo de cliente <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtTipoCliente" name="txtTipoCliente" required="">
-                </div>
-                
               </div>
              <div class="form-row">
+
                 
              </div>
               <div class="tile-footer">
@@ -87,14 +71,13 @@
     </div>
   </div>
 </div>
--->
-<!-- Modal -->
-<!--
-<div class="modal fade" id="modalViewCliente" tabindex="-1" role="dialog" aria-hidden="true">
+
+<!-- Modal Visualizar-->
+<div class="modal fade" id="modalViewSolicitante" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header header-primary">
-        <h5 class="modal-title" id="titleModal">Datos del cliente</h5>
+        <h5 class="modal-title" id="titleModal">Datos del Solicitante</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -119,13 +102,12 @@
               <td id="celTelefono">Larry</td>
             </tr>
             <tr>
-              <td>Email (Usuario):</td>
+              <td>Email (Solicitante):</td>
               <td id="celEmail">Larry</td>
-            </tr>
             <tr>
-              <td>Identificación Tributaria:</td>
+            <tr>
+              <td>Dirección (Solicitante):</td>
               <td id="celIde">Larry</td>
-            </tr>
             <tr>
               <td>Cargo:</td>
               <td id="celCargo">Larry</td>
@@ -133,18 +115,6 @@
             <tr>
               <td>Área:</td>
               <td id="celArea">Larry</td>
-            </tr>
-            <tr>
-              <td>Industria:</td>
-              <td id="celIndustria">Automotriz</td>
-            </tr>
-            <tr>
-              <td>Segmento:</td>
-              <td id="celSegmento">Coches</td>
-            </tr>
-            <tr>
-              <td>Tipo de cliente:</td>
-              <td id="celTipoCliente">Nuevo</td>
             </tr>
             <tr>
               <td>Fecha registro:</td>
@@ -159,4 +129,4 @@
     </div>
   </div>
 </div>
--->
+

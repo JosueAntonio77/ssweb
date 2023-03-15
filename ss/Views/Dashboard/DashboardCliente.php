@@ -22,13 +22,13 @@
                 </a>
             </div>
         <?php } ?>
-        <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
+        <?php if (!empty($_SESSION['permisos'][14]['r'])) { ?>
             <div class="col-md-6 col-lg-3">
-                <a href="<?= base_url() ?>/clientes" class="linkw">
+                <a href="<?= base_url() ?>/solicitantes" class="linkw">
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
-                            <h4>Clientes</h4>
-                            <p><b><?= $data['clientes'] ?></b></p>
+                            <h4>Solicitantes</h4>
+                            <p><b><?= $data['solicitantes'] ?></b></p>
                         </div>
                     </div>
                 </a>
@@ -68,7 +68,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Cliente</th>
+                                <th>Solicitante</th>
                                 <th>Estado</th>
                                 <th class="text-right">Problema</th>
                                 <th></th>
@@ -103,7 +103,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Cliente</th>
+                                <th>Solicitante</th>
                                 <th>Problema</th>
                                 <th></th>
                             </tr>

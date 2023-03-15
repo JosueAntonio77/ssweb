@@ -112,8 +112,8 @@
                           <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
                         </div>
                         <div class="col col-md-6 form-group">
-                          <label for="txtEmailCliente">Email</label>
-                          <input type="email" class="form-control valid validEmail" id="txtEmailCliente" name="txtEmailCliente" required="">
+                          <label for="txtEmailSolicitante">Email</label>
+                          <input type="email" class="form-control valid validEmail" id="txtEmailSolicitante" name="txtEmailSolicitante" required="">
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary">Regístrate</button>

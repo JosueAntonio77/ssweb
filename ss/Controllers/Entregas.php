@@ -26,7 +26,7 @@ class Entregas extends Controllers{
 	public function getEntregas(){
 					if($_SESSION['permisosMod']['r']){
 						$idpersona = "";
-						if ($_SESSION['userData']['idrol'] == RCLIENTES){
+						if ($_SESSION['userData']['idrol'] == RSOLICITANTE){
 							$idpersona = $_SESSION['userData']['idpersona'];
 					}
 					$arrData = $this->model->selectEntregas($idpersona);
@@ -45,6 +45,12 @@ class Entregas extends Controllers{
 
 								<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idmantenimiento'].')"
 									title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
+									if($arrData[$i]['status'] == 1)
+					{
+						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
+					}else{
+						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
+					}
 						}
 						if($_SESSION['permisosMod']['u']){
 							$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
@@ -59,16 +65,18 @@ class Entregas extends Controllers{
 				die();	
 	}
 	public function orden(int $idmantenimiento){
+		/*Validar si el usuario tiene permisos de lectura,
+			de lo contrario redirecciona al dashboard*/
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
 		}
 
 		$idpersona = "";
-			if ($_SESSION['userData']['idrol'] == RCLIENTES){
+			if ($_SESSION['userData']['idrol'] == RSOLICITANTE){
 				$idpersona = $_SESSION['userData']['idpersona'];
 			}
 
-		$data['page_tag'] = "Entrega";
+		$data['page_tag'] = "Detalle";
 		$data['page_title'] = "ENTREGA <small>H. Ayuntamiento de Progreso</small>";
 		$data['page_name'] = "entrega";
 		$data['arrMantenimiento'] = $this->model->selectEntrega($idmantenimiento,$idpersona);

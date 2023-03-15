@@ -30,11 +30,11 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
         <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/clientes">
+            <a class="app-menu__item" href="<?= base_url(); ?>/solicitantes">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Clientes</span>
+                <span class="app-menu__label">Solicitante</span>
             </a>
         </li>
         <?php } ?>

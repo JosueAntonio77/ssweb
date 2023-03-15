@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			e.preventDefault();
 			let strNombre = document.querySelector('#txtNombre').value;
 			let strApellido = document.querySelector('#txtApellido').value;
-			let strEmail = document.querySelector('#txtEmailCliente').value;
+			let strEmail = document.querySelector('#txtEmailSolicitante').value;
 			let intTelefono = document.querySelector('#txtTelefono').value;
 	
 			if (strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '') {

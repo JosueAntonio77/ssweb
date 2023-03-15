@@ -283,7 +283,7 @@ class Recepciones extends Controllers{
 			if(count($arrData) > 0 ){
 				for ($i=0; $i < count($arrData); $i++) { 
 					if($arrData[$i]['status'] == 1 ){
-					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
+					$htmlOptions .= '<option value="'.$arrData[$i]['idsolicitante']['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
 					}
 				}
 			}
