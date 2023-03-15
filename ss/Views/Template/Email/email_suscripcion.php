@@ -91,7 +91,7 @@
 			<tr>
 				<td>
 					<p>Datos del suscriptor.</p>
-					<p>¡Gracias por suscribirte a <b>MgDakava!</b></p>
+					<p>¡Gracias por suscribirte al <b>Ayuntamiento de Progreso!</b></p>
                     <p>Ahora conocerás toda nuestra información valiosa en segundos.</p>
 					<p>Nombre: <strong><?= $data['nombreSuscriptor']; ?></strong></p>
 					<p>Email: <strong><?= $data['emailSuscriptor']; ?></strong></p>

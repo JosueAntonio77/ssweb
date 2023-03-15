@@ -91,7 +91,7 @@
 			<tr>
 				<td>
 					<p>Datos del mensaje.</p>
-					<p>¡Gracias por contactar a <b>MgDakava!</b></p>
+					<p>¡Gracias por contactar al <b>Ayuntamiento de Progreso!</b></p>
                     <p>En breve tu mensaje será respondido, gracias por la preferencia.</p>
 					<p>Nombre: <strong><?= $data['nombreContacto']; ?></strong></p>
 					<p>Email: <strong><?= $data['emailContacto']; ?></strong></p>

@@ -32,7 +32,7 @@
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
 			if($rolid == RCLIENTES ){
-				$where = " WHERE personaid = ".$idUser;
+				$where = "WHERE personaid = ".$idUser;
 			}
 
 			$sql = "SELECT COUNT(*) as total FROM mantenimiento ".$where;
