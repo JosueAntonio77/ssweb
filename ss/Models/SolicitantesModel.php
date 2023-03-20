@@ -64,13 +64,20 @@ class SolicitantesModel extends Mysql
 
 	public function selectSolicitantes()
 	{
-		$sql = "SELECT idpersona,identificacion,nombres,apellidos,telefono,email_user,status 
+		$sql = "SELECT idpersona,
+						identificacion,
+						nombres,
+						apellidos,
+						telefono,
+						email_user,
+						status 
 				FROM persona 
-				WHERE rolid = 3; and status != 0 ";
+				WHERE rolid = 3 and status != 0 ";
 		$request = $this->select_all($sql);
 		return $request;
 	}
-//Visualizar datos del cliente.
+
+	//Visualizar datos del cliente.
 	public function selectSolicitante(int $idpersona){
 		$this->intIdUsuario = $idpersona;
 		$sql = "SELECT idpersona,identificacion,nombres,apellidos,telefono,email_user,nit,cargo,area,status, DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro 

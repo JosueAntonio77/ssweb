@@ -75,7 +75,7 @@ class ClientesModel extends Mysql
 	{
 		$sql = "SELECT idpersona,identificacion,nombres,apellidos,telefono,email_user,status 
 				FROM persona 
-				WHERE rolid = 3; and status != 0 ";
+				WHERE rolid = 3 and status != 0 ";
 		$request = $this->select_all($sql);
 		return $request;
 	}

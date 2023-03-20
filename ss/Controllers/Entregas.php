@@ -23,47 +23,57 @@ class Entregas extends Controllers{
 		$data['page_functions_js'] = "functions_entregas.js";
 		$this->views->getView($this,"entregas",$data); 
 	} 
+
 	public function getEntregas(){
-					if($_SESSION['permisosMod']['r']){
-						$idpersona = "";
-						if ($_SESSION['userData']['idrol'] == RSOLICITANTE){
-							$idpersona = $_SESSION['userData']['idpersona'];
-					}
-					$arrData = $this->model->selectEntregas($idpersona);
-					//dep($arrData);
-					//exit();
-					for ($i=0; $i < count($arrData); $i++) {
-						$btnView = '';
-						$btnEdit = '';
-						$btnDelete = '';
+		if($_SESSION['permisosMod']['r']){
+			$idpersona = "";
+			if ($_SESSION['userData']['idrol'] == RSOLICITANTE){
+				$idpersona = $_SESSION['userData']['idpersona'];
+			}
+			$arrData = $this->model->selectEntregas($idpersona);
+			//dep($arrData);
+			//exit();
+			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				$btnEdit = '';
+				$btnDelete = '';
 
-						//$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
+				//$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
 
-						if($_SESSION['permisosMod']['r']){
-							$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"
-								class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
-
-								<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idmantenimiento'].')"
-									title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
-									if($arrData[$i]['status'] == 1)
+				if($_SESSION['permisosMod']['r']){
+					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"	class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
+					<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idmantenimiento'].')" title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
+					
+					/*
+					if($arrData[$i]['status'] == 1)
 					{
 						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}else{
 						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
 					}
-						}
-						if($_SESSION['permisosMod']['u']){
-							$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
-						}
-						if($_SESSION['permisosMod']['d']){	
-							$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar cotización"><i class="far fa-trash-alt"></i></button>';
-						}
-						$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+					*/
+					
+					if($arrData[$i]['status'] == 1)
+					{
+						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
+					}else{
+						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}
-					echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 				}
-				die();	
+				if($_SESSION['permisosMod']['u']){
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
+				}
+				if($_SESSION['permisosMod']['d']){	
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar cotización"><i class="far fa-trash-alt"></i></button>';
+				}
+
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+			}
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();	
 	}
+
 	public function orden(int $idmantenimiento){
 		/*Validar si el usuario tiene permisos de lectura,
 			de lo contrario redirecciona al dashboard*/

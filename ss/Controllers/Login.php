@@ -62,9 +62,9 @@
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
 					$intTelefono = intval(strClean($_POST['txtTelefono']));
 					$strEmail = strtolower(strClean($_POST['txtEmailSolicitante']));
-					$intTipoId = 7; 
+					$intTipoId = MSOLICITANTES;
+
 					$request_user = "";
-					
 					$strPassword = passGenerator();
 					$strPasswordEncript = hash("SHA256",$strPassword);
 					$request_user = $this->insertSolicitante($strNombre, 
@@ -73,8 +73,8 @@
 														$strEmail,
 														$strPasswordEncript,
 														$intTipoId );
-					if($request_user > 0 )
-					{
+
+					if($request_user > 0 ){
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 						$nombreUsuario = $strNombre.' '.$strApellido;
 						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
@@ -85,7 +85,7 @@
 						$_SESSION['login'] = true;
 						$this->login->sessionLogin($request_user);
 						//Esta comentado por que estamos de forma local. Esto sirve para enviar a su correo credenciales. 
-                        //sendEmail($dataUsuario,'email_bienvenida');
+                        sendEmail($dataUsuario,'email_bienvenida');
 
 					}else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');		

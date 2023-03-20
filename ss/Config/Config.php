@@ -34,17 +34,14 @@
 	const CAT_SLIDER = "1,2,3";
 	const CAT_BANNER = "4,5,6";
 
-
 	//Datos para Encriptar / Desencriptar
 	const KEY = 'hayuntamiento';
 	const METHODENCRIPT = "AES-128-ECB";
 
-
-
 	//Módulos
 	const MDASHBOARD = 1;
 	const MUSUARIOS = 2;
-	const MSOLICITANTES = 14;
+	const MSOLICITANTES = 3;
 	const MRECEPCIONES = 4;
 	const MENTREGAS = 5;
 	const MCATEGORIAS = 6;

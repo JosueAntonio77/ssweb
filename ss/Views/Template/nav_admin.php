@@ -30,7 +30,7 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MSOLICITANTES]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/solicitantes">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>

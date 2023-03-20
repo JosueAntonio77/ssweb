@@ -13,8 +13,8 @@
 			return $total;
 		}
 
-		public function cantClientes(){
-			$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = ".RCLIENTES;
+		public function cantSolicitantes(){
+			$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = ".MSOLICITANTES;
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
@@ -31,7 +31,7 @@
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
-			if($rolid == RCLIENTES ){
+			if($rolid == MSOLICITANTES ){
 				$where = " WHERE personaid = ".$idUser;
 			}
 
@@ -45,7 +45,7 @@
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
-			if($rolid == RCLIENTES ){
+			if($rolid == MSOLICITANTES ){
 				$where = " WHERE p.personaid = ".$idUser;
 			}
 

@@ -101,17 +101,6 @@ class Recepciones extends Controllers{
 				if($idMantenimiento == 0)
 				{
 					$option = 1;
-					if($_SESSION['permisosMod']['w']){
-						/*
-						$request_mantenimiento = $this->model->insertMantenimiento($strNombre, 
-																	$strDescripcion,
-																	$strDiagnostico,
-																	$intCategoriaId,
-																	$intPersonaId,
-																	$strEquipo, 
-																	$intStatus);
-																	*/
-					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
