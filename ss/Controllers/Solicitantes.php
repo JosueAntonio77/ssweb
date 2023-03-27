@@ -105,8 +105,6 @@ class Solicitantes extends Controllers{
 			
 		die();
 	}
-		
-	
 
 	public function getSolicitantes()
 	{
