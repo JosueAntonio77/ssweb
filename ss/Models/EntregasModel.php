@@ -20,7 +20,7 @@
 									m.status
 							FROM mantenimiento as m
 							INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-							INNER JOIN persona as p ON m.personaid = p.idpersona $where AND m.status = 1";
+							INNER JOIN persona as p ON m.personaid = p.idpersona $where AND m.status = 0";
             $request = $this ->select_all($sql);
             return $request;
 
