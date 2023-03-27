@@ -93,6 +93,14 @@ window.addEventListener('load', function(e){
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
             }
+
+            let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) { 
+                if(elementsValid[i].classList.contains('is-invalid')) { 
+                    swal("Atención", "Por favor verifique los campos en rojo." , "error");
+                    return false;
+                } 
+            } 
             
             divLoading.style.display = "flex";
             tinyMCE.triggerSave();
@@ -108,25 +116,11 @@ window.addEventListener('load', function(e){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        swal("", objData.msg ,"success");
-                        document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
-                        document.querySelector("#containerGallery").classList.remove("notblock");
-                        //tableRecepciones.api().ajax.reload();
-                        if(rowTable == ""){
-                            tableRecepciones.api().ajax.reload();
-                        }else{
-                           htmlStatus = intStatus == 1 ? 
-                            '<span class="badge badge-danger">Pendiente</span>' :
-                            '<span class="badge badge-success">Entregado</span>';
-                            
-                            rowTable.cells[2].textContent = strNombre;
-                            rowTable.cells[3].textContent = intPersonaid;
-                            rowTable.cells[5].textContent = intCategoriaid;
-                            rowTable.cells[6].textContent = strDescripcion;
-                            rowTable.cells[7].textContent = strEquipo;
-                            rowTable.cells[8].innerHTML =  htmlStatus;
-                            rowTable = ""; 
-                        }
+                        $('#modalFormRecepciones').modal("hide");
+                        formRecepciones.reset();
+                        swal("Recepciones", objData.msg ,"success");
+                        tableRecepciones.api().ajax.reload();
+                        
                     }else{
                         swal("Error", objData.msg , "error");
                     }
@@ -164,6 +158,7 @@ window.addEventListener('load', function(e){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        /*
                         swal("", objData.msg ,"success");
                         document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
                         if(rowTable == ""){
@@ -175,7 +170,12 @@ window.addEventListener('load', function(e){
                             
                             rowTable.cells[8].innerHTML =  htmlStatus;
                             rowTable = ""; 
-                        }
+                        }    
+                        */
+                        $('#modalFormEntregaRecepciones').modal("hide");
+                        formRecepciones.reset();
+                        swal("Recepciones", objData.msg ,"success");
+                        tableRecepciones.api().ajax.reload();
                     }else{
                         swal("Error", objData.msg , "error");
                     }
@@ -344,10 +344,10 @@ function fntEditInfo(element,idMantenimiento){
 
 function fntDelivInfo(element,idMantenimiento){
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML ="Entregar Recepción";
+    document.querySelector('#titleModal').innerHTML = "Entregar Recepción";
     document.querySelector('.modal-header').classList.replace("headerEntregar", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML ="Entregar";
+    document.querySelector('#btnText').innerHTML = "Entregar";
 
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
@@ -356,7 +356,7 @@ function fntDelivInfo(element,idMantenimiento){
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
+        if(request.readyState == 3 && request.status == 200){
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
@@ -364,11 +364,12 @@ function fntDelivInfo(element,idMantenimiento){
                 
                 document.querySelector("#idMantenimiento").value    = objMantenimiento.idmantenimiento;
                 document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
+                document.querySelector("#listStatus").value         = objMantenimiento.status;
 
                 //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
+                $('#listStatus').selectpicker('render');
 
-                $('#modalFormEntregaRecepciones').modal('show');
-                
+                $('#modalFormEntregaRecepciones').modal('show'); 
             }else{
                 swal("Error", objData.msg , "error");
             }
@@ -521,7 +522,7 @@ function fntDelItem(element){
 
 function openModal()
 {
-    rowTable = "";
+    //rowTable = "";
     document.querySelector('#idMantenimiento').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
@@ -533,14 +534,3 @@ function openModal()
     $('#modalFormRecepciones').modal('show');
 }
 
-function openModalEntrega()
-{
-    rowTable = "";
-    document.querySelector('#idMantenimiento').value = "";
-    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerEntregar");
-    document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
-    document.querySelector('#btnText').innerHTML ="Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nueva Entrega";
-    document.querySelector("#formEntregaRecepciones").reset();
-    $('#modalFormEntregaRecepciones').modal('show');
-}

@@ -27,18 +27,19 @@
 		public function setUsuario(){
 			if($_POST){
 				
-				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) )
+				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['listDireccionid']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
-					$idUsuario = intval($_POST['idUsuario']);
-					$strIdentificacion = strClean($_POST['txtIdentificacion']);
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
-					$strEmail = strtolower(strClean($_POST['txtEmail']));
-					$intTipoId = intval(strClean($_POST['listRolid']));
-					$intStatus = intval(strClean($_POST['listStatus']));
+					$idUsuario 			= intval($_POST['idUsuario']);
+					$strIdentificacion 	= strClean($_POST['txtIdentificacion']);
+					$strNombre 			= ucwords(strClean($_POST['txtNombre']));
+					$strApellido 		= ucwords(strClean($_POST['txtApellido']));
+					$intDireccionId 	= intval(strClean($_POST['listDireccionid']));
+					$intTelefono 		= intval(strClean($_POST['txtTelefono']));
+					$strEmail 			= strtolower(strClean($_POST['txtEmail']));
+					$intTipoId 			= intval(strClean($_POST['listRolid']));
+					$intStatus 			= intval(strClean($_POST['listStatus']));
 
 					if($idUsuario == 0)
 					{
@@ -46,7 +47,8 @@
 						$strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
 						$request_user = $this->model->insertUsuario($strIdentificacion,
 																			$strNombre, 
-																			$strApellido, 
+																			$strApellido,
+																			$intDireccionId,  
 																			$intTelefono, 
 																			$strEmail,
 																			$strPassword, 
@@ -59,6 +61,7 @@
 																	$strIdentificacion, 
 																	$strNombre,
 																	$strApellido, 
+																	$intDireccionId, 
 																	$intTelefono, 
 																	$strEmail,
 																	$strPassword, 
@@ -227,6 +230,18 @@
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 			die();
+		}
+
+		public function getSelectDirecciones(){
+			$htmlOptions = "";
+			$arrData = $this->model->selectDirecciones();
+			if(count($arrData) > 0 ){
+				for ($i=0; $i < count($arrData); $i++) { 
+					$htmlOptions .= '<option value="'.$arrData[$i]['iddireccion'].'">'.$arrData[$i]['direccion'].'</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();	 
 		}
 
 	}

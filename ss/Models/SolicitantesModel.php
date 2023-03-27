@@ -5,6 +5,7 @@ class SolicitantesModel extends Mysql
 	private $strIdentificacion;
 	private $strNombre;
 	private $strApellido;
+	private $intDireccionId; 
 	private $intTelefono;
 	private $strEmail;
 	private $strPassword;
@@ -22,18 +23,18 @@ class SolicitantesModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, string $nit, string $cargo, string $area){
+	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, string $cargo, string $area){
 
-		$this->strIdentificacion = $identificacion;
-		$this->strNombre = $nombre;
-		$this->strApellido = $apellido;
-		$this->intTelefono = $telefono;
-		$this->strEmail = $email;
-		$this->strPassword = $password;
-		$this->intTipoId = $tipoid;
-		$this->strNit = $nit;
-		$this->strCargo = $cargo;
-		$this->strArea = $area;
+		$this->strIdentificacion 	= $identificacion;
+		$this->strNombre 			= $nombre;
+		$this->strApellido 			= $apellido;
+		$this->intDireccionId 		= $direccionid; 
+		$this->intTelefono 			= $telefono;
+		$this->strEmail 			= $email;
+		$this->strPassword 			= $password;
+		$this->intTipoId 			= $tipoid;
+		$this->strCargo 			= $cargo;
+		$this->strArea 				= $area;
 
 		$return = 0;
 		$sql = "SELECT * FROM persona WHERE 
@@ -42,18 +43,18 @@ class SolicitantesModel extends Mysql
 
 		if(empty($request))
 		{
-			$query_insert  = "INSERT INTO persona(identificacion,nombres,apellidos,telefono,email_user,password,rolid,nit,cargo,area) 
-							  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			$query_insert  = "INSERT INTO persona(identificacion,nombres,apellidos,direccionid,telefono,email_user,password,cargo,area,rolid) 
+							VALUES(?,?,?,?,?,?,?,?,?,?)";
         	$arrData = array($this->strIdentificacion,
     						$this->strNombre,
     						$this->strApellido,
+							$this->intDireccionId, 
     						$this->intTelefono,
     						$this->strEmail,
     						$this->strPassword,
-    						$this->intTipoId,
-    						$this->strNit,
     						$this->strCargo,
-    						$this->strArea);
+    						$this->strArea, 
+							$this->intTipoId);
         	$request_insert = $this->insert($query_insert,$arrData);
         	$return = $request_insert;
 		}else{
@@ -64,15 +65,18 @@ class SolicitantesModel extends Mysql
 
 	public function selectSolicitantes()
 	{
-		$sql = "SELECT idpersona,
-						identificacion,
-						nombres,
-						apellidos,
-						telefono,
-						email_user,
-						status 
-				FROM persona 
-				WHERE rolid = 3 and status != 0 ";
+		$sql = "SELECT p.idpersona,
+						p.identificacion,
+						p.nombres,
+						p.apellidos,
+						d.iddireccion, 
+						d.direccion,
+						p.telefono,
+						p.email_user,
+						p.status 
+				FROM persona p
+				INNER JOIN direcciones d ON p.direccionid = d.iddireccion
+				WHERE p.rolid = 3 and p.status != 0 ";
 		$request = $this->select_all($sql);
 		return $request;
 	}
@@ -80,25 +84,38 @@ class SolicitantesModel extends Mysql
 	//Visualizar datos del cliente.
 	public function selectSolicitante(int $idpersona){
 		$this->intIdUsuario = $idpersona;
-		$sql = "SELECT idpersona,identificacion,nombres,apellidos,telefono,email_user,nit,cargo,area,status, DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro 
-				FROM persona
-				WHERE idpersona = $this->intIdUsuario and rolid = 3";
+		$sql = "SELECT p.idpersona,
+						p.identificacion,
+						p.nombres,
+						p.apellidos,
+						d.iddireccion, 
+						d.direccion,  
+						p.telefono,
+						p.email_user,
+						p.nit,
+						p.cargo,
+						p.area,
+						p.status, 
+						p.DATE_FORMAT(datecreated, '%d-%m-%Y') AS fechaRegistro 
+				FROM persona p
+				INNER JOIN direcciones d ON p.direccionid = d.iddireccion
+				WHERE p.idpersona = $this->intIdUsuario and p.rolid = 3";
 		$request = $this->select($sql);
 		return $request;
 	}
 
-	public function updateSolicitante(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, string $nit, string $cargo, string $area){
+	public function updateSolicitante(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo, string $area){
 
-		$this->intIdUsuario = $idUsuario;
-		$this->strIdentificacion = $identificacion;
-		$this->strNombre = $nombre;
-		$this->strApellido = $apellido;
-		$this->intTelefono = $telefono;
-		$this->strEmail = $email;
-		$this->strPassword = $password;
-		$this->strNit = $nit;
-		$this->strCargo = $cargo;
-		$this->strArea = $area;
+		$this->intIdUsuario 		= $idUsuario;
+		$this->strIdentificacion 	= $identificacion;
+		$this->strNombre 			= $nombre;
+		$this->strApellido 			= $apellido;
+		$this->intDireccionId 		= $direccionid;  
+		$this->intTelefono 			= $telefono;
+		$this->strEmail 			= $email;
+		$this->strPassword 			= $password;
+		$this->strCargo 			= $cargo;
+		$this->strArea 				= $area;
 
 
 		$sql = "SELECT * FROM persona WHERE (email_user = '{$this->strEmail}' AND idpersona != $this->intIdUsuario)
@@ -109,26 +126,26 @@ class SolicitantesModel extends Mysql
 		{
 			if($this->strPassword  != "")
 			{
-				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, telefono=?, email_user=?, password=?, nit=?, cargo=?, area=?
+				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, direccionid=?, telefono=?, email_user=?, password=?, cargo=?, area=?
 						WHERE idpersona = $this->intIdUsuario ";
 				$arrData = array($this->strIdentificacion,
         						$this->strNombre,
         						$this->strApellido,
+								$this->intDireccionId, 
         						$this->intTelefono,
         						$this->strEmail,
         						$this->strPassword,
-        						$this->strNit,
         						$this->strCargo,
         						$this->strArea);
 			}else{
-				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, telefono=?, email_user=?, nit=?, cargo=?, area=? 
+				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, direccionid=?, telefono=?, email_user=?, cargo=?, area=? 
 						WHERE idpersona = $this->intIdUsuario ";
 				$arrData = array($this->strIdentificacion,
         						$this->strNombre,
         						$this->strApellido,
         						$this->intTelefono,
+								$this->intDireccionId, 
         						$this->strEmail,
-        						$this->strNit,
         						$this->strCargo,
         						$this->strArea);
 			}
@@ -147,6 +164,7 @@ class SolicitantesModel extends Mysql
 		$request = $this->update($sql,$arrData);
 		return $request;
 	}
+	
 }
 
  ?>

@@ -54,21 +54,25 @@
 			if($_POST){
 				error_reporting(0);
 				
-				if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailSolicitante']))
+				if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailSolicitante']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
+
 					$strNombre = ucwords(strClean($_POST['txtNombre']));
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
 					$intTelefono = intval(strClean($_POST['txtTelefono']));
 					$strEmail = strtolower(strClean($_POST['txtEmailSolicitante']));
+					
 					$intTipoId = MSOLICITANTES;
+					$intDireccionId = 1;
 
 					$request_user = "";
 					$strPassword = passGenerator();
 					$strPasswordEncript = hash("SHA256",$strPassword);
 					$request_user = $this->insertSolicitante($strNombre, 
-														$strApellido, 
+														$strApellido,
+														$intDireccionId,  
 														$intTelefono, 
 														$strEmail,
 														$strPasswordEncript,

@@ -62,8 +62,8 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-					<a href="<?=WEB_EMPRESA?>" class="semibold-text mb-2" target="_blanck">
-					H. AYUNTAMIENTO DE PROGRESO 
+						<a href="<?=WEB_EMPRESA?>" class="semibold-text mb-2" target="_blanck">
+							H. AYUNTAMIENTO DE PROGRESO 
 						</a>
 					</div>
 
@@ -130,12 +130,16 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="<?= base_url(); ?>/dashboard" class="flex-c-m p-lr-10 trans-04">
+						<!--<a href="<?= base_url(); ?>/dashboard" class="flex-c-m p-lr-10 trans-04">
 							Mi Cuenta
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Salir
+						</a>-->
+
+						<a href="<?= base_url(); ?>/login" class="flex-c-m trans-04 p-lr-25">
+							Regresar
 						</a>
 					</div>
 				</li>

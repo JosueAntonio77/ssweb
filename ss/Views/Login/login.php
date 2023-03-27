@@ -116,8 +116,16 @@
                           <input type="email" class="form-control valid validEmail" id="txtEmailSolicitante" name="txtEmailSolicitante" required="">
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-primary">Regístrate</button>
-                      <br>
+                      <!--
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="listDireccionid">¿Qué dirección perteneces?</label>
+                            <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" required>
+                            </select>
+                        </div>
+                      </div>
+                      -->
+                      <button type="submit" class="btn btn-primary btn-block">REGISTRARSE</button>
                       <br>
                       <div class="form-group">
                         <div class="utility">

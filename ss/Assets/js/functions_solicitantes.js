@@ -1,5 +1,5 @@
 let tableSolicitantes; 
-let rowTable = "";
+//let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -56,17 +56,18 @@ document.addEventListener('DOMContentLoaded', function(){
         let formSolicitante = document.querySelector("#formSolicitante");
         formSolicitante.onsubmit = function(e) {
             e.preventDefault();
-            let strIdentificacion = document.querySelector('#txtIdentificacion').value;
-            let strNombre = document.querySelector('#txtNombre').value;
-            let strApellido = document.querySelector('#txtApellido').value;
-            let strEmail = document.querySelector('#txtEmail').value;
-            let intTelefono = document.querySelector('#txtTelefono').value;
-            let strNit = document.querySelector('#txtNit').value;
-            let strCargo = document.querySelector('#txtCargo').value;
-            let strArea = document.querySelector('#txtArea').value;
-            let strPassword = document.querySelector('#txtPassword').value;
 
-            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strNit == '' || strArea == '' || strCargo=='')
+            let strIdentificacion   = document.querySelector('#txtIdentificacion').value;
+            let strNombre           = document.querySelector('#txtNombre').value;
+            let strApellido         = document.querySelector('#txtApellido').value;
+            var intDireccion        = document.querySelector('#listDireccionid').value;
+            let strEmail            = document.querySelector('#txtEmail').value;
+            let intTelefono         = document.querySelector('#txtTelefono').value;
+            let strCargo            = document.querySelector('#txtCargo').value;
+            let strArea             = document.querySelector('#txtArea').value;
+            let strPassword         = document.querySelector('#txtPassword').value;
+
+            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || intDireccion == '' || strEmail == '' || intTelefono == '' || strArea == '' || strCargo=='')
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        /*
                         if(rowTable == ""){
                             tableSolicitantes.api().ajax.reload();
                         }else{
@@ -104,6 +106,11 @@ document.addEventListener('DOMContentLoaded', function(){
                         $('#modalFormSolicitante').modal("hide");
                         formSolicitante.reset();
                         swal("Usuarios", objData.msg ,"success");
+                        */
+                        $('#modalFormSolicitante').modal("hide");
+                        formSolicitante.reset();
+                        swal("Solicitantes", objData.msg ,"success");
+                        tableSolicitantes.api().ajax.reload();
                     }else{
                         swal("Error", objData.msg , "error");
                     }
@@ -113,10 +120,28 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
     }
-
-
 }, false);
 
+window.addEventListener('load', function() {
+    ftnDirecciones();    
+}, false);
+
+function ftnDirecciones() {
+    if(document.querySelector('#listDireccionid')){
+        let ajaxUrl = base_url+'/Usuarios/getSelectDirecciones';
+        let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listDireccionid').innerHTML = request.responseText;
+                $('#listDireccionid').selectpicker('render');
+            }
+        }
+    }
+}
 
 function fntViewInfo(idpersona){
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -128,15 +153,16 @@ function fntViewInfo(idpersona){
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
-                document.querySelector("#celIdentificacion").innerHTML = objData.data.identificacion;
-                document.querySelector("#celNombre").innerHTML = objData.data.nombres;
-                document.querySelector("#celApellido").innerHTML = objData.data.apellidos;
-                document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
-                document.querySelector("#celEmail").innerHTML = objData.data.email_user;
-                document.querySelector("#celIde").innerHTML = objData.data.nit;
-                document.querySelector("#celCargo").innerHTML = objData.data.cargo;
-                document.querySelector("#celArea").innerHTML = objData.data.area;
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro; 
+                document.querySelector("#celIdentificacion").innerHTML  = objData.data.identificacion;
+                document.querySelector("#celNombre").innerHTML          = objData.data.nombres;
+                document.querySelector("#celApellido").innerHTML        = objData.data.apellidos;
+                document.querySelector("#listDireccionid").innerHTML    = objData.data.direccion;
+                document.querySelector("#celTelefono").innerHTML        = objData.data.telefono;
+                document.querySelector("#celEmail").innerHTML           = objData.data.email_user;
+                document.querySelector("#celIde").innerHTML             = objData.data.nit;
+                document.querySelector("#celCargo").innerHTML           = objData.data.cargo;
+                document.querySelector("#celArea").innerHTML            = objData.data.area;
+                document.querySelector("#celFechaRegistro").innerHTML   = objData.data.fechaRegistro; 
                 $('#modalViewSolicitante').modal('show');
             }else{
                 swal("Error", objData.msg , "error");
@@ -144,6 +170,7 @@ function fntViewInfo(idpersona){
         }
     }
 }
+
 // Actualizar datos del solicitante.
 function fntEditInfo(element, idpersona){
     rowTable = element.parentNode.parentNode.parentNode;
@@ -162,15 +189,17 @@ function fntEditInfo(element, idpersona){
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
-                document.querySelector("#idUsuario").value = objData.data.idpersona;
-                document.querySelector("#txtIdentificacion").value = objData.data.identificacion;
-                document.querySelector("#txtNombre").value = objData.data.nombres;
-                document.querySelector("#txtApellido").value = objData.data.apellidos;
-                document.querySelector("#txtTelefono").value = objData.data.telefono;
-                document.querySelector("#txtEmail").value = objData.data.email_user;
-                document.querySelector("#txtNit").value =objData.data.nit;
-                document.querySelector("#txtCargo").value =objData.data.cargo;
-                document.querySelector("#txtArea").value =objData.data.area;
+                document.querySelector("#idUsuario").value          = objData.data.idpersona;
+                document.querySelector("#txtIdentificacion").value  = objData.data.identificacion;
+                document.querySelector("#txtNombre").value          = objData.data.nombres;
+                document.querySelector("#txtApellido").value        = objData.data.apellidos;
+                document.querySelector("#txtTelefono").value        = objData.data.telefono;
+                document.querySelector("#txtEmail").value           = objData.data.email_user;
+                document.querySelector("#listDireccionid").value    = objData.data.iddireccion;
+                document.querySelector("#txtCargo").value           = objData.data.cargo;
+                document.querySelector("#txtArea").value            = objData.data.area;
+
+                $('#listDireccionid').selectpicker('render');
             }
         }
         $('#modalFormSolicitante').modal('show');
@@ -217,7 +246,7 @@ function fntDelInfo(idpersona){
 
 function openModal()
 {
-    rowTable = "";
+    //rowTable = "";
     document.querySelector('#idUsuario').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");

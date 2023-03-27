@@ -127,12 +127,13 @@
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " and p.idmantenimiento != 1 ";
+				$whereAdmin = " AND p.idmantenimiento != 1 ";
 			}
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							p.personaid, 
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							d.iddireccion AS direcionid,   
 							d.direccion AS direcciones,
 							p.categoriaid, 
 							c.nombre AS categoria,

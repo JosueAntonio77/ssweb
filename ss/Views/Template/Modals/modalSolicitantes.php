@@ -46,8 +46,8 @@
 
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label>Dirección <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtNit" name="txtNit" required="">
+                  <label for="listDireccionid">Dirección</label>
+                  <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" required ></select>
                 </div>
                 <div class="form-group col-md-6">
                   <label>Cargo <span class="required">*</span></label>
@@ -87,38 +87,38 @@
           <tbody>
             <tr>
               <td>Identificación:</td>
-              <td id="celIdentificacion">654654654</td>
+              <td id="celIdentificacion"></td>
             </tr>
             <tr>
               <td>Nombres:</td>
-              <td id="celNombre">Jacob</td>
+              <td id="celNombre"></td>
             </tr>
             <tr>
               <td>Apellidos:</td>
-              <td id="celApellido">Jacobs</td>
+              <td id="celApellido"></td>
             </tr>
             <tr>
               <td>Teléfono:</td>
-              <td id="celTelefono">Larry</td>
+              <td id="celTelefono"></td>
             </tr>
             <tr>
               <td>Email (Solicitante):</td>
-              <td id="celEmail">Larry</td>
+              <td id="celEmail"></td>
             <tr>
             <tr>
               <td>Dirección (Solicitante):</td>
-              <td id="celIde">Larry</td>
+              <td id="celIde"></td>
             <tr>
               <td>Cargo:</td>
-              <td id="celCargo">Larry</td>
+              <td id="celCargo"></td>
             </tr>
             <tr>
               <td>Área:</td>
-              <td id="celArea">Larry</td>
+              <td id="celArea"></td>
             </tr>
             <tr>
               <td>Fecha registro:</td>
-              <td id="celFechaRegistro">Larry</td>
+              <td id="celFechaRegistro"></td>
             </tr>
           </tbody>
         </table>

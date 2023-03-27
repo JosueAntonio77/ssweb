@@ -30,21 +30,23 @@ class Solicitantes extends Controllers{
 		error_reporting(0);
 		if($_POST){
 			dep($_POST);exit;
-			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
+			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{ 
-				$idUsuario = intval($_POST['idUsuario']);
-				$strIdentificacion = strClean($_POST['txtIdentificacion']);
-				$strNombre = ucwords(strClean($_POST['txtNombre']));
-				$strApellido = ucwords(strClean($_POST['txtApellido']));
-				$intTelefono = intval(strClean($_POST['txtTelefono']));
-				$strEmail = strtolower(strClean($_POST['txtEmail']));
-				$strNit = strClean($_POST['txtNit']);
-				$strNomFiscal = strClean($_POST['txtCargo']);
-				$strDirFiscal = strClean($_POST['txtArea']);
+
+				$idUsuario 			= intval($_POST['idUsuario']);
+				$strIdentificacion 	= strClean($_POST['txtIdentificacion']);
+				$strNombre	 		= ucwords(strClean($_POST['txtNombre']));
+				$strApellido 		= ucwords(strClean($_POST['txtApellido']));
+				$intDireccionId 	= intval(strClean($_POST['listDireccionid']));
+				$intTelefono 		= intval(strClean($_POST['txtTelefono']));
+				$strEmail 			= strtolower(strClean($_POST['txtEmail']));
+				$strCargo 			= strClean($_POST['txtCargo']);
+				$strArea 			= strClean($_POST['txtArea']);
 				
-				$intTipoId = 3;
+				$intTipoId = 3;  
+
 				$request_user = "";
 				if($idUsuario == 0)
 				{
@@ -54,12 +56,12 @@ class Solicitantes extends Controllers{
 					if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
-																			$strApellido, 
+																			$strApellido,
+																			$intDireccionId,  
 																			$intTelefono, 
 																			$strEmail,
 																			$strPasswordEncript,
 																			$intTipoId, 
-																			$strNit,
 																			$strCargo,
 																			$strArea);
 					}
@@ -68,41 +70,41 @@ class Solicitantes extends Controllers{
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
 					if($_SESSION['permisosMod']['u']){
 						$request_user = $this->model->updateSolicitante($strIdentificacion,
-						$strNombre, 
-						$strApellido, 
-						$intTelefono, 
-						$strEmail,
-						$strPassword,
-						$strNit,
-						$strCargo,
-						$strArea);
+																		$strNombre, 
+																		$strApellido,
+																		$intDireccionId,  
+																		$intTelefono, 
+																		$strEmail,
+																		$strPassword,
+																		$strCargo,
+																		$strArea);
 					}
 				}
 			}
 
-				if($request_user > 0 )
-				{
-					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-						$nombreUsuario = $strNombre.' '.$strApellido;
-						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
-											 'email' => $strEmail,
-											 'password' => $strPassword,
-											 'asunto' => 'Bienvenido a tu tienda en línea');
-						sendEmail($dataUsuario,'email_bienvenida');
-					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
-					}
-				}else if($request_user == 'exist'){
-					$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
+			if($request_user > 0 )
+			{
+				if($option == 1){
+					$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+					$nombreUsuario = $strNombre.' '.$strApellido;
+					$dataUsuario = array('nombreUsuario' => $nombreUsuario,
+										 'email' => $strEmail,
+										 'password' => $strPassword,
+										 'asunto' => 'Bienvenido a tu tienda en línea');
+					sendEmail($dataUsuario,'email_bienvenida');
 				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+					$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
 				}
-				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}else if($request_user == 'exist'){
+				$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
+			}else{
+				$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 			}
-			
-			die();
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
+			
+		die();
+	}
 		
 	
 
@@ -129,6 +131,7 @@ class Solicitantes extends Controllers{
 		}
 		die();
 	}
+
 // Método para visualizar los datos del solicitante
 	public function getSolicitante($idpersona){
 		if($_SESSION['permisosMod']['r']){

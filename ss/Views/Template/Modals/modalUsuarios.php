@@ -46,6 +46,13 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
+                    <label for="listDireccionid">Dirección</label>
+                    <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" required >
+                    </select>
+                </div>
+             </div>
+             <div class="form-row">
+                <div class="form-group col-md-6">
                     <label for="listStatus">Status</label>
                     <select class="form-control selectpicker" id="listStatus" name="listStatus" required >
                         <option value="1">Activo</option>
