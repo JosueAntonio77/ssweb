@@ -9,6 +9,8 @@
             <li class="breadcrumb-item"><a href="<?= base_url(); ?>/dashboard">Dashboard</a></li>
         </ul>
     </div>
+    <?php dep($_SESSION['permisos']); ?>
+    <?php dep($_SESSION['permisosMod']); ?>
     <div class="row">
         <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
             <div class="col-md-6 col-lg-3">
