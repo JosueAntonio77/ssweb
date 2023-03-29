@@ -9,12 +9,12 @@ class SolicitantesModel extends Mysql
 	private $intTelefono;
 	private $strEmail;
 	private $strPassword;
+	private $strCargo;
+	private $strArea;
 	private $strToken;
 	private $intTipoId;
 	private $intStatus;
 	private $strNit;
-	private $strCargo;
-	private $strArea;
 
 
 
@@ -37,13 +37,23 @@ class SolicitantesModel extends Mysql
 		$this->strArea 				= $area;
 
 		$return = 0;
+
 		$sql = "SELECT * FROM persona WHERE 
 				email_user = '{$this->strEmail}' or identificacion = '{$this->strIdentificacion}' ";
 		$request = $this->select_all($sql);
 
 		if(empty($request))
 		{
-			$query_insert  = "INSERT INTO persona(identificacion,nombres,apellidos,direccionid,telefono,email_user,password,cargo,area,rolid) 
+			$query_insert  = "INSERT INTO persona(identificacion,
+													nombres,
+													apellidos,
+													direccionid,
+													telefono,
+													email_user,
+													password,
+													cargo,
+													area,
+													rolid) 
 							VALUES(?,?,?,?,?,?,?,?,?,?)";
         	$arrData = array($this->strIdentificacion,
     						$this->strNombre,

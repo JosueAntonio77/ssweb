@@ -45,7 +45,8 @@
 					{
 						$option = 1;
 						$strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
-						$request_user = $this->model->insertUsuario($strIdentificacion,
+						if($_SESSION['permisosMod']['w']){
+							$request_user = $this->model->insertUsuario($strIdentificacion,
 																			$strNombre, 
 																			$strApellido,
 																			$intDireccionId,  
@@ -54,20 +55,22 @@
 																			$strPassword, 
 																			$intTipoId, 
 																			$intStatus );
+						}
 					}else{
 						$option = 2;
 						$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-						$request_user = $this->model->updateUsuario($idUsuario,
-																	$strIdentificacion, 
-																	$strNombre,
-																	$strApellido, 
-																	$intDireccionId, 
-																	$intTelefono, 
-																	$strEmail,
-																	$strPassword, 
-																	$intTipoId, 
-																	$intStatus);
-
+						if($_SESSION['permisosMod']['u']){
+							$request_user = $this->model->updateUsuario($idUsuario,
+																		$strIdentificacion, 
+																		$strNombre,
+																		$strApellido, 
+																		$intDireccionId, 
+																		$intTelefono, 
+																		$strEmail,
+																		$strPassword, 
+																		$intTipoId, 
+																		$intStatus);
+						}
 					}
 
 					if($request_user > 0 )

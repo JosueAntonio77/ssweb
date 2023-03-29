@@ -10,7 +10,7 @@ class Solicitantes extends Controllers{
 		{
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(RSOLICITANTE);
+		getPermisos(MSOLICITANTES);
 	}
 
 	public function Solicitantes()
@@ -27,10 +27,10 @@ class Solicitantes extends Controllers{
 
 	public function setSolicitante(){
 
-		error_reporting(0);
+		//error_reporting(0);
 		if($_POST){
-			dep($_POST);exit;
-			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
+			//dep($_POST);exit;
+			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['listDireccionid']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{ 
@@ -42,17 +42,20 @@ class Solicitantes extends Controllers{
 				$intDireccionId 	= intval(strClean($_POST['listDireccionid']));
 				$intTelefono 		= intval(strClean($_POST['txtTelefono']));
 				$strEmail 			= strtolower(strClean($_POST['txtEmail']));
-				$strCargo 			= strClean($_POST['txtCargo']);
-				$strArea 			= strClean($_POST['txtArea']);
+				$strCargo 			= ucwords(strClean($_POST['txtCargo']));
+				$strArea 			= ucwords(strClean($_POST['txtArea']));
 				
-				$intTipoId = 3;  
+				$intTipoId = RSOLICITANTE;  
 
 				$request_user = "";
 				if($idUsuario == 0)
 				{
 					$option = 1;
+					/*
 					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
 					$strPasswordEncript = hash("SHA256",$strPassword);
+					*/
+					$strPasswordEncript =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
 					if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
@@ -101,8 +104,7 @@ class Solicitantes extends Controllers{
 				$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 			}
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-		}
-			
+		}	
 		die();
 	}
 

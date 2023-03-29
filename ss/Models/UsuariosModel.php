@@ -24,15 +24,15 @@
 
 		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, int $status){
 
-			$this->strIdentificacion = $identificacion;
-			$this->strNombre = $nombre;
-			$this->strApellido = $apellido;
-			$this->intDireccionId = $direccionid;  
-			$this->intTelefono = $telefono;
-			$this->strEmail = $email;
-			$this->strPassword = $password;
-			$this->intTipoId = $tipoid;
-			$this->intStatus = $status;
+			$this->strIdentificacion 	= $identificacion;
+			$this->strNombre 			= $nombre;
+			$this->strApellido 			= $apellido;
+			$this->intDireccionId 		= $direccionid;  
+			$this->intTelefono 			= $telefono;
+			$this->strEmail 			= $email;
+			$this->strPassword 			= $password;
+			$this->intTipoId 			= $tipoid;
+			$this->intStatus 			= $status;
 			$return = 0;
 
 			$sql = "SELECT * FROM persona WHERE 
@@ -41,7 +41,15 @@
 
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO persona(identificacion,nombres,apellidos,direccionid,telefono,email_user,password,rolid,status) 
+				$query_insert  = "INSERT INTO persona(identificacion,
+														nombres,
+														apellidos,
+														direccionid,
+														telefono,
+														email_user,
+														password,
+														rolid,
+														status) 
 								  VALUES(?,?,?,?,?,?,?,?,?)";
 	        	$arrData = array($this->strIdentificacion,
         						$this->strNombre,
@@ -118,16 +126,16 @@
 
 		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, int $status){
 
-			$this->intIdUsuario = $idUsuario;
-			$this->strIdentificacion = $identificacion;
-			$this->strNombre = $nombre;
-			$this->strApellido = $apellido;
-			$this->intDireccionId = $direccionid; 
-			$this->intTelefono = $telefono;
-			$this->strEmail = $email;
-			$this->strPassword = $password;
-			$this->intTipoId = $tipoid;
-			$this->intStatus = $status;
+			$this->intIdUsuario 		= $idUsuario;
+			$this->strIdentificacion 	= $identificacion;
+			$this->strNombre 			= $nombre;
+			$this->strApellido 			= $apellido;
+			$this->intDireccionId 		= $direccionid; 
+			$this->intTelefono 			= $telefono;
+			$this->strEmail 			= $email;
+			$this->strPassword 			= $password;
+			$this->intTipoId 			= $tipoid;
+			$this->intStatus 			= $status;
 
 			$sql = "SELECT * FROM persona WHERE (email_user = '{$this->strEmail}' AND idpersona != $this->intIdUsuario)
 										  OR (identificacion = '{$this->strIdentificacion}' AND idpersona != $this->intIdUsuario) ";

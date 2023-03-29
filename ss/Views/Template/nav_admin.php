@@ -8,7 +8,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MDASHBOARD]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/dashboard">
                 <i class="app-menu__icon fa fa-dashboard"></i>
@@ -16,7 +16,7 @@
             </a>
         </li>
         <?php } ?>
-        <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MUSUARIOS]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
@@ -39,7 +39,7 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MRECEPCIONES]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/recepciones">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
@@ -48,7 +48,7 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MENTREGAS]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/entregas">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
@@ -57,7 +57,7 @@
         </li>
         <?php } ?> 
 
-         <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
+         <?php if(!empty($_SESSION['permisos'][MCONTACTOS]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/contactos">
                 <i class="app-menu__icon fas fa-envelope" aria-hidden="true"></i>

@@ -10,7 +10,7 @@ class Recepciones extends Controllers{
 		{
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(4);
+		getPermisos(MRECEPCIONES);
 	}
 
 	public function Recepciones()
