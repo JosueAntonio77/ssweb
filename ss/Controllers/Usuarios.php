@@ -17,7 +17,7 @@
 			if(empty($_SESSION['permisosMod']['r'])){
 				header("Location:".base_url().'/dashboard');
 			}
-			$data['page_tag'] = "Usuarios - Mgdakava";
+			$data['page_tag'] = "Usuarios - Ayuntamiento";
 			$data['page_title'] = "USUARIOS <small>Ayuntamiento de Progreso</small>";
 			$data['page_name'] = "usuarios";
 			$data['page_functions_js'] = "functions_usuarios.js";
@@ -45,7 +45,7 @@
 					{
 						$option = 1;
 						$strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
-						if($_SESSION['permisosMod']['w']){
+						//if($_SESSION['permisosMod']['w']){
 							$request_user = $this->model->insertUsuario($strIdentificacion,
 																			$strNombre, 
 																			$strApellido,
@@ -55,11 +55,11 @@
 																			$strPassword, 
 																			$intTipoId, 
 																			$intStatus );
-						}
+						//}
 					}else{
 						$option = 2;
 						$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-						if($_SESSION['permisosMod']['u']){
+						//if($_SESSION['permisosMod']['u']){
 							$request_user = $this->model->updateUsuario($idUsuario,
 																		$strIdentificacion, 
 																		$strNombre,
@@ -70,7 +70,7 @@
 																		$strPassword, 
 																		$intTipoId, 
 																		$intStatus);
-						}
+						//}
 					}
 
 					if($request_user > 0 )

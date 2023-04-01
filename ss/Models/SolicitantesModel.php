@@ -23,7 +23,7 @@ class SolicitantesModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, string $cargo, string $area){
+	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo, string $area, int $tipoid){
 
 		$this->strIdentificacion 	= $identificacion;
 		$this->strNombre 			= $nombre;
@@ -32,9 +32,9 @@ class SolicitantesModel extends Mysql
 		$this->intTelefono 			= $telefono;
 		$this->strEmail 			= $email;
 		$this->strPassword 			= $password;
-		$this->intTipoId 			= $tipoid;
 		$this->strCargo 			= $cargo;
 		$this->strArea 				= $area;
+		$this->intTipoId 			= $tipoid;
 
 		$return = 0;
 

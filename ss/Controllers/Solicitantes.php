@@ -44,10 +44,9 @@ class Solicitantes extends Controllers{
 				$strEmail 			= strtolower(strClean($_POST['txtEmail']));
 				$strCargo 			= ucwords(strClean($_POST['txtCargo']));
 				$strArea 			= ucwords(strClean($_POST['txtArea']));
-				
 				$intTipoId = RSOLICITANTE;  
 
-				$request_user = "";
+				//$request_user = "";
 				if($idUsuario == 0)
 				{
 					$option = 1;
@@ -56,7 +55,7 @@ class Solicitantes extends Controllers{
 					$strPasswordEncript = hash("SHA256",$strPassword);
 					*/
 					$strPasswordEncript =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
-					if($_SESSION['permisosMod']['w']){
+					//if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
 																			$strApellido,
@@ -64,14 +63,14 @@ class Solicitantes extends Controllers{
 																			$intTelefono, 
 																			$strEmail,
 																			$strPasswordEncript,
-																			$intTipoId, 
 																			$strCargo,
-																			$strArea);
-					}
+																			$strArea,
+																			$intTipoId);
+					//}
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-					if($_SESSION['permisosMod']['u']){
+					//if($_SESSION['permisosMod']['u']){
 						$request_user = $this->model->updateSolicitante($strIdentificacion,
 																		$strNombre, 
 																		$strApellido,
@@ -81,7 +80,7 @@ class Solicitantes extends Controllers{
 																		$strPassword,
 																		$strCargo,
 																		$strArea);
-					}
+					//}
 				}
 			}
 
