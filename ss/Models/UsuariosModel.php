@@ -10,19 +10,19 @@
 		private $intTelefono;
 		private $strEmail;
 		private $strPassword;
-		private $strToken;
-		private $intTipoId;
-		private $intStatus;
 		private $strNit;
 		private $strCargo;
 		private $strArea;
+		private $strToken;
+		private $intTipoId;
+		private $intStatus;
 
 		public function __construct()
 		{
 			parent::__construct();
 		}	
 
-		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, int $status){
+		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $nit, string $cargo,  string $area,  string $token, int $tipoid, int $status){
 
 			$this->strIdentificacion 	= $identificacion;
 			$this->strNombre 			= $nombre;
@@ -31,6 +31,10 @@
 			$this->intTelefono 			= $telefono;
 			$this->strEmail 			= $email;
 			$this->strPassword 			= $password;
+			$this->strNit				= $nit; 
+			$this->strCargo				= $cargo;
+			$this->strArea				= $area;
+			$this->strToken				= $token; 
 			$this->intTipoId 			= $tipoid;
 			$this->intStatus 			= $status;
 			$return = 0;
@@ -41,16 +45,20 @@
 
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO persona(identificacion,
+				$query_insert  = "INSERT INTO persona (identificacion,
 														nombres,
 														apellidos,
 														direccionid,
 														telefono,
 														email_user,
 														password,
+														nit, 
+														cargo, 
+														area, 
+														token, 
 														rolid,
 														status) 
-								  VALUES(?,?,?,?,?,?,?,?,?)";
+								  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        	$arrData = array($this->strIdentificacion,
         						$this->strNombre,
         						$this->strApellido,
@@ -58,6 +66,10 @@
         						$this->intTelefono,
         						$this->strEmail,
         						$this->strPassword,
+								$this->strNit, 
+								$this->strCargo, 
+								$this->strArea, 
+								$this->strToken, 
         						$this->intTipoId,
         						$this->intStatus);
 	        	$request_insert = $this->insert($query_insert,$arrData);

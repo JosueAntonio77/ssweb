@@ -9,7 +9,7 @@
 			{
 				header('Location: '.base_url().'/login');
 			}
-			getPermisos(2);
+			getPermisos(MUSUARIOS);
 		}
 
 		public function Usuarios()
@@ -40,6 +40,7 @@
 					$strEmail 			= strtolower(strClean($_POST['txtEmail']));
 					$intTipoId 			= intval(strClean($_POST['listRolid']));
 					$intStatus 			= intval(strClean($_POST['listStatus']));
+					$strRelleno 		= "";
 
 					if($idUsuario == 0)
 					{
@@ -52,7 +53,11 @@
 																			$intDireccionId,  
 																			$intTelefono, 
 																			$strEmail,
-																			$strPassword, 
+																			$strPassword,
+																			$strRelleno, 
+																			$strRelleno, 
+																			$strRelleno, 
+																			$strRelleno, 
 																			$intTipoId, 
 																			$intStatus );
 						//}
