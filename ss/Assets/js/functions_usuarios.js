@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var formDataEmpresa = document.querySelector("#formDataEmpresa");
         formDataEmpresa.onsubmit = function(e) {
             e.preventDefault();
+            
             var strNit = document.querySelector('#txtNit').value;
             var strCargo = document.querySelector('#txtCargo').value;
             var strArea = document.querySelector('#txtArea').value;

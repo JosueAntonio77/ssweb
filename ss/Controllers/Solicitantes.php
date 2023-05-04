@@ -18,7 +18,7 @@ class Solicitantes extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
 		}
-		$data['page_tag'] = "Solicitantes";
+		$data['page_tag'] = "Solicitantes - Ayuntamiento";
 		$data['page_title'] = "SOLICITANTES <small>Ayuntamiento de Progreso</small>";
 		$data['page_name'] = "solicitantes";
 		$data['page_functions_js'] = "functions_solicitantes.js";
@@ -44,17 +44,15 @@ class Solicitantes extends Controllers{
 				$strEmail 			= strtolower(strClean($_POST['txtEmail']));
 				$strCargo 			= ucwords(strClean($_POST['txtCargo']));
 				$strArea 			= ucwords(strClean($_POST['txtArea']));
-				$intTipoId = RSOLICITANTE;  
+				$intTipoId 			= RSOLICITANTE;  
+				$strRelleno 		= ""; 
 
 				//$request_user = "";
-				if($idUsuario == 0)
-				{
+				if($idUsuario == 0){
 					$option = 1;
-					/*
 					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
 					$strPasswordEncript = hash("SHA256",$strPassword);
-					*/
-					$strPasswordEncript =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+					//$strPasswordEncript =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
 					//if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
@@ -63,15 +61,18 @@ class Solicitantes extends Controllers{
 																			$intTelefono, 
 																			$strEmail,
 																			$strPasswordEncript,
+																			$strRelleno,
 																			$strCargo,
 																			$strArea,
+																			$strRelleno,
 																			$intTipoId);
 					//}
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-					//if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateSolicitante($strIdentificacion,
+					if($_SESSION['permisosMod']['u']){
+						$request_user = $this->model->updateSolicitante($idUsuario,
+																		$strIdentificacion,
 																		$strNombre, 
 																		$strApellido,
 																		$intDireccionId,  
@@ -80,35 +81,33 @@ class Solicitantes extends Controllers{
 																		$strPassword,
 																		$strCargo,
 																		$strArea);
-					//}
+					}
 				}
-			}
 
-			if($request_user > 0 )
-			{
-				if($option == 1){
-					$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-					$nombreUsuario = $strNombre.' '.$strApellido;
-					$dataUsuario = array('nombreUsuario' => $nombreUsuario,
-										 'email' => $strEmail,
-										 'password' => $strPassword,
-										 'asunto' => 'Bienvenido a tu tienda en línea');
-					sendEmail($dataUsuario,'email_bienvenida');
+				if($request_user > 0 ){
+					if($option == 1){
+						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+						$nombreUsuario = $strNombre.' '.$strApellido;
+						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
+											'email' => $strEmail,
+											'password' => $strPassword,
+											'asunto' => 'Bienvenido a tu tienda en línea');
+						sendEmail($dataUsuario,'email_bienvenida');
+					}else{
+						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
+					}
+				}else if($request_user == 'exist'){
+					$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 				}else{
-					$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
+					$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 				}
-			}else if($request_user == 'exist'){
-				$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
-			}else{
-				$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
-			}
+			}	
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}	
 		die();
 	}
 
-	public function getSolicitantes()
-	{
+	public function getSolicitantes(){
 		if($_SESSION['permisosMod']['r']){
 			$arrData = $this->model->selectSolicitantes();
 			for ($i=0; $i < count($arrData); $i++) {
@@ -131,7 +130,7 @@ class Solicitantes extends Controllers{
 		die();
 	}
 
-// Método para visualizar los datos del solicitante
+	// Método para visualizar los datos del solicitante
 	public function getSolicitante($idpersona){
 		if($_SESSION['permisosMod']['r']){
 			$idusuario = intval($idpersona);
@@ -150,8 +149,7 @@ class Solicitantes extends Controllers{
 		die();
 	}
 
-	public function delSolicitante()
-	{
+	public function delSolicitante(){
 		if($_POST){
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
@@ -168,8 +166,5 @@ class Solicitantes extends Controllers{
 		die();
 	}
 
-
-
 }
-
 ?>

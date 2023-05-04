@@ -102,12 +102,13 @@
               <td id="celTelefono"></td>
             </tr>
             <tr>
+              <td>Dirección (Solicitante):</td>
+              <td id="celDireccion"></td>
+            </tr>
+            <tr>
               <td>Email (Solicitante):</td>
               <td id="celEmail"></td>
-            <tr>
-            <tr>
-              <td>Dirección (Solicitante):</td>
-              <td id="celIde"></td>
+            </tr>
             <tr>
               <td>Cargo:</td>
               <td id="celCargo"></td>

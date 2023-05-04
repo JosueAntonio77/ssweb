@@ -9,12 +9,12 @@ class SolicitantesModel extends Mysql
 	private $intTelefono;
 	private $strEmail;
 	private $strPassword;
+	private $strNit;
 	private $strCargo;
 	private $strArea;
 	private $strToken;
 	private $intTipoId;
 	private $intStatus;
-	private $strNit;
 
 
 
@@ -23,7 +23,7 @@ class SolicitantesModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo, string $area, int $tipoid){
+	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $nit, string $cargo, string $area,  string $token, int $tipoid){
 
 		$this->strIdentificacion 	= $identificacion;
 		$this->strNombre 			= $nombre;
@@ -32,10 +32,11 @@ class SolicitantesModel extends Mysql
 		$this->intTelefono 			= $telefono;
 		$this->strEmail 			= $email;
 		$this->strPassword 			= $password;
+		$this->strNit				= $nit; 
 		$this->strCargo 			= $cargo;
 		$this->strArea 				= $area;
+		$this->strToken				= $token; 
 		$this->intTipoId 			= $tipoid;
-
 		$return = 0;
 
 		$sql = "SELECT * FROM persona WHERE 
@@ -51,10 +52,12 @@ class SolicitantesModel extends Mysql
 													telefono,
 													email_user,
 													password,
+													nit, 
 													cargo,
 													area,
+													token, 
 													rolid) 
-							VALUES(?,?,?,?,?,?,?,?,?,?)";
+							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         	$arrData = array($this->strIdentificacion,
     						$this->strNombre,
     						$this->strApellido,
@@ -62,8 +65,10 @@ class SolicitantesModel extends Mysql
     						$this->intTelefono,
     						$this->strEmail,
     						$this->strPassword,
+							$this->strNit,
     						$this->strCargo,
-    						$this->strArea, 
+    						$this->strArea,
+							$this->strToken, 
 							$this->intTipoId);
         	$request_insert = $this->insert($query_insert,$arrData);
         	$return = $request_insert;
@@ -83,6 +88,8 @@ class SolicitantesModel extends Mysql
 						d.direccion,
 						p.telefono,
 						p.email_user,
+						p.cargo, 
+						p.area, 
 						p.status 
 				FROM persona p
 				INNER JOIN direcciones d ON p.direccionid = d.iddireccion
@@ -102,11 +109,10 @@ class SolicitantesModel extends Mysql
 						d.direccion,  
 						p.telefono,
 						p.email_user,
-						p.nit,
 						p.cargo,
 						p.area,
-						p.status, 
-						p.DATE_FORMAT(datecreated, '%d-%m-%Y') AS fechaRegistro 
+						DATE_FORMAT(p.datecreated, '%d-%m-%Y') AS fechaRegistro,
+						p.status
 				FROM persona p
 				INNER JOIN direcciones d ON p.direccionid = d.iddireccion
 				WHERE p.idpersona = $this->intIdUsuario and p.rolid = 3";
@@ -136,7 +142,16 @@ class SolicitantesModel extends Mysql
 		{
 			if($this->strPassword  != "")
 			{
-				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, direccionid=?, telefono=?, email_user=?, password=?, cargo=?, area=?
+				$sql = "UPDATE persona 
+						SET identificacion=?, 
+							nombres=?, 
+							apellidos=?, 
+							direccionid=?, 
+							telefono=?, 
+							email_user=?, 
+							password=?, 
+							cargo=?, 
+							area=?
 						WHERE idpersona = $this->intIdUsuario ";
 				$arrData = array($this->strIdentificacion,
         						$this->strNombre,
@@ -148,7 +163,15 @@ class SolicitantesModel extends Mysql
         						$this->strCargo,
         						$this->strArea);
 			}else{
-				$sql = "UPDATE persona SET identificacion=?, nombres=?, apellidos=?, direccionid=?, telefono=?, email_user=?, cargo=?, area=? 
+				$sql = "UPDATE persona 
+						SET identificacion=?, 
+							nombres=?, 
+							apellidos=?, 
+							direccionid=?, 
+							telefono=?, 
+							email_user=?, 
+							cargo=?, 
+							area=? 
 						WHERE idpersona = $this->intIdUsuario ";
 				$arrData = array($this->strIdentificacion,
         						$this->strNombre,

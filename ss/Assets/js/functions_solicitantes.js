@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     return false;
                 } 
             } 
+
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Solicitantes/setSolicitante'; 
@@ -156,10 +157,9 @@ function fntViewInfo(idpersona){
                 document.querySelector("#celIdentificacion").innerHTML  = objData.data.identificacion;
                 document.querySelector("#celNombre").innerHTML          = objData.data.nombres;
                 document.querySelector("#celApellido").innerHTML        = objData.data.apellidos;
-                document.querySelector("#listDireccionid").innerHTML    = objData.data.direccion;
+                document.querySelector("#celDireccion").innerHTML       = objData.data.direccion;
                 document.querySelector("#celTelefono").innerHTML        = objData.data.telefono;
                 document.querySelector("#celEmail").innerHTML           = objData.data.email_user;
-                document.querySelector("#celIde").innerHTML             = objData.data.nit;
                 document.querySelector("#celCargo").innerHTML           = objData.data.cargo;
                 document.querySelector("#celArea").innerHTML            = objData.data.area;
                 document.querySelector("#celFechaRegistro").innerHTML   = objData.data.fechaRegistro; 
@@ -172,8 +172,8 @@ function fntViewInfo(idpersona){
 }
 
 // Actualizar datos del solicitante.
-function fntEditInfo(element, idpersona){
-    rowTable = element.parentNode.parentNode.parentNode;
+function fntEditInfo( idpersona){
+    //rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar datos del Solicitante";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
