@@ -53,9 +53,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let formRegister = document.querySelector("#formRegister");
 		formRegister.onsubmit = function (e) {
 			e.preventDefault();
-			let strNombre = document.querySelector('#txtNombre').value;
+
+			let strNombre 	= document.querySelector('#txtNombre').value;
 			let strApellido = document.querySelector('#txtApellido').value;
-			let strEmail = document.querySelector('#txtEmailSolicitante').value;
+			let strEmail 	= document.querySelector('#txtEmailSolicitante').value;
 			let intTelefono = document.querySelector('#txtTelefono').value;
 	
 			if (strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '') {
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					return false;
 				}
 			}
+			
 			divLoading.style.display = "flex";
 			let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 			let ajaxUrl = base_url + '/Login/registro';

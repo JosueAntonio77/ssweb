@@ -1,6 +1,9 @@
 <?php 
+	require_once("Models/ASolicitante.php");
+	require_once("Models/LoginModel.php");
 
 	class Login extends Controllers{
+		use ASolicitante;
 		public function __construct()
 		{
 			session_start();
@@ -52,31 +55,41 @@
 
 		public function registro(){
 			if($_POST){
-				error_reporting(0);
+				//error_reporting(0);
 				
 				if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailSolicitante']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
 
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
-					$strEmail = strtolower(strClean($_POST['txtEmailSolicitante']));
-					
-					$intTipoId = MSOLICITANTES;
-					$intDireccionId = 1;
+					$strIdentificacion 	= "";
+					$strNombre	 		= ucwords(strClean($_POST['txtNombre']));
+					$strApellido 		= ucwords(strClean($_POST['txtApellido']));
+					$intDireccionId 	= 1;
+					$intTelefono 		= intval(strClean($_POST['txtTelefono']));
+					$strEmail 			= strtolower(strClean($_POST['txtEmailSolicitante']));
+					$strNit 			= "";
+					$strCargo 			= "";
+					$strArea 			= "";
+					$strToken 			= "";
+					$intTipoId 			= RSOLICITANTE;  
+
 
 					$request_user = "";
 					$strPassword = passGenerator();
 					$strPasswordEncript = hash("SHA256",$strPassword);
-					$request_user = $this->insertSolicitante($strNombre, 
-														$strApellido,
-														$intDireccionId,  
-														$intTelefono, 
-														$strEmail,
-														$strPasswordEncript,
-														$intTipoId );
+					$request_user = $this->insertSolicitante($strIdentificacion,
+															$strNombre, 
+															$strApellido,
+															$intDireccionId,  
+															$intTelefono, 
+															$strEmail,
+															$strPasswordEncript,
+															$strNit,
+															$strCargo,
+															$strArea,
+															$strToken,
+															$intTipoId );
 
 					if($request_user > 0 ){
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');

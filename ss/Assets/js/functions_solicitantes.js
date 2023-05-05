@@ -92,22 +92,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        /*
-                        if(rowTable == ""){
-                            tableSolicitantes.api().ajax.reload();
-                        }else{
-                           rowTable.cells[1].textContent =  strIdentificacion;
-                           rowTable.cells[2].textContent =  strNombre;
-                           rowTable.cells[3].textContent =  strApellido;
-                           rowTable.cells[4].textContent =  strEmail;
-                           rowTable.cells[5].textContent =  intTelefono;
-                          
-                           rowTable = "";
-                        }
-                        $('#modalFormSolicitante').modal("hide");
-                        formSolicitante.reset();
-                        swal("Usuarios", objData.msg ,"success");
-                        */
                         $('#modalFormSolicitante').modal("hide");
                         formSolicitante.reset();
                         swal("Solicitantes", objData.msg ,"success");
