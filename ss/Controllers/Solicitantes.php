@@ -53,7 +53,7 @@ class Solicitantes extends Controllers{
 					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
 					$strPasswordEncript = hash("SHA256",$strPassword);
 					//$strPasswordEncript =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
-					//if($_SESSION['permisosMod']['w']){
+					if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertSolicitante($strIdentificacion,
 																			$strNombre, 
 																			$strApellido,
@@ -66,7 +66,7 @@ class Solicitantes extends Controllers{
 																			$strArea,
 																			$strRelleno,
 																			$intTipoId);
-					//}
+					}
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
@@ -90,9 +90,9 @@ class Solicitantes extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 						$nombreUsuario = $strNombre.' '.$strApellido;
 						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
-											'email' => $strEmail,
-											'password' => $strPassword,
-											'asunto' => 'Bienvenido a tu tienda en línea');
+											'email' 		=> $strEmail,
+											'password' 		=> $strPassword,
+											'asunto' => 'Bienvenido al mantenimiento del Ayuntamiento de Progreso');
 						sendEmail($dataUsuario,'email_bienvenida');
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados Correctamente.');
