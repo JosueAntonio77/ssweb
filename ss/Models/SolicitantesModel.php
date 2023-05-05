@@ -176,8 +176,8 @@ class SolicitantesModel extends Mysql
 				$arrData = array($this->strIdentificacion,
         						$this->strNombre,
         						$this->strApellido,
-        						$this->intTelefono,
 								$this->intDireccionId, 
+        						$this->intTelefono,
         						$this->strEmail,
         						$this->strCargo,
         						$this->strArea);

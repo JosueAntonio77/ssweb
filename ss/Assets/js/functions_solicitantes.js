@@ -172,7 +172,7 @@ function fntViewInfo(idpersona){
 }
 
 // Actualizar datos del solicitante.
-function fntEditInfo( idpersona){
+function fntEditInfo(idpersona){
     //rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar datos del Solicitante";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");

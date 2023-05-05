@@ -70,7 +70,8 @@ class Solicitantes extends Controllers{
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-					if($_SESSION['permisosMod']['u']){
+					if($_SESSION['permisosMod']['u'])
+					{
 						$request_user = $this->model->updateSolicitante($idUsuario,
 																		$strIdentificacion,
 																		$strNombre, 
@@ -118,7 +119,7 @@ class Solicitantes extends Controllers{
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver solicitante"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Editar solicitante"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo('.$arrData[$i]['idpersona'].')" title="Editar solicitante"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Eliminar solicitante"><i class="far fa-trash-alt"></i></button>';
