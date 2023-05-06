@@ -128,11 +128,14 @@
                       <button type="submit" class="btn btn-primary btn-block">REGISTRARSE</button>
                       <br>
                       <div class="form-group">
+                        <div>
+                          <p class="semibold-text mb-2">Sele enviará un email a su cuenta de correo</p>
+                        </div>
                         <div class="utility">
                           <!--
                           <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto"  target="_blanck">Contactate con nosotros aquí.</a></p>
                           -->
-                          <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto"  target="">Contactate con nosotros aquí.</a></p>
+                          <p class="semibold-text mb-2"><a href="<?= base_url(); ?>/contacto"  target="">Contactate con nosotros</a></p>
                         </div>
                       </div>
                     </form>

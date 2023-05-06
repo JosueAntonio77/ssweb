@@ -91,6 +91,7 @@
 															$intTipoId );
 
 					if($request_user > 0 ){
+						$arrResponse = array('status' => true, 'msg' => 'Se ha enviado un email a tu cuenta de correo para acceder al sitío');
 						$nombreUsuario = $strNombre.' '.$strApellido;
 						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
 											 'email' => $strEmail,
@@ -100,15 +101,7 @@
 						//$_SESSION['login'] = true;
 						//$this->login->sessionLogin($request_user);
 						//Esta comentado por que estamos de forma local. Esto sirve para enviar a su correo credenciales. 
-                        $sendEmail = sendEmail($dataUsuario,'email_bienvenida');
-
-						if($sendEmail){
-							$arrResponse = array('status' => true, 
-											'msg' => 'Se ha enviado un email a tu cuenta de correo para acceder al sitío');
-						}else{
-							$arrResponse = array('status' => false, 
-											 'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
-						}
+                        sendEmail($dataUsuario,'email_bienvenida');
 					}else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');		
 					}else{
