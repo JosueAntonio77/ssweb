@@ -98,7 +98,7 @@
 					<p>Accede a tu cuenta con tus credenciales:</p>
 					<p>Usuario: <strong><?= $data['email']; ?></strong></p>
 					<p>Contraseña: <strong><?= $data['password']; ?></strong></p>
-					<a href="<?= BASE_URL; ?>" target="_blank" class="x_button_link x_link_blue">Comprar ahora</a>
+					<a href="<?= BASE_URL; ?>" target="_blank" class="x_button_link x_link_blue">Acceder ahora</a>
 					<p class="x_title_gray"><a href="<?= WEB_EMPRESA; ?>" target="_blanck"><?= WEB_EMPRESA; ?></a></p>
 				</td>
 			</tr>

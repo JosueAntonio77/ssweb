@@ -129,7 +129,7 @@
                       <br>
                       <div class="form-group">
                         <div>
-                          <p class="semibold-text mb-2">Sele enviará un email a su cuenta de correo</p>
+                          <p class="semibold-text mb-2">Se enviará un email a su cuenta de correo</p>
                         </div>
                         <div class="utility">
                           <!--
