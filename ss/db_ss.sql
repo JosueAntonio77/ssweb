@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 10-05-2023 a las 16:50:13
+-- Tiempo de generación: 10-05-2023 a las 17:20:14
 -- Versión del servidor: 10.5.16-MariaDB
 -- Versión de PHP: 7.3.32
 
@@ -187,7 +187,14 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (371, 1, 4, 1, 1, 1, 1),
 (372, 1, 5, 1, 1, 1, 1),
 (373, 1, 6, 1, 1, 1, 1),
-(375, 1, 7, 1, 1, 1, 1);
+(375, 1, 7, 1, 1, 1, 1),
+(404, 3, 1, 1, 0, 0, 0),
+(405, 3, 2, 1, 0, 0, 0),
+(406, 3, 3, 1, 0, 0, 0),
+(407, 3, 4, 1, 0, 0, 0),
+(408, 3, 5, 1, 0, 0, 0),
+(409, 3, 6, 1, 0, 0, 0),
+(410, 3, 7, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -346,7 +353,7 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
