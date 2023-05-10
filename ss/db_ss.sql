@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2023 a las 14:52:10
--- Versión del servidor: 10.9.2-MariaDB
--- Versión de PHP: 7.4.29
+-- Servidor: localhost:3306
+-- Tiempo de generación: 10-05-2023 a las 16:50:13
+-- Versión del servidor: 10.5.16-MariaDB
+-- Versión de PHP: 7.3.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_ss`
+-- Base de datos: `id20491174_ssweb`
 --
 
 -- --------------------------------------------------------
@@ -37,8 +38,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idcategoria`, `nombre`) VALUES
-(1, 'Pantalla Azul'),
-(2, 'Falla en el Sistema');
+(1, 'NA'),
+(2, 'Pantalla Azul');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,8 @@ CREATE TABLE `contacto` (
 
 INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`, `useragent`, `datecreated`) VALUES
 (1, 'Yoda Gomez', 'spikegonzalez85@gmail.com', 'hola, esto es un mensaje de prueba', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.124 Safari/537.36 Edg/102.0.1245.41', '2022-06-16 12:39:52'),
-(2, 'Esmeralda Chi', 'esmeralda@gmail.com', 'Hola, solicito ayuda en el área de marketing', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78', '2023-02-04 15:35:38');
+(2, 'Esmeralda Chi', 'esmeralda@gmail.com', 'Hola, solicito ayuda en el área de marketing', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78', '2023-02-04 15:35:38'),
+(4, 'Josue Castro', 'josueantonio795@gmail.com', 'Como funciona', '189.172.58.206', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', '2023-05-06 06:18:41');
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,7 @@ CREATE TABLE `direcciones` (
 --
 
 INSERT INTO `direcciones` (`iddireccion`, `direccion`) VALUES
-(1, 'Recursos Humanos'),
+(1, 'NA'),
 (2, 'Ventas'),
 (5, 'Mercadotecnia'),
 (6, 'Presidencia'),
@@ -123,8 +125,8 @@ CREATE TABLE `mantenimiento` (
 --
 
 INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `equipo`, `status`) VALUES
-(15, 'Prueba Recepcion', '<p>Des</p>', 'Prueba', 1, '2023-02-28 13:14:46', '2023-02-27 00:57:51', 14, 'MAC', 2),
-(16, 'Windows 11', '<p>Actualizar</p>', 'No Se Ve El Diag', 1, '2023-02-28 13:54:34', '2023-02-28 19:15:32', 14, 'HP', 1);
+(22, 'Sistema', '<p>La Burla</p>', ' ', 1, '2023-05-10 16:37:40', '2023-02-22 20:11:01', 22, 'Lenovo', 1),
+(23, 'Windows Word', '<p>No Tiene Word&nbsp;</p>', ' ', 1, '2023-05-10 16:37:34', '2023-02-22 20:13:45', 22, 'ACESS', 1);
 
 -- --------------------------------------------------------
 
@@ -146,10 +148,10 @@ CREATE TABLE `modulo` (
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (1, 'Dashboard', 'Dashboard', 1),
 (2, 'Usuarios', 'Usuarios del sistema', 1),
-(3, 'Clientes', 'Clientes del Ayuntamiento', 1),
-(4, 'Recepciones', 'Todas las recepciones', 1),
-(5, 'Entregas', 'Entregas', 1),
-(6, 'Caterogías', 'Caterogías de los problemas', 1),
+(3, 'Solicitudes', 'Solicitantes podran ver sus solicitudes realizadas.', 1),
+(4, 'Solicitantes', 'Clientes del Ayuntamiento', 1),
+(5, 'Recepciones', 'Todas las recepciones pendientes', 1),
+(6, 'Entregas', 'Las recepciones entregadas', 1),
 (7, 'Contactos', 'Contactos de posibles usuarios que se comunican con H. Ayuntamiento Progreso.', 1);
 
 -- --------------------------------------------------------
@@ -207,19 +209,17 @@ CREATE TABLE `persona` (
   `area` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `token` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `rolid` bigint(20) NOT NULL,
-  `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
-  `status` int(11) NOT NULL DEFAULT 1,
-  `segmento` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `tipocliente` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
+  `datecreated` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`, `segmento`, `tipocliente`) VALUES
-(1, '2409198920', 'Carlos', 'Gio', 1, 1234567, 'gio@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2020-08-13 00:51:44', 1, '', ''),
-(14, '', 'Josue Antonio', 'Castro Colli', 7, 9993815121, 'josue@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '', '', 3, '2023-02-14 22:29:18', 1, '', '');
+INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`) VALUES
+(1, '2409198920', 'Administrador', 'SS', 1, 0, 'admin@gmail.com', '731a08e4c69bf361f539a260ff1b7c9d8eb3ce1d1ba5be5030b09ce5da6a2718', 'Sistemas', 'Empresa', 'Mexico Mérida', '', 1, '2023-05-10 16:46:35', 1),
+(22, '22', 'Josue Antonio', 'Castro Collí', 7, 9993815121, 'solicitante@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', 'Software', 'Tips', '', 3, '2023-05-10 16:46:51', 1);
 
 -- --------------------------------------------------------
 
@@ -322,7 +322,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
@@ -331,16 +331,10 @@ ALTER TABLE `direcciones`
   MODIFY `iddireccion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `imagen`
---
-ALTER TABLE `imagen`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -358,7 +352,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
