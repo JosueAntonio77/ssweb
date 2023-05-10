@@ -61,6 +61,32 @@
 			$request = $this->select_all($sql);
 			return $request;
 		}	
+
+		public function mantenimientosTen(){
+			/*
+			$sql = "SELECT * FROM mantenimiento WHERE status = 1 ORDER BY idmantenimiento DESC ";
+			$request = $this->select_all($sql);
+			return $request;
+			*/
+			$rolid = $_SESSION['userData']['idrol'];
+			$idUser = $_SESSION['userData']['idpersona'];
+			$where = "";
+			if($rolid == MSOLICITANTES ){
+				$where = " WHERE p.personaid = ".$idUser;
+			}
+
+			$sql = "SELECT p.idmantenimiento, 
+							p.nombre,
+							c.nombre AS categoria,  
+							p.status 
+					FROM mantenimiento p
+					INNER JOIN persona pr ON p.personaid = pr.idpersona
+					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
+					$where
+					ORDER BY p.idmantenimiento DESC LIMIT 10 ";
+			$request = $this->select_all($sql);
+			return $request;
+		}
 		/*
 		
 		public function selectVentasMes(int $anio, int $mes){
@@ -118,10 +144,5 @@
 			$arrVentas = array('anio' => $anio, 'meses' => $arrMVentas);
 			return $arrVentas;
 		}*/
-		public function productosTen(){
-			$sql = "SELECT * FROM mantenimiento WHERE status = 1 ORDER BY idmantenimiento DESC LIMIT 1,10 ";
-			$request = $this->select_all($sql);
-			return $request;
-		}
 	}
  ?>

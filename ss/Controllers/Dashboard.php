@@ -27,7 +27,7 @@
 			$data['entregas'] = $this->model->cantEntregas();
 			//$data['pedidos'] = $this->model->cantPedidos();
 			$data['lastOrders'] = $this->model->lastOrders();
-			//$data['productosTen'] = $this->model->productosTen();
+			$data['mantenimientosTen'] = $this->model->mantenimientosTen();
 
 			$anio = date('Y');
 			$mes = date('m');

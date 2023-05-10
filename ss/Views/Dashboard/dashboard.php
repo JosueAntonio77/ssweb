@@ -10,7 +10,7 @@
     </ul>
   </div>
   <div class="row">
-    <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
+    <?php if (!empty($_SESSION['permisos'][MUSUARIOS]['r'])) { ?>
       <div class="col-md-6 col-lg-3">
         <a href="<?= base_url() ?>/usuarios" class="linkw">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
@@ -34,7 +34,7 @@
         </a>
       </div>
     <?php } ?>
-    <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
+    <?php if (!empty($_SESSION['permisos'][MRECEPCIONES]['r'])) { ?>
       <div class="col-md-6 col-lg-3">
         <a href="<?= base_url() ?>/recepciones" class="linkw">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
@@ -46,9 +46,9 @@
         </a>
       </div>
     <?php } ?>
-    <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
+    <?php if (!empty($_SESSION['permisos'][MENTREGAS]['r'])) { ?>
       <div class="col-md-6 col-lg-3">
-        <a href="<?= base_url() ?>/cotizaciones" class="linkw">
+        <a href="<?= base_url() ?>/entregas" class="linkw">
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
             <div class="info">
               <h4>Entregas</h4>
@@ -60,7 +60,7 @@
     <?php } ?>
   </div>
   <div class="row">
-    <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
+    <?php if (!empty($_SESSION['permisos'][MRECEPCIONES]['r'])) { ?>
       <div class="col-md-6">
         <div class="tile">
           <h3 class="tile-title">Últimos Mantenimientos</h3>
