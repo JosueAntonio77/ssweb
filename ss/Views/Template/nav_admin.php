@@ -39,10 +39,19 @@
         </li>
         <?php } ?>
 
+        <?php if(!empty($_SESSION['permisos'][MSOLICITUDES]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/solicitudes">
+                <i class="app-menu__icon far fa-copy" aria-hidden="true"></i>
+                <span class="app-menu__label">Solicitudes</span>  
+            </a>
+        </li>
+        <?php } ?>
+
         <?php if(!empty($_SESSION['permisos'][MRECEPCIONES]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/recepciones">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <i class="app-menu__icon far fa-copy" aria-hidden="true"></i>
                 <span class="app-menu__label">Recepciones</span>  
             </a>
         </li>
@@ -51,7 +60,7 @@
         <?php if(!empty($_SESSION['permisos'][MENTREGAS]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/entregas">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <i class="app-menu__icon far fa-copy" aria-hidden="true"></i>
                 <span class="app-menu__label">Entregas</span>
             </a>
         </li>

@@ -1,7 +1,7 @@
 <?php 
 	
 	const BASE_URL = "http://localhost/ssweb/ss";
-	//const BASE_URL = "http://scpi.progreso.tecnm.mx/scpi";
+	//const BASE_URL = "https://mantenimientoap.000webhostapp.com/ss";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -12,6 +12,14 @@
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
+
+	/*
+	const DB_HOST = "localhost";
+	const DB_NAME = "id20491174_ssweb";
+	const DB_USER = "id20491174_admin";
+	const DB_PASSWORD = "w/*P\V)#U}o25c/P";
+	const DB_CHARSET = "utf8";
+	*/
 
 	//Deliminadores decimal y millar Ej. 24,1989.00
 	const SPD = ".";
@@ -39,13 +47,13 @@
 	const METHODENCRIPT = "AES-128-ECB";
 
 	//Módulos
-	const MDASHBOARD = 1;
-	const MUSUARIOS = 2;
-	const MSOLICITANTES = 3;
-	const MRECEPCIONES = 4;
-	const MENTREGAS = 5;
-	const MCATEGORIAS = 6;
-	const MCONTACTOS = 7;
+	const MDASHBOARD 	= 1;
+	const MUSUARIOS 	= 2;
+	const MSOLICITUDES 	= 3;
+	const MSOLICITANTES = 4;
+	const MRECEPCIONES 	= 5;
+	const MENTREGAS 	= 6;
+	const MCONTACTOS 	= 7;
 	
 
 	//Roles
