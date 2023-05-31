@@ -25,7 +25,6 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Entregar</th>
                           <th>Recepción</th>
                           <th>Solicitante</th>
                           <th>Técnico</th>

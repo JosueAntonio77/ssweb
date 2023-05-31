@@ -89,61 +89,14 @@ class Recepciones extends Controllers{
 			die();
 	}
 
-	public function setEntregaRecepcion(){
-		if($_POST){
-			
-			if( empty($_POST['txtDescripcion'])  )
-			{
-				$arrResponse = array("status" => false, "msg" => 'Llenar la descripcion, gracias.');
-			}else{
-
-				$idMantenimiento 	= intval($_POST['idMantenimiento']);
-				$strDiagnostico 	= ucwords(strClean($_POST['txtDiagnostico']));
-				$intStatus 			= 2;
-
-				if($idMantenimiento == 0)
-				{
-					$option = 1;
-				}else{
-					$option = 2;
-					if($_SESSION['permisosMod']['u']){
-						$request_mantenimiento = $this->model->updateEntregaMantenimiento($idMantenimiento,
-																	$strDiagnostico,
-																	$intStatus);	
-					}
-				}
-
-				if($request_mantenimiento > 0 )
-				{
-					if($option == 1){
-						$arrResponse = array('status' => true, 'idmantenimiento' => $request_mantenimiento, 'msg' => 'Datos guardados correctamente.');
-					}else{
-						$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados Correctamente.');
-					}
-				}else if($request_mantenimiento == 'exist'){
-					$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
-				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
-				}
-			}
-			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-		}
-		die();
-	}
-
     public function getRecepciones()
 	{
 		if($_SESSION['permisosMod']['r']){
 				$arrData = $this->model->selectRecepciones();
 				for ($i=0; $i < count($arrData); $i++) {
-					$btnDelivery = '';
 					$btnView = '';
 					$btnEdit = '';
 					$btnDelete = '';
-
-					$btnDelivery = '<button class="btn btn-primary  btn-sm" onClick="fntDelivInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Entregar recepción"><i class="fas fa-pencil-alt"></i></button>';
-
-					$arrData[$i]['btnEntrega'] = '<div class="text-center">'.$btnDelivery.'</div>';
 
 					if($arrData[$i]['personat'] == 1)
 					{
@@ -192,22 +145,6 @@ class Recepciones extends Controllers{
 						}
 					}
 					$arrData['images'] = $arrImg;
-					$arrResponse = array('status' => true, 'data' => $arrData);
-				}
-				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-			}
-		}
-		die();
-	}
-
-	public function getEntregaMantenimiento($idmantenimiento){
-		if($_SESSION['permisosMod']['r']){
-			$idmantenimiento = intval($idmantenimiento);
-			if($idmantenimiento > 0){
-				$arrData = $this->model->selectEntregaMantenimiento($idmantenimiento);
-				if(empty($arrData)){
-					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
-				}else{
 					$arrResponse = array('status' => true, 'data' => $arrData);
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

@@ -20,7 +20,6 @@ window.addEventListener('load', function(e){
         },
         "columns":[
             {"data":"idmantenimiento"},
-            {"data":"btnEntrega"},
             {"data":"nombre"},
             {"data":"persona"},
             {"data":"personat"},
@@ -122,61 +121,6 @@ window.addEventListener('load', function(e){
                         swal("Recepciones", objData.msg ,"success");
                         tableRecepciones.api().ajax.reload();
                         
-                    }else{
-                        swal("Error", objData.msg , "error");
-                    }
-                }
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-
-    if(document.querySelector("#formEntregaRecepciones")){
-        let formEntregaRecepciones = document.querySelector("#formEntregaRecepciones");
-        formEntregaRecepciones.onsubmit = function(e) {
-            e.preventDefault();
-
-            let strDiagnostico  = document.querySelector('#txtDiagnostico').value;
-
-            if(strDiagnostico == '' )
-            {
-                swal("Atención", "Todos los campos son obligatorios." , "error");
-                return false;
-            }
-            
-            divLoading.style.display = "flex";
-            tinyMCE.triggerSave();
-            let request = (window.XMLHttpRequest) ? 
-                            new XMLHttpRequest() : 
-                            new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Recepciones/setEntregaRecepcion'; 
-            let formData = new FormData(formEntregaRecepciones);
-            request.open("POST",ajaxUrl,true);
-            request.send(formData);
-            request.onreadystatechange = function(){
-                if(request.readyState == 4 && request.status == 200){
-                    let objData = JSON.parse(request.responseText);
-                    if(objData.status)
-                    {
-                        /*
-                        swal("", objData.msg ,"success");
-                        document.querySelector("#idMantenimiento").value = objData.idmantenimiento;
-                        if(rowTable == ""){
-                            tableRecepciones.api().ajax.reload();
-                        }else{
-                           htmlStatus = intStatus == 1 ? 
-                            '<span class="badge badge-danger">Pendiente</span>' :
-                            '<span class="badge badge-success">Entregado</span>';
-                            
-                            rowTable.cells[8].innerHTML =  htmlStatus;
-                            rowTable = ""; 
-                        }    
-                        */
-                        $('#modalFormEntregaRecepciones').modal("hide");
-                        formRecepciones.reset();
-                        swal("Recepciones", objData.msg ,"success");
-                        tableRecepciones.api().ajax.reload();
                     }else{
                         swal("Error", objData.msg , "error");
                     }
@@ -360,41 +304,6 @@ function fntEditInfo(element,idMantenimiento){
                 document.querySelector("#containerGallery").classList.remove("notblock");
                 $('#modalFormRecepciones').modal('show');
                 
-            }else{
-                swal("Error", objData.msg , "error");
-            }
-        }
-    }
-}
-
-function fntDelivInfo(element,idMantenimiento){
-    rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Entregar Recepción";
-    document.querySelector('.modal-header').classList.replace("headerEntregar", "headerUpdate");
-    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML = "Entregar";
-
-    let request = (window.XMLHttpRequest) ? 
-                    new XMLHttpRequest() : 
-                    new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Recepciones/getEntregaMantenimiento/'+idMantenimiento;
-    request.open("GET",ajaxUrl,true);
-    request.send();
-    request.onreadystatechange = function(){
-        if(request.readyState == 3 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-            if(objData.status)
-            {
-                let objMantenimiento = objData.data;
-                
-                document.querySelector("#idMantenimiento").value    = objMantenimiento.idmantenimiento;
-                document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
-                document.querySelector("#listStatus").value         = objMantenimiento.status;
-
-                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
-                $('#listStatus').selectpicker('render');
-
-                $('#modalFormEntregaRecepciones').modal('show'); 
             }else{
                 swal("Error", objData.msg , "error");
             }
