@@ -28,7 +28,7 @@ class Solicitudes extends Controllers{
    public function setSolicitud(){
 			if($_POST){
 				
-				if( empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) || empty($_POST['listPersona']) )
+				if( empty($_POST['txtNombre'])||empty($_POST['listCategoria']) || empty($_POST['txtEquipo']) || empty($_POST['txtDescripcion']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Llene todos los campos.');
 				}else{
@@ -38,7 +38,8 @@ class Solicitudes extends Controllers{
 					$strDescripcion 	= ucwords(strClean($_POST['txtDescripcion']));
 					$strDiagnostico 	= ' ';
 					$intCategoriaId 	= intval(strClean($_POST['listCategoria']));
-					$intPersonaId 		= intval(strClean($_POST['listPersona']));
+					$intPersonaId 		= $_SESSION['userData']['idpersona'];
+					$strPersonaT		= 1;
 					$strEquipo 			= ucwords(strClean($_POST['txtEquipo']));
 					$intStatus 			= 1;
 
@@ -51,6 +52,7 @@ class Solicitudes extends Controllers{
 																		$strDiagnostico,
 																		$intCategoriaId,
 																		$intPersonaId,
+																		$strPersonaT,
 																		$strEquipo, 
 																		$intStatus);
 						}
@@ -94,6 +96,13 @@ class Solicitudes extends Controllers{
 					$btnView = '';
 					$btnEdit = '';
 					$btnDelete = '';
+
+					if($arrData[$i]['personat'] == 1)
+					{
+						$arrData[$i]['personat'] = '<span class="badge badge-danger">No asignado</span>';
+					}else{
+						$arrData[$i]['personat'] = $arrData[$i]['personatecnico'];
+					}
 
 					if($arrData[$i]['status'] == 1)
 					{
@@ -199,21 +208,6 @@ class Solicitudes extends Controllers{
 				}
 			}
 			die();
-		}
-
-		public function getSelectPersonas(){
-			$htmlOptions = "";
-			$arrData = $this->model->selectPersonas();
-			if(count($arrData) > 0 ){
-				for ($i=0; $i < count($arrData); $i++) { 
-					if($arrData[$i]['status'] == 1 ){
-					//$htmlOptions .= '<option value="'.$arrData[$i]['idsolicitante']['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
-					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
-					}
-				}
-			}
-			echo $htmlOptions;
-			die();	 
 		}
 
 }

@@ -27,7 +27,8 @@
                           <th>ID</th>
                           <th>Entregar</th>
                           <th>Recepción</th>
-                          <th>Personal</th>
+                          <th>Solicitante</th>
+                          <th>Técnico</th>
                           <th>Dirección</th>
                           <th>Categoria</th>
                           <th>Descripción</th>

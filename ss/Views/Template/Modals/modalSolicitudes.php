@@ -26,23 +26,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <!--
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Teléfono <span class="required">*</span></label>
-                            <input class="form-control" id="txtPrecio" name="txtPrecio" type="text" required="">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Dirección <span class="required">*</span></label>
-                            <input class="form-control" id="txtDimensiones" name="txtDimensiones" type="text" placeholder="Dirección" required="">
-                        </div>
-                    </div>
-                    -->
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label for="listPersona">Personal <span class="required">*</span></label>
-                        <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
-                      </div>
                       <div class="form-group col-md-6">
                           <label for="listCategoria">Categoría <span class="required">*</span></label>
                           <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
@@ -94,7 +78,6 @@
                              <label for="img1" class="btnUploadfile"><i class="fas fa-upload "></i></label>
                              <button class="btnDeleteImage" type="button" onclick="fntDelItem('div24')"><i class="fas fa-trash-alt"></i></button>
                          </div> -->
-                        
                      </div>
                  </div>
               </div>
@@ -123,8 +106,12 @@
               <td id="celNombre"></td>
             </tr>
             <tr>
-              <td>Personal Encargado:</td>
+              <td>Personal:</td>
               <td id="celPersona"></td>
+            </tr>
+            <tr>
+              <td>Técnico asignado:</td>
+              <td id="celPersonaT"></td>
             </tr>
             <tr>
               <td>Dirección:</td>

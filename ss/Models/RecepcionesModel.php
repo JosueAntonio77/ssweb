@@ -8,6 +8,7 @@
 		private $strDiagnostico;
 		private $intCategoriaId;
 		private $intPersonaId;
+		private $intPersonaT;
 		private $strEquipo;
 		private $intStatus;
 		private $strImagen;
@@ -17,13 +18,14 @@
 			parent::__construct();
 		}	
 
-		public function insertMantenimiento(string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
+		public function insertMantenimiento(string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, int $personat, string $equipo, int $status){
 
 			$this->strNombre 		= $nombre;
 			$this->strDescripcion 	= $descripcion;
 			$this->strDiagnostico 	= $diagnostico;
 			$this->intCategoriaId 	= $categoriaid;
 			$this->intPersonaId 	= $personaid;
+			$this->intPersonaT		= $personat;
 			$this->strEquipo 		= $equipo;
 			$this->intStatus 		= $status;
 			$return = 0;
@@ -37,14 +39,16 @@
 														diagnostico, 
 														categoriaid,
 														personaid, 
+														personat,
 														equipo,
 														status) 
-								  VALUES(?,?,?,?,?,?,?)";
+								  VALUES(?,?,?,?,?,?,?,?)";
 	        	$arrData = array($this->strNombre,
         						$this->strDescripcion,
         						$this->strDiagnostico,
         						$this->intCategoriaId,
         						$this->intPersonaId,
+								$this->intPersonaT,
 								$this->strEquipo,
         						$this->intStatus);
 	        	$request_insert = $this->insert($query_insert,$arrData);
@@ -55,7 +59,7 @@
 	        return $return;
 		}
 
-		public function updateMantenimiento(int $idmantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, string $equipo, int $status){
+		public function updateMantenimiento(int $idmantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, int $personat, string $equipo, int $status){
 			
 			$this->intIdMantenimiento 	= $idmantenimiento;
 			$this->strNombre 			= $nombre;
@@ -63,6 +67,7 @@
 			$this->strDiagnostico 		= $diagnostico;
 			$this->intCategoriaId 		= $categoriaid;
 			$this->intPersonaId 		= $personaid;
+			$this->intPersonaT			= $personat;
 			$this->strEquipo 			= $equipo;
 			$this->intStatus 			= $status;
 			$return = 0;
@@ -77,6 +82,7 @@
 							diagnostico=?,
 							categoriaid=?,
 							personaid=?,
+							personat=?,
 							equipo=?,
 							status=?
 						WHERE idmantenimiento = $this->intIdMantenimiento";
@@ -85,6 +91,7 @@
 								$this->strDiagnostico,
 								$this->intCategoriaId,
 								$this->intPersonaId,
+								$this->intPersonaT,
 								$this->strEquipo,
 								$this->intStatus);
 
@@ -132,7 +139,9 @@
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							p.personaid, 
-							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							p.personat, 
+							CONCAT(pd.nombres,' ',pd.apellidos) AS persona, 
+							CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico,
 							d.iddireccion AS direcionid,   
 							d.direccion AS direcciones,
 							p.categoriaid, 
@@ -143,6 +152,7 @@
 							p.status 
 					FROM mantenimiento p
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
+					INNER JOIN persona pt ON p.personat = pt.idpersona
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
 					WHERE p.status != 0".$whereAdmin;
@@ -155,7 +165,9 @@
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
 							p.personaid,
+							p.personat,
 							CONCAT(pd.nombres,' ',pd.apellidos) AS persona,
+							CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, 
 							d.direccion AS direcciones, 
 							p.categoriaid, 
 							c.nombre AS categoria, 
@@ -166,6 +178,7 @@
 					FROM mantenimiento p
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					INNER JOIN persona pd ON p.personaid = pd.idpersona
+					INNER JOIN persona pt ON p.personat = pt.idpersona
 					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
 					WHERE idmantenimiento = $this->intIdMantenimiento";
 			$request = $this->select($sql);
@@ -191,13 +204,31 @@
 			}
 			$sql = "SELECT p.idpersona,
 						CONCAT(p.nombres,' ',p.apellidos) AS nombre,
-						p.email_user,
-						p.direccionid, 
-						p.telefono,
-						p.area, 
 						p.status 
 					FROM persona p 
-					WHERE p.status != 0 ".$whereAdmin;
+					WHERE p.status != 0 and p.rolid = 3 ".$whereAdmin;
+					$request = $this->select_all($sql);
+					return $request;
+		}
+
+		public function selectPersonasT()
+		{
+			$whereAdmin = "";
+			$rolid = $_SESSION['userData']['idrol'];
+			$idUser = $_SESSION['userData']['idpersona'];
+
+			if($rolid == RADMINISTRADOR ){
+				$whereAdmin = " and p.idpersona != 1 ";
+			} 
+			if ($rolid == RTECNICO) {
+				$whereAdmin = "and p.idpersona = ".$idUser;
+			} 
+			
+			$sql = "SELECT p.idpersona,
+						CONCAT(p.nombres,' ',p.apellidos) AS nombre,
+						p.status 
+					FROM persona p 
+					WHERE p.status != 0 and p.rolid = 2 ".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}

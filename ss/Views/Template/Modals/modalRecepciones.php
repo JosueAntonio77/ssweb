@@ -42,40 +42,47 @@
                         </div>
                     </div>
                     -->
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label for="listPersona">Personal <span class="required">*</span></label>
-                        <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
-                      </div>
-                      <div class="form-group col-md-6">
-                          <label for="listCategoria">Categoría <span class="required">*</span></label>
-                          <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
-                      </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="listPersona">Personal <span class="required">*</span></label>
+                      <select class="form-control" data-live-search="true" id="listPersona" name="listPersona" required=""></select>
                     </div>
+                    <div class="form-group col-md-6">
+                      <label for="listPersonaT">Técnico</label>
+                      <select class="form-control" data-live-search="true" id="listPersonaT" name="listPersonaT" required=""></select>
+                    </div>
+                  </div>
 
-                    <div class="form-group">
-                      <label class="control-label">Equipo <span class="required">*</span></label>
-                      <input class="form-control" id="txtEquipo" name="txtEquipo" type="text" placeholder="Equipo" required="">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="listCategoria">Categoría <span class="required">*</span></label>
+                      <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
                     </div>
+                  </div>
 
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label for="listStatus">Estado<span class="required">*</span></label>
-                        <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
-                          <option value="1">Pendiente</option>
-                          <option value="2">Entregado</option>
-                        </select>
-                      </div>
+                  <div class="form-group">
+                    <label class="control-label">Equipo <span class="required">*</span></label>
+                    <input class="form-control" id="txtEquipo" name="txtEquipo" type="text" placeholder="Equipo" required="">
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="listStatus">Estado<span class="required">*</span></label>
+                      <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
+                        <option value="1">Pendiente</option>
+                        <option value="2">Entregado</option>
+                      </select>
                     </div>
+                  </div>
                     
-                    <div class="row">
-                       <div class="form-group col-md-6">
-                           <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>
-                      </div> 
-                       <div class="form-group col-md-6">
-                           <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
-                       </div> 
-                    </div>  
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                     <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>
+                    </div> 
+                    <div class="form-group col-md-6">
+                     <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+                    </div> 
+                  </div>  
                     
                 </div>
               </div>
@@ -191,8 +198,12 @@
               <td id="celNombre"></td>
             </tr>
             <tr>
-              <td>Personal Encargado:</td>
+              <td>Solicitante de mantenimiento:</td>
               <td id="celPersona"></td>
+            </tr>
+            <tr>
+              <td>Técnico asignado:</td>
+              <td id="celPersonaT"></td>
             </tr>
             <tr>
               <td>Dirección:</td>

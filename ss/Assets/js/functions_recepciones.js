@@ -23,6 +23,7 @@ window.addEventListener('load', function(e){
             {"data":"btnEntrega"},
             {"data":"nombre"},
             {"data":"persona"},
+            {"data":"personat"},
             {"data":"direcciones"},
             {"data":"categoria"},
             {"data":"descripcion"},
@@ -204,6 +205,7 @@ window.addEventListener('load', function(e){
     }
     ftnCategorias();
     ftnPersonas();
+    ftnPersonasT();
 }, false);
 
 function ftnCategorias() {
@@ -240,6 +242,23 @@ function ftnPersonas() {
     }
 }
 
+function ftnPersonasT() {
+    if(document.querySelector('#listPersonaT')){
+        let ajaxUrl = base_url+'/Recepciones/getSelectPersonasT';
+        let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listPersonaT').innerHTML = request.responseText;
+                $('#listPersonaT').selectpicker('render');
+            }
+        }
+    }
+}
+
 function fntViewInfo(idMantenimiento){
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
@@ -257,9 +276,13 @@ function fntViewInfo(idMantenimiento){
                 let estadoMantenimiento = objMantenimiento.status == 1 ?
                 '<span class="badge badge-danger">Pendiente</span>'  :
                 '<span class="badge badge-success">Entregado</span>';
+                let tecnicoMantenimiento = objMantenimiento.personat == 1 ?
+                '<span class="badge badge-danger">No asignado</span>' :
+                objMantenimiento.personatecnico ;
 
                 document.querySelector("#celNombre").innerHTML      = objMantenimiento.nombre;
                 document.querySelector("#celPersona").innerHTML     = objMantenimiento.persona;
+                document.querySelector("#celPersonaT").innerHTML    = tecnicoMantenimiento;
                 document.querySelector("#celDirecciones").innerHTML = objMantenimiento.direcciones;
                 document.querySelector("#celCategoria").innerHTML   = objMantenimiento.categoria;
                 document.querySelector("#celEquipo").innerHTML      = objMantenimiento.equipo;
@@ -309,6 +332,7 @@ function fntEditInfo(element,idMantenimiento){
                 document.querySelector("#txtDescripcion").value     = objMantenimiento.descripcion;
                 document.querySelector("#txtDiagnostico").value     = objMantenimiento.diagnostico;
                 document.querySelector("#listPersona").value        = objMantenimiento.personaid;
+                document.querySelector("#listPersonaT").value       = objMantenimiento.personat;  
                 document.querySelector("#listCategoria").value      = objMantenimiento.categoriaid;
                 document.querySelector("#txtEquipo").value          = objMantenimiento.equipo;
                 document.querySelector("#listStatus").value         = objMantenimiento.status;
@@ -317,6 +341,7 @@ function fntEditInfo(element,idMantenimiento){
                 //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
                 $('#listCategoria').selectpicker('render');
                 $('#listPersona').selectpicker('render');
+                $('#listPersonaT').selectpicker('render');
                 $('#listStatus').selectpicker('render');
 
                 if(objMantenimiento.images.length > 0){

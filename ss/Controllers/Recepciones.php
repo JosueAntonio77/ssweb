@@ -39,6 +39,7 @@ class Recepciones extends Controllers{
 					$strDiagnostico 	= ucwords(strClean($_POST['txtDiagnostico']));
 					$intCategoriaId 	= intval(strClean($_POST['listCategoria']));
 					$intPersonaId 		= intval(strClean($_POST['listPersona']));
+					$intPersonaT 		= intval(strClean($_POST['listPersonaT']));
 					$strEquipo 			= ucwords(strClean($_POST['txtEquipo']));
 					$intStatus 			= intval(strClean($_POST['listStatus']));
 
@@ -51,6 +52,7 @@ class Recepciones extends Controllers{
 																		$strDiagnostico,
 																		$intCategoriaId,
 																		$intPersonaId,
+																		$intPersonaT,
 																		$strEquipo, 
 																		$intStatus);
 						}
@@ -63,6 +65,7 @@ class Recepciones extends Controllers{
 																		$strDiagnostico, 
 																		$intCategoriaId,
 																		$intPersonaId,   
+																		$intPersonaT, 
 																		$strEquipo,
 																		$intStatus);	
 						}
@@ -141,6 +144,13 @@ class Recepciones extends Controllers{
 					$btnDelivery = '<button class="btn btn-primary  btn-sm" onClick="fntDelivInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Entregar recepción"><i class="fas fa-pencil-alt"></i></button>';
 
 					$arrData[$i]['btnEntrega'] = '<div class="text-center">'.$btnDelivery.'</div>';
+
+					if($arrData[$i]['personat'] == 1)
+					{
+						$arrData[$i]['personat'] = '<span class="badge badge-danger">No asignado</span>';
+					}else{
+						$arrData[$i]['personat'] = $arrData[$i]['personatecnico'];
+					}
 
 					if($arrData[$i]['status'] == 1)
 					{
@@ -271,10 +281,24 @@ class Recepciones extends Controllers{
 			$arrData = $this->model->selectPersonas();
 			if(count($arrData) > 0 ){
 				for ($i=0; $i < count($arrData); $i++) { 
-					if($arrData[$i]['status'] == 1 ){
+					//if($arrData[$i]['status'] == 1 ){
 					//$htmlOptions .= '<option value="'.$arrData[$i]['idsolicitante']['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
 					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
-					}
+					//}
+				}
+			}
+			echo $htmlOptions;
+			die();	 
+		}
+
+		public function getSelectPersonasT(){
+			$htmlOptions = "";
+			$arrData = $this->model->selectPersonasT();
+			if(count($arrData) > 0 ){
+				for ($i=0; $i < count($arrData); $i++) { 
+					//if($arrData[$i]['status'] == 1 ){
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.$arrData[$i]['nombre'].'</option>';
+					//}
 				}
 			}
 			echo $htmlOptions;
