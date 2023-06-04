@@ -89,7 +89,7 @@ if ($grafica = "mantenimientosMes") {
                 name: '',
                 data: [
                     <?php
-                    foreach ($mantenimientosMes['Cantidad de entregas'] as $dia) {
+                    foreach ($mantenimientosMes['mantenimientos'] as $dia) {
                         echo $dia['cantidad'] . ",";
                     }
                     ?>

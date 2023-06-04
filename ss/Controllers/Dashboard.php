@@ -21,30 +21,49 @@
 			$data['page_title'] = "Dashboard - Control de Mantenimiento";
 			$data['page_name'] = "dashboard";
 			$data['page_functions_js'] = "functions_dashboard.js";
+
 			$data['usuarios'] = $this->model->cantUsuarios();
 			$data['solicitantes'] = $this->model->cantSolicitantes();
 			$data['mantenimientos'] = $this->model->cantMantenimientos();
 			$data['entregas'] = $this->model->cantEntregas();
-			//$data['pedidos'] = $this->model->cantPedidos();
+			//$data['solicitudes'] = $this->model->cantSolicitudes();
 			$data['lastOrders'] = $this->model->lastOrders();
 			$data['mantenimientosTen'] = $this->model->mantenimientosTen();
 
 			$anio = date('Y');
 			$mes = date('m');
+			
 			//dep($data['pagosMes']);exit;
-			//$data['ventasMDia'] = $this->model->selectVentasMes($anio,$mes);
+			//$data['manteniMes'] = $this->model->selectManteniMes($anio,$mes);
 			//dep($data['ventasMDia']);exit;
-			//$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
+			$data['manteniMes'] = $this->model->selectMantenimientosMes($anio,$mes);/*
+			//dep($data['pagosMes']);exit;
+			$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
 			//dep($data['ventasAnio']);exit;
+			*/
+			
 			if( $_SESSION['userData']['idrol'] == RSOLICITANTE ){
 				$this->views->getView($this,"dashboardSolicitante",$data);
 			}else{
 				$this->views->getView($this,"dashboard",$data);
 			}
 		}
-
 		
-	/*	public function ventasMes(){
+		public function mantenimientosMes(){
+			if($_POST){
+				$grafica = "mantenimientosMes";
+				$nFecha = str_replace(" ","",$_POST['fecha']);
+				$arrFecha = explode('-',$nFecha);
+				$mes = $arrFecha[0];
+				$anio = $arrFecha[1];
+				$mantenimientos = $this->model->selectMantenimientosMes($anio,$mes);
+				$script = getFile("Template/Modals/graficas",$mantenimientos);
+				echo $script;
+				die();
+			}
+		}
+
+		public function ventasMes(){
 			if($_POST){
 				$grafica = "ventasMes";
 				$nFecha = str_replace(" ","",$_POST['fecha']);
@@ -66,7 +85,7 @@
 				echo $script;
 				die();
 			}
-		}*/
+		}
 
 	}
  ?>

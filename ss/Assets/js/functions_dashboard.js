@@ -41,6 +41,62 @@ function fntSearchPagos(){
     }
 }
 
+/*
+
+function fntSearchVmanteniMes(){
+    let fecha = document.querySelector(".manteniMes").value;
+    if(fecha == ""){
+        swal("", "Seleccione mes y año" , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ? 
+            new XMLHttpRequest() : 
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Dashboard/manteniMes';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('fecha',fecha);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#manteniMesAnio").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+*/
+
+function fntSearchVMes(){
+    let fecha = document.querySelector(".mantenimientosMes").value;
+    if(fecha == ""){
+        swal("", "Seleccione mes y año" , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ? 
+            new XMLHttpRequest() : 
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Dashboard/mantenimientosMes';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('fecha',fecha);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaMes").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+/*
 function fntSearchVMes(){
     let fecha = document.querySelector(".ventasMes").value;
     if(fecha == ""){
@@ -66,7 +122,7 @@ function fntSearchVMes(){
         }
     }
 }
-
+*/
 function fntSearchVAnio(){
     let anio = document.querySelector(".ventasAnio").value;
     if(anio == ""){

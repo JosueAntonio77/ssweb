@@ -42,7 +42,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": { 
-                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "excelHtml5",
@@ -50,7 +50,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": { 
-                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "pdfHtml5",
@@ -58,7 +58,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": { 
-                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             },{
                 "extend": "csvHtml5",
@@ -66,7 +66,7 @@ window.addEventListener('load', function(e){
                 "titleAttr":"Exportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": { 
-                "columns": [ 0, 2, 3, 4, 5, 6, 7] 
+                "columns": [ 0, 1, 2, 3, 4, 5, 6, 7] 
                 }
             }
         ],
