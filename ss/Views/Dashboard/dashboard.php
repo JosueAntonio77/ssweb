@@ -104,32 +104,20 @@
         </div>
       <?php } ?>
 
-      <!--<div class="col-md-6">
-        <div class="tile">
-          <div class="container-title">
-            <h3 class="tile-title">Tipo de pagos por mes</h3>
-            <div class="dflex">
-              <input class="date-picker pagoMes" name="pagoMes" placeholder="Mes y Año">
-              <button type="button" class="btnTipoVentaMes btn btn-info btn-sm" onclick="fntSearchPagos()"> <i class="fas fa-search"></i> </button>
-            </div>
-          </div>
-          <div id="pagosMesAnio"></div>
-        </div>
-      </div>-->
-
+      <!--
       <div class="col-md-6">
         <div class="tile">
           <div class="container-title">
               <h3 class="tile-title">Tipo de pagos por mes</h3>
                 <div class="dflex">
                   <input class="date-picker pagoMes" name="pagoMes" placeholder="Mes y Año">
-                  <button type="button" class="btnTipoVentaMes btn btn-info btn-sm" onclick="fntSearchVmanteniMes()"> <i class="fas fa-search"></i> </button>
+                  <button type="button" class="btnTipoVentaMes btn btn-info btn-sm" onclick="fntSearchMantenimientos()"> <i class="fas fa-search"></i> </button>
                 </div>
               </div>
             <div id="manteniMesAnio"></div>
           </div>
         </div>
-      </div>
+      </div>-->
 
     </div>
 

@@ -14,36 +14,8 @@ $('.date-picker').datepicker( {
         $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
     }
 });
-
-function fntSearchPagos(){
-    let fecha = document.querySelector(".pagoMes").value;
-    if(fecha == ""){
-        swal("", "Seleccione mes y año" , "error");
-        return false;
-    }else{
-        let request = (window.XMLHttpRequest) ? 
-            new XMLHttpRequest() : 
-            new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/tipoPagoMes';
-        divLoading.style.display = "flex";
-        let formData = new FormData();
-        formData.append('fecha',fecha);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){
-            if(request.readyState != 4) return;
-            if(request.status == 200){
-                $("#pagosMesAnio").html(request.responseText);
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-}
-
 /*
-
-function fntSearchVmanteniMes(){
+function fntSearchMantenimientos(){
     let fecha = document.querySelector(".manteniMes").value;
     if(fecha == ""){
         swal("", "Seleccione mes y año" , "error");
@@ -52,7 +24,7 @@ function fntSearchVmanteniMes(){
         let request = (window.XMLHttpRequest) ? 
             new XMLHttpRequest() : 
             new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/manteniMes';
+        let ajaxUrl = base_url+'/Dashboard/entregaMes';
         divLoading.style.display = "flex";
         let formData = new FormData();
         formData.append('fecha',fecha);
@@ -68,9 +40,7 @@ function fntSearchVmanteniMes(){
         }
     }
 }
-
 */
-
 function fntSearchMMes(){
     let fecha = document.querySelector(".mantenimientosMes").value;
     if(fecha == ""){
@@ -121,56 +91,3 @@ function fntSearchMAnio(){
         }
     }
 }
-/*
-function fntSearchVMes(){
-    let fecha = document.querySelector(".ventasMes").value;
-    if(fecha == ""){
-        swal("", "Seleccione mes y año" , "error");
-        return false;
-    }else{
-        let request = (window.XMLHttpRequest) ? 
-            new XMLHttpRequest() : 
-            new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/ventasMes';
-        divLoading.style.display = "flex";
-        let formData = new FormData();
-        formData.append('fecha',fecha);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){
-            if(request.readyState != 4) return;
-            if(request.status == 200){
-                $("#graficaMes").html(request.responseText);
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-}
-
-function fntSearchVAnio(){
-    let anio = document.querySelector(".ventasAnio").value;
-    if(anio == ""){
-        swal("", "Ingrese año " , "error");
-        return false;
-    }else{
-        let request = (window.XMLHttpRequest) ? 
-            new XMLHttpRequest() : 
-            new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/ventasAnio';
-        divLoading.style.display = "flex";
-        let formData = new FormData();
-        formData.append('anio',anio);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){
-            if(request.readyState != 4) return;
-            if(request.status == 200){
-                $("#graficaAnio").html(request.responseText);
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-}
-*/

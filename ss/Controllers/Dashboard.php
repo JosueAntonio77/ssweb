@@ -48,7 +48,20 @@
 				$this->views->getView($this,"dashboard",$data);
 			}
 		}
-		
+		/*
+		public function entregaMes(){
+			if($_POST){
+				$grafica = "entregaMes";
+				$nFecha = str_replace(" ","",$_POST['fecha']);
+				$arrFecha = explode('-',$nFecha);
+				$mes = $arrFecha[0];
+				$anio = $arrFecha[1];
+				$pagos = $this->model->selectManteniMes($anio,$mes);
+				$script = getFile("Template/Modals/graficas",$pagos);
+				echo $script;
+				die();
+			}
+		}*/
 		public function mantenimientosMes(){
 			if($_POST){
 				$grafica = "mantenimientosMes";
@@ -62,7 +75,6 @@
 				die();
 			}
 		}
-
 		public function mantenimientosAnio(){
 			if($_POST){
 				$grafica = "mantenimientosAnio";
@@ -73,29 +85,5 @@
 				die();
 			}
 		}
-		/*
-		public function ventasMes(){
-			if($_POST){
-				$grafica = "ventasMes";
-				$nFecha = str_replace(" ","",$_POST['fecha']);
-				$arrFecha = explode('-',$nFecha);
-				$mes = $arrFecha[0];
-				$anio = $arrFecha[1];
-				$pagos = $this->model->selectVentasMes($anio,$mes);
-				$script = getFile("Template/Modals/graficas",$pagos);
-				echo $script;
-				die();
-			}
-		}
-		public function ventasAnio(){
-			if($_POST){
-				$grafica = "ventasAnio";
-				$anio = intval($_POST['anio']);
-				$pagos = $this->model->selectVentasAnio($anio);
-				$script = getFile("Template/Modals/graficas",$pagos);
-				echo $script;
-				die();
-			}
-		}*/
 	}
  ?>
