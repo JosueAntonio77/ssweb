@@ -121,19 +121,49 @@
 						DAY(datecreated) AS dia, 
 						COUNT(idmantenimiento) AS cantidad
 					FROM mantenimiento 
-					WHERE DATE(datecreated) = '$fechaMantenimiento' AND status = '1' ".$where;
+					WHERE DATE(datecreated) = '$fechaMantenimiento' AND status = '2' ".$where;
 				$mantenimientoDia = $this->select($sql);
 				$mantenimientoDia['dia'] = $n_dia;
 				$n_dia++;
 				$mantenimientoDia['cantidad'] = $mantenimientoDia['cantidad'] == "" ? 0 : $mantenimientoDia['cantidad'] ;
 				$totalCantidadMes += $mantenimientoDia['cantidad'];
-				
+
 				array_push($arrMantenimientoDias, $mantenimientoDia);
 				//dep($fechaMantenimiento);
 			}
 			$meses = Meses();
 			$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes-1)], 'total' => $totalCantidadMes, 'mantenimientos' => $arrMantenimientoDias );
 			return $arrData;
+		}
+
+		public function selectMantenimientosAnio(int $anio){
+			$arrMMantenimientos = array();
+			$arrMeses = Meses();
+			for ($i=1; $i <= 12; $i++) { 
+				$arrData = array('anio'=>'','no_mes'=>'','mes'=>'','venta'=>'');
+				$sql = "SELECT 
+						$anio AS anio, 
+						$i AS mes, 
+						COUNT(idmantenimiento) AS cantidad
+					FROM mantenimiento 
+					WHERE MONTH(datecreated)= $i AND YEAR(datecreated) = $anio AND status = '2' 
+					GROUP BY MONTH(datecreated) ";
+				$mantenimientosMes = $this->select($sql);
+				$arrData['mes'] = $arrMeses[$i-1];
+				if(empty($mantenimientosMes)){
+					$arrData['anio'] = $anio;
+					$arrData['no_mes'] = $i;
+					$arrData['cantidad'] = 0;
+				}else{
+					$arrData['anio'] = $mantenimientosMes['anio'];
+					$arrData['no_mes'] = $mantenimientosMes['mes'];
+					$arrData['cantidad'] = $mantenimientosMes['cantidad'];
+				}
+				array_push($arrMMantenimientos, $arrData);
+				# code...
+			}
+			$arrMMantenimientos = array('anio' => $anio, 'meses' => $arrMMantenimientos);
+			return $arrMMantenimientos;
 		}
 		/*
 		public function selectVentasMes(int $anio, int $mes){

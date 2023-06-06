@@ -140,7 +140,7 @@
             <h3 class="tile-title">Entregas por mes</h3>
             <div class="dflex">
               <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
-              <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchVMes()"> <i class="fas fa-search"></i> </button>
+              <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
             </div>
           </div>
           <div id="graficaMes"></div>
@@ -151,8 +151,8 @@
           <div class="container-title">
             <h3 class="tile-title">Entregas por año</h3>
             <div class="dflex">
-              <input class="ventasAnio" name="ventasAnio" placeholder="Año" minlength="4" maxlength="4" onkeypress="return controlTag(event);">
-              <button type="button" class="btnVentasAnio btn btn-info btn-sm" onclick="fntSearchVAnio()"> <i class="fas fa-search"></i> </button>
+              <input class="mantenimientosAnio" name="mantenimientosAnio" placeholder="Año" minlength="4" maxlength="4" onkeypress="return controlTag(event);">
+              <button type="button" class="btnVentasAnio btn btn-info btn-sm" onclick="fntSearchMAnio()"> <i class="fas fa-search"></i> </button>
             </div>
           </div>
           <div id="graficaAnio"></div>
@@ -255,7 +255,7 @@
         }
     },
     series: [{
-        name: '',
+        name: 'Entregas',
         data: [
           <?php
               foreach ($data['manteniMes']['mantenimientos'] as $dia) {
@@ -263,6 +263,64 @@
               }
           ?>
         ]
+    }]
+  });
+
+  Highcharts.chart('graficaAnio', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Entregas del año <?= $data['manteniAnio']['anio'] ?> '
+    },
+    subtitle: {
+      text: 'Estadística de entregas por mes'
+    },
+    xAxis: {
+      type: 'category',
+      labels: {
+        rotation: -45,
+        style: {
+          fontSize: '13px',
+          fontFamily: 'Verdana, sans-serif'
+        }
+      }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Cantidad de entregas'
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    tooltip: {
+      //pointFormat: 'Entregas en 2017: <b>{point.y:.1f} millions</b>'
+      crosshairs: true,
+        shared: true
+    },
+    series: [{
+      name: 'Entregas',
+      data: [
+        <?php
+        foreach ($data['manteniAnio']['meses'] as $mes) {
+          echo "['" . $mes['mes'] . "'," . $mes['cantidad'] . "],";
+        }
+        ?>
+      ],
+      dataLabels: {
+        enabled: true,
+        rotation: -90,
+        color: '#FFFFFF',
+        align: 'right',
+        //format: '{point.y:.1f}', // one decimal
+        y: 10, // 10 pixels down from the top
+        style: {
+          fontSize: '13px',
+          fontFamily: 'Verdana, sans-serif'
+        }
+      }
     }]
   });
 

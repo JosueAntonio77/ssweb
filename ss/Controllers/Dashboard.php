@@ -36,11 +36,11 @@
 			//dep($data['pagosMes']);exit;
 			//$data['manteniMes'] = $this->model->selectManteniMes($anio,$mes);
 			//dep($data['ventasMDia']);exit;
-			$data['manteniMes'] = $this->model->selectMantenimientosMes($anio,$mes);/*
+			$data['manteniMes'] = $this->model->selectMantenimientosMes($anio,$mes);
 			//dep($data['pagosMes']);exit;
-			$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
+			$data['manteniAnio'] = $this->model->selectMantenimientosAnio($anio);
 			//dep($data['ventasAnio']);exit;
-			*/
+			
 			
 			if( $_SESSION['userData']['idrol'] == RSOLICITANTE ){
 				$this->views->getView($this,"dashboardSolicitante",$data);
@@ -63,6 +63,17 @@
 			}
 		}
 
+		public function mantenimientosAnio(){
+			if($_POST){
+				$grafica = "mantenimientosAnio";
+				$anio = intval($_POST['anio']);
+				$mantenimientos = $this->model->selectMantenimientosAnio($anio);
+				$script = getFile("Template/Modals/graficas",$mantenimientos);
+				echo $script;
+				die();
+			}
+		}
+		/*
 		public function ventasMes(){
 			if($_POST){
 				$grafica = "ventasMes";
@@ -85,7 +96,6 @@
 				echo $script;
 				die();
 			}
-		}
-
+		}*/
 	}
  ?>

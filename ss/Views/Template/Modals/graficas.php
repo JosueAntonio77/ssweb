@@ -47,7 +47,6 @@ if ($grafica = "tipoPagoMes") {
     </script>
 <?php } ?>
 <!--////////////////////////////////////////-->
-
 <?php
 if ($grafica = "mantenimientosMes") {
     $mantenimientosMes = $data;
@@ -94,6 +93,71 @@ if ($grafica = "mantenimientosMes") {
                     }
                     ?>
                 ]
+            }]
+        });
+    </script>
+<?php } ?>
+<!--////////////////////////////////////////-->
+<?php
+if ($grafica = "mantenimientosAnio") {
+    $mantenimientosAnio = $data;
+?>
+    <script>
+        Highcharts.chart('graficaAnio', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Entregas del año <?= $mantenimientosAnio['anio'] ?> '
+            },
+            subtitle: {
+                text: 'Esdística de entregas por mes'
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Cantidad de entregas'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                //pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
+                crosshairs: true,
+                shared: true
+            },
+            series: [{
+                name: 'Entregas',
+                data: [
+                    <?php
+                    foreach ($mantenimientosAnio['meses'] as $mes) {
+                        echo "['" . $mes['mes'] . "'," . $mes['cantidad'] . "],";
+                    }
+                    ?>
+                ],
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    //format: '{point.y:.1f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
             }]
         });
     </script>

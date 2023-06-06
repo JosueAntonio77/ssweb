@@ -71,7 +71,7 @@ function fntSearchVmanteniMes(){
 
 */
 
-function fntSearchVMes(){
+function fntSearchMMes(){
     let fecha = document.querySelector(".mantenimientosMes").value;
     if(fecha == ""){
         swal("", "Seleccione mes y año" , "error");
@@ -90,6 +90,31 @@ function fntSearchVMes(){
             if(request.readyState != 4) return;
             if(request.status == 200){
                 $("#graficaMes").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+function fntSearchMAnio(){
+    let anio = document.querySelector(".mantenimientosAnio").value;
+    if(anio == ""){
+        swal("", "Ingrese año " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ? 
+            new XMLHttpRequest() : 
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Dashboard/mantenimientosAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnio").html(request.responseText);
                 divLoading.style.display = "none";
                 return false;
             }
@@ -122,7 +147,7 @@ function fntSearchVMes(){
         }
     }
 }
-*/
+
 function fntSearchVAnio(){
     let anio = document.querySelector(".ventasAnio").value;
     if(anio == ""){
@@ -148,3 +173,4 @@ function fntSearchVAnio(){
         }
     }
 }
+*/
