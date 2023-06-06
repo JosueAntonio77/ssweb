@@ -107,7 +107,7 @@
 		{
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " AND p.idmantenimiento != 1 ";
+				$whereAdmin = " AND p.personaid != 1 ";
 			}
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,

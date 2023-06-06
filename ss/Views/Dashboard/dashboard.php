@@ -51,7 +51,7 @@
       <?php if (!empty($_SESSION['permisos'][MENTREGAS]['r'])) { ?>
         <div class="col-md-6 col-lg-3">
           <a href="<?= base_url() ?>/entregas" class="linkw">
-            <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa-archive fa-3x"></i>
               <div class="info">
                 <h4>Entregas</h4>
                 <p><b><?= $data['entregas'] ?></b></p>
@@ -152,6 +152,7 @@
 <?php footerAdmin($data); ?>
 
 <script>
+  /*///////////////////////////////////////*/
   /*
   Highcharts.chart('manteniMesAnio', {
       chart: {
@@ -197,8 +198,7 @@
       
   });
   */
-
-
+  /*///////////////////////////////////////*/
   Highcharts.chart('graficaMes', {
     chart: {
         type: 'spline'
@@ -253,7 +253,7 @@
         ]
     }]
   });
-
+  /*///////////////////////////////////////*/
   Highcharts.chart('graficaAnio', {
     chart: {
       type: 'column'
@@ -311,7 +311,7 @@
       }
     }]
   });
-
+  /*///////////////////////////////////////*/
   /*
     Highcharts.chart('graficaMes', {
     chart: {
@@ -409,6 +409,6 @@
       }
     }]
   });
-
   */
+  /*///////////////////////////////////////*/
 </script>

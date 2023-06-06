@@ -93,9 +93,8 @@
                                             <td><?= $mantenimiento['categoria'] ?></td>
                                             <!--
                                             <td class="text-right"><?= SMONEY . " " . formatMoney($mantenimiento['monto']) ?></td>
-                                            
-                                            <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                             -->
+                                            <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                         </tr>
                                 <?php }
                                 } ?>
@@ -145,22 +144,22 @@
                 </div>
             </div>            
         </div>
-                            <!--
+                        
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
                     <div class="container-title">
                         <h3 class="tile-title">Entregas por mes</h3>
                         <div class="dflex">
-                            <input class="date-picker ventasMes" name="ventasMes" placeholder="Mes y Año">
-                            <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchVMes()"> <i class="fas fa-search"></i> </button>
+                            <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
+                            <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
                         </div>
                     </div>
                     <div id="graficaMes"></div>
                 </div>
             </div>
         </div>
-                            -->
+                            
 
     </main>
 <?php footerAdmin($data); ?>
@@ -171,23 +170,23 @@
             type: 'line'
         },
         title: {
-            text: 'Ventas de <?= $data['ventasMDia']['mes'] . ' del ' . $data['ventasMDia']['anio'] ?>'
+            text: 'Entregas de <?= $data['manteniMes']['mes'].' del '.$data['manteniMes']['anio']?>'
         },
         subtitle: {
-            text: 'Total Ventas <?= SMONEY . '. ' . formatMoney($data['ventasMDia']['total']) ?> '
+            text: 'Total Entregas <?= $data['manteniMes']['total'] ?> '
         },
         xAxis: {
             categories: [
                 <?php
-                foreach ($data['ventasMDia']['ventas'] as $dia) {
+                foreach ($data['manteniMes']['mantenimientos'] as $dia) {
                     echo $dia['dia'] . ",";
                 }
                 ?>
             ]
-        },
+        },/*
         yAxis: {
             title: {
-                text: ''
+                text: 'Cantidad de entregas'
             }
         },
         plotOptions: {
@@ -197,13 +196,37 @@
                 },
                 enableMouseTracking: false
             }
+        },*/
+        yAxis: {
+            title: {
+                text: 'Cantidad de entregas'
+            },
+            labels: {
+                formatter: function () {
+                    //return this.value + '°';
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
         },
         series: [{
-            name: 'Dato',
+            name: 'Entregas',
             data: [
                 <?php
-                foreach ($data['ventasMDia']['ventas'] as $dia) {
-                    echo $dia['total'] . ",";
+                foreach ($data['manteniMes']['mantenimientos'] as $dia) {
+                    echo $dia['cantidad'] . ",";
                 }
                 ?>
             ]

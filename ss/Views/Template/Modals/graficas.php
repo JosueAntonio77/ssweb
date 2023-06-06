@@ -70,7 +70,7 @@ if ($grafica = "mantenimientosMes") {
                     }
                     ?>
                 ]
-            },
+            },/*
             yAxis: {
                 title: {
                     text: 'Cantidad de entregas'
@@ -82,6 +82,30 @@ if ($grafica = "mantenimientosMes") {
                         enabled: true
                     },
                     enableMouseTracking: false
+                }
+            },*/
+            yAxis: {
+                title: {
+                    text: 'Cantidad de entregas'
+                },
+                labels: {
+                    formatter: function () {
+                        //return this.value + '°';
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
                 }
             },
             series: [{

@@ -129,9 +129,11 @@
 
 		public function selectRecepciones()
 		{
+			$rolid = $_SESSION['userData']['idrol'];
+			$idUser = $_SESSION['userData']['idpersona'];
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1 ){
-				$whereAdmin = " AND p.idmantenimiento != 1 ";
+				$whereAdmin = " AND p.personaid != 1 AND p.personaid = ".$idUser;
 			}
 			$sql = "SELECT p.idmantenimiento,
 							p.nombre,
