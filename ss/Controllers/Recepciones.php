@@ -98,7 +98,14 @@ class Recepciones extends Controllers{
 					$btnEdit = '';
 					$btnDelete = '';
 
-					if($arrData[$i]['personat'] == 1)
+					if($arrData[$i]['personaid'] == RADMINISTRADOR)
+					{
+						$arrData[$i]['personaid'] = '<span class="badge badge-danger">No asignado</span>';
+					}else{
+						$arrData[$i]['personaid'] = $arrData[$i]['persona'];
+					}
+
+					if($arrData[$i]['personat'] == RADMINISTRADOR)
 					{
 						$arrData[$i]['personat'] = '<span class="badge badge-danger">No asignado</span>';
 					}else{

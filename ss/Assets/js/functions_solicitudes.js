@@ -21,7 +21,7 @@ window.addEventListener('load', function(e){
         "columns":[
             {"data":"idmantenimiento"},
             {"data":"nombre"},
-            {"data":"persona"},
+            {"data":"personaid"},
             {"data":"personat"},
             {"data":"direcciones"},
             {"data":"categoria"},
