@@ -43,44 +43,49 @@ class Solicitudes extends Controllers{
 					$strEquipo 			= ucwords(strClean($_POST['txtEquipo']));
 					$intStatus 			= 1;
 
-					if($idMantenimiento == 0)
-					{
-						$option = 1;
-						if($_SESSION['permisosMod']['w']){
-							$request_mantenimiento = $this->model->insertMantenimiento($strNombre, 
-																		$strDescripcion,
-																		$strDiagnostico,
-																		$intCategoriaId,
-																		$intPersonaId,
-																		$strPersonaT,
-																		$strEquipo, 
-																		$intStatus);
-						}
-					}else{
-						$option = 2;
-						if($_SESSION['permisosMod']['u']){
-							$request_mantenimiento = $this->model->updateMantenimiento($idMantenimiento,
-																		$strNombre, 
-																		$strDescripcion, 
-																		$strDiagnostico, 
-																		$intCategoriaId,
-																		$intPersonaId,   
-																		$strEquipo,
-																		$intStatus);	
-						}
-					}
-
-					if($request_mantenimiento > 0 )
-					{
-						if($option == 1){
-							$arrResponse = array('status' => true, 'idmantenimiento' => $request_mantenimiento, 'msg' => 'Datos guardados correctamente.');
+					$rolid = $_SESSION['userData']['idrol'];
+					if($rolid == RSOLICITANTE){
+						if($idMantenimiento == 0)
+						{
+							$option = 1;
+							if($_SESSION['permisosMod']['w']){
+								$request_mantenimiento = $this->model->insertMantenimiento($strNombre, 
+																			$strDescripcion,
+																			$strDiagnostico,
+																			$intCategoriaId,
+																			$intPersonaId,
+																			$strPersonaT,
+																			$strEquipo, 
+																			$intStatus);
+							}
 						}else{
-							$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados Correctamente.');
+							$option = 2;
+							if($_SESSION['permisosMod']['u']){
+								$request_mantenimiento = $this->model->updateMantenimiento($idMantenimiento,
+																			$strNombre, 
+																			$strDescripcion, 
+																			$strDiagnostico, 
+																			$intCategoriaId,
+																			$intPersonaId,   
+																			$strEquipo,
+																			$intStatus);	
+							}
 						}
-					}else if($request_mantenimiento == 'exist'){
-						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
+
+						if($request_mantenimiento > 0 )
+						{
+							if($option == 1){
+								$arrResponse = array('status' => true, 'idmantenimiento' => $request_mantenimiento, 'msg' => 'Datos guardados correctamente.');
+							}else{
+								$arrResponse = array('status' => true, 'idmantenimiento' => $idMantenimiento, 'msg' => 'Datos Actualizados Correctamente.');
+							}
+						}else if($request_mantenimiento == 'exist'){
+							$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe la recepción con ese nombre.');		
+						}else{
+							$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+						}
 					}else{
-						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+						$arrResponse = array("status" => false, "msg" => 'Solo los solicitantes puedes agregar o editar en esta vista.');
 					}
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

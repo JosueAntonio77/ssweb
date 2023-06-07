@@ -182,12 +182,15 @@ function fntViewInfo(idMantenimiento){
                 let estadoMantenimiento = objMantenimiento.status == 1 ?
                 '<span class="badge badge-danger">Pendiente</span>'  :
                 '<span class="badge badge-success">Entregado</span>';
+                let personaMantenimiento = objMantenimiento.personat == 1 ?
+                '<span class="badge badge-danger">No asignado</span>' :
+                objMantenimiento.persona ;
                 let tecnicoMantenimiento = objMantenimiento.personat == 1 ?
                 '<span class="badge badge-danger">No asignado</span>' :
                 objMantenimiento.personatecnico ;
 
                 document.querySelector("#celNombre").innerHTML      = objMantenimiento.nombre;
-                document.querySelector("#celPersona").innerHTML     = objMantenimiento.persona;
+                document.querySelector("#celPersona").innerHTML     = personaMantenimiento;
                 document.querySelector("#celPersonaT").innerHTML    = tecnicoMantenimiento;
                 document.querySelector("#celDirecciones").innerHTML = objMantenimiento.direcciones;
                 document.querySelector("#celCategoria").innerHTML   = objMantenimiento.categoria;
