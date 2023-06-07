@@ -27,7 +27,7 @@
       <?php if (!empty($_SESSION['permisos'][MSOLICITANTES]['r'])) { ?>
         <div class="col-md-6 col-lg-3">
           <a href="<?= base_url() ?>/solicitantes" class="linkw">
-            <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
+            <div class="widget-small warning coloured-icon"><i class="icon fa fa-user fa-3x"></i>
               <div class="info">
                 <h4>Solicitantes</h4>
                 <p><b><?= $data['solicitantes'] ?></b></p>
@@ -39,7 +39,7 @@
       <?php if (!empty($_SESSION['permisos'][MRECEPCIONES]['r'])) { ?>
         <div class="col-md-6 col-lg-3">
           <a href="<?= base_url() ?>/recepciones" class="linkw">
-            <div class="widget-small warning coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
               <div class="info">
                 <h4>Recepciones</h4>
                 <p><b><?= $data['mantenimientos'] ?></b></p>
@@ -51,7 +51,7 @@
       <?php if (!empty($_SESSION['permisos'][MENTREGAS]['r'])) { ?>
         <div class="col-md-6 col-lg-3">
           <a href="<?= base_url() ?>/entregas" class="linkw">
-            <div class="widget-small danger coloured-icon"><i class="icon fa fa-archive fa-3x"></i>
+            <div class="widget-small info coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
               <div class="info">
                 <h4>Entregas</h4>
                 <p><b><?= $data['entregas'] ?></b></p>
