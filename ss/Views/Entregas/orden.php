@@ -13,7 +13,7 @@
     <div class="col-md-12">
       <div class="tile">
         
-     <!-- <?php dep($data['arrMantenimiento']); ?> -->
+    <!--  <?php dep($data['arrMantenimiento']); ?> -->
      
         <?php $data['arrMantenimiento']; 
                     
@@ -38,14 +38,15 @@
           </div>
           <div class="row invoice-info">
             <div class="col-4"><strong>Solicita:</strong>
-              <address><?=$pago['nombres'].' '.$pago['apellidos']?> <br>
+              <address><?=$pago['persona']?> <br>
               <strong>Dirección: </strong><?=$pago['direccion']?><br>
               <strong>Área: </strong><?=$pago['area']?><br>
               <strong>Cargo: </strong><?=$pago['cargo']?><br>
-                <?=$pago['email_user']?><br>
+              <strong>Email: </strong><?=$pago['email_user']?><br>
               </address>
             </div>
-            <div class="col-4">To
+            <div class="col-4">
+            <strong>Para:</strong>
               <address><strong><?= NOMBRE_EMPRESA ?></strong><br>
               <strong>Web: </strong> <?= WEB_EMPRESA ?><br>
               <strong>Ubicación: </strong> <?= CALLE ?>
@@ -74,7 +75,7 @@
                     <td><?= $pago['equipo'] ?></td>
                     <td><?= $pago['direccion'] ?></td>
                     <td><?= $pago['diagnostico'] ?></td>
-                    <td><?=$pago['nombres'].' '.$pago['apellidos']?></td>
+                    <td><?=$pago['personatecnico']?></td>
                   </tr>
                 </tbody>
               </table>

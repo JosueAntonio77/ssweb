@@ -41,17 +41,8 @@ class Entregas extends Controllers{
 				//$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"	class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>
-					<button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idmantenimiento'].')" title="Generar PDF"><i class="fas fa-file-pdf"></i></button>';
+					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"	class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>';
 					
-					/*
-					if($arrData[$i]['status'] == 1)
-					{
-						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
-					}else{
-						$arrData[$i]['status'] = '<span class="badge badge-danger">Pendiente</span>';
-					}
-					*/
 					
 					if($arrData[$i]['status'] == 1)
 					{
@@ -60,18 +51,42 @@ class Entregas extends Controllers{
 						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}
 				}
-				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar cotización"><i class="fas fa-pencil-alt"></i></button>';
+				/*if($_SESSION['permisosMod']['u']){
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar cotización"><i class="far fa-trash-alt"></i></button>';
-				}
-
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
+				}*/
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
+
+			
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
 		die();	
+	}
+
+	public function getMantenimiento($idmantenimiento){
+		if($_SESSION['permisosMod']['r']){
+			$idmantenimiento = intval($idmantenimiento);
+			if($idmantenimiento > 0){
+				$arrData = $this->model->selectMantenimiento($idmantenimiento);
+				if(empty($arrData)){
+					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+				}else{
+					$arrImg = $this->model->selectImages($idmantenimiento);
+					if(count($arrImg) > 0){
+						for ($i=0; $i < count($arrImg); $i++) { 
+							$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
+						}
+					}
+					$arrData['images'] = $arrImg;
+					$arrResponse = array('status' => true, 'data' => $arrData);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
 	}
 
 	public function orden(int $idmantenimiento){

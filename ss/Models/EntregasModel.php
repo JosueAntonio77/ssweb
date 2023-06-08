@@ -9,18 +9,20 @@
 		public function selectEntregas($idpersona = null){
 			$where = "";
 			if($idpersona != null){
-				$where = "WHERE personaid = ".$idpersona;
+				$where = "WHERE personaid =".$idpersona;
 			}
 					$sql = "SELECT m.idmantenimiento,
-									m.equipo,
-									d.direccion as direcciones,
-									m.diagnostico,
-									p.nombres as persona,
-									DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
-									m.status
-							FROM mantenimiento as m
-							INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-							INNER JOIN persona as p ON m.personaid = p.idpersona $where AND m.status = 1";
+					m.equipo,
+					d.direccion as direcciones,
+					m.diagnostico,
+					CONCAT(pd.nombres,' ',pd.apellidos) AS persona, /* solicitante */
+					CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
+					DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
+					m.status
+					FROM mantenimiento as m 
+					INNER JOIN persona pd ON m.personaid = pd.idpersona
+					INNER JOIN persona pt ON m.personat = pt.idpersona
+					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion $where AND m.status = 2";
             $request = $this ->select_all($sql);
             return $request;
 
@@ -34,51 +36,51 @@
 			}
 		$request = array();
 		$sql = "SELECT m.idmantenimiento,
-						m.equipo,
-						d.direccion as direcciones,
-						m.diagnostico,
-						m.personaid,
-						p.nombres as persona,
-						DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
-						m.status
-				FROM mantenimiento as m
-				INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-				INNER JOIN persona  as p ON m.personaid = p.idpersona".$busqueda;
+							m.equipo,
+							d.direccion as persona,
+							m.diagnostico,p.nombres as persona,
+							m.datefinish,
+							m.status
+							FROM mantenimiento as m 
+							INNER JOIN persona as p ON m.personaid = p.idpersona
+							INNER JOIN direcciones as d ON p.direccionid = d.iddireccion".$busqueda;
 			$requestMantenimiento = $this->select($sql);
 			if(!empty($requestMantenimiento)){
 				$idpersona = $requestMantenimiento['personaid'];
 				$sql_solicitante = "SELECT p.idpersona,
-										p.nombres,
-										p.apellidos,
-										p.telefono,
-										p.email_user,
-										p.nit,
-										p.cargo,
-										p.area,
-										m.idmantenimiento,
-										m.equipo,
-										d.direccion,
-										m.diagnostico,
-										m.personaid,
-										DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
-										m.status
-									FROM persona as p
-									INNER JOIN mantenimiento as m ON p.idpersona = m.personaid
-									INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-									WHERE m.idmantenimiento = $idmantenimiento AND m.status = 1";
+											CONCAT(p.nombres,' ',p.apellidos) AS persona, /* solicitante */
+											CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
+											p.telefono,
+											p.email_user,
+											p.nit,
+											p.cargo,
+											p.area,
+											m.idmantenimiento,
+											m.equipo,
+											d.direccion,
+											m.diagnostico,
+											m.personaid,
+											DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
+											m.status
+										FROM persona as p
+										INNER JOIN mantenimiento as m ON p.idpersona = m.personaid
+										INNER JOIN persona pt ON m.personat = pt.idpersona
+									INNER JOIN direcciones d ON p.direccionid = d.iddireccion
+									WHERE m.idmantenimiento = $idmantenimiento AND m.status = 2";
 					$requestsolicitante = $this->select($sql_solicitante);
 					$sql_detalle = "SELECT m.idmantenimiento,
 											m.equipo,
 											d.direccion as direcciones,
 											m.diagnostico,
 											m.personaid,
-											p.nombres,
-											p.apellidos,
+											CONCAT(pd.nombres,' ',pd.apellidos) AS persona, /* solicitante */
+											CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
 											DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
 											m.status
 									FROM mantenimiento as m
-									INNER JOIN direcciones as d ON m.direccionid = d.iddireccion
-									INNER JOIN persona as p ON m.personaid = p.idpersona
+									INNER JOIN persona pd ON m.personaid = pd.idpersona
+									INNER JOIN persona pt ON m.personat = pt.idpersona
+									INNER JOIN direcciones d ON pd.direccionid = d.iddireccion
 									WHERE m.idmantenimiento = $idmantenimiento
 									/*WHERE d.pedidoid = $idmantenimiento*/";
 					$requestEntregas = $this->select_all($sql_detalle);

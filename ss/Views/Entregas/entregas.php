@@ -20,6 +20,7 @@
                       <thead>
                         <tr>
                           <th>ID</th>
+                          <th>Solicitó</th>
                           <th>Equipo</th>
                           <th>Dirección</th>
                           <th>Diagnóstico</th>
