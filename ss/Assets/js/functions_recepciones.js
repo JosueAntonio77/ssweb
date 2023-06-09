@@ -285,7 +285,7 @@ function fntEditInfo(element,idMantenimiento){
                 document.querySelector("#listStatus").value         = objMantenimiento.status;
 
                 tinymce.activeEditor.setContent(objMantenimiento.descripcion);
-                tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
+                //tinymce.activeEditor.setContent(objMantenimiento.diagnostico);
                 $('#listCategoria').selectpicker('render');
                 $('#listPersona').selectpicker('render');
                 $('#listPersonaT').selectpicker('render');
@@ -365,6 +365,7 @@ tinymce.init({
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
 });
 
+/*
 tinymce.init({
     selector: '#txtDiagnostico',
     width: "100%",
@@ -377,7 +378,7 @@ tinymce.init({
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
 });
-
+*/
 
 function fntInputFile(){
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
