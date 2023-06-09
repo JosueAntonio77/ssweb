@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 08-06-2023 a las 04:25:20
--- Versión del servidor: 10.5.20-MariaDB
--- Versión de PHP: 7.3.33
+-- Host: localhost:3306
+-- Generation Time: Jun 09, 2023 at 09:19 AM
+-- Server version: 10.5.20-MariaDB
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `id20491174_ssweb`
+-- Database: `id20491174_ssweb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -33,7 +33,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`idcategoria`, `nombre`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `categoria` (`idcategoria`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contacto`
+-- Table structure for table `contacto`
 --
 
 CREATE TABLE `contacto` (
@@ -58,7 +58,7 @@ CREATE TABLE `contacto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `contacto`
+-- Dumping data for table `contacto`
 --
 
 INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`, `useragent`, `datecreated`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `direcciones`
+-- Table structure for table `direcciones`
 --
 
 CREATE TABLE `direcciones` (
@@ -78,7 +78,7 @@ CREATE TABLE `direcciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `direcciones`
+-- Dumping data for table `direcciones`
 --
 
 INSERT INTO `direcciones` (`iddireccion`, `direccion`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `direcciones` (`iddireccion`, `direccion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagen`
+-- Table structure for table `imagen`
 --
 
 CREATE TABLE `imagen` (
@@ -103,7 +103,7 @@ CREATE TABLE `imagen` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mantenimiento`
+-- Table structure for table `mantenimiento`
 --
 
 CREATE TABLE `mantenimiento` (
@@ -112,8 +112,8 @@ CREATE TABLE `mantenimiento` (
   `descripcion` text NOT NULL,
   `diagnostico` text DEFAULT NULL,
   `categoriaid` bigint(20) NOT NULL,
-  `datecreated` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `datefinish` timestamp NOT NULL DEFAULT current_timestamp(),
+  `datecreated` datetime DEFAULT current_timestamp(),
+  `datefinish` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `personaid` bigint(20) NOT NULL,
   `personat` int(20) NOT NULL,
   `equipo` varchar(255) NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `mantenimiento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `mantenimiento`
+-- Dumping data for table `mantenimiento`
 --
 
 INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagnostico`, `categoriaid`, `datecreated`, `datefinish`, `personaid`, `personat`, `equipo`, `status`) VALUES
@@ -132,7 +132,7 @@ INSERT INTO `mantenimiento` (`idmantenimiento`, `nombre`, `descripcion`, `diagno
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modulo`
+-- Table structure for table `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -143,14 +143,14 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `modulo`
+-- Dumping data for table `modulo`
 --
 
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (1, 'Dashboard', 'Dashboard', 1),
 (2, 'Usuarios', 'Usuarios del sistema', 1),
-(3, 'Solicitudes', 'Solicitantes podran ver sus solicitudes realizadas.', 1),
-(4, 'Solicitantes', 'Clientes del Ayuntamiento', 1),
+(3, 'Solicitantes', 'Clientes del Ayuntamiento', 1),
+(4, 'Solicitudes', 'Solicitantes podran ver sus solicitudes realizadas.', 1),
 (5, 'Recepciones', 'Todas las recepciones pendientes', 1),
 (6, 'Entregas', 'Las recepciones entregadas', 1),
 (7, 'Contactos', 'Contactos de posibles usuarios que se comunican con H. Ayuntamiento Progreso.', 1);
@@ -158,7 +158,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permisos`
+-- Table structure for table `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -172,35 +172,36 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `permisos`
+-- Dumping data for table `permisos`
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(230, 2, 1, 1, 0, 0, 0),
-(231, 2, 2, 0, 0, 0, 0),
-(232, 2, 3, 0, 0, 0, 0),
-(233, 2, 4, 0, 0, 0, 0),
-(234, 2, 5, 0, 0, 0, 0),
-(235, 2, 6, 0, 0, 0, 0),
-(418, 3, 1, 1, 0, 0, 0),
-(419, 3, 2, 0, 0, 0, 0),
-(420, 3, 3, 1, 1, 1, 1),
-(421, 3, 4, 0, 0, 0, 0),
-(422, 3, 5, 0, 0, 0, 0),
-(423, 3, 6, 0, 0, 0, 0),
-(424, 3, 7, 0, 0, 0, 0),
-(432, 1, 1, 1, 1, 1, 1),
-(433, 1, 2, 1, 1, 1, 1),
-(434, 1, 3, 1, 1, 1, 1),
-(435, 1, 4, 1, 1, 1, 1),
-(436, 1, 5, 1, 1, 1, 1),
-(437, 1, 6, 1, 1, 1, 1),
-(438, 1, 7, 1, 0, 0, 1);
+(439, 3, 1, 1, 0, 0, 0),
+(440, 3, 2, 0, 0, 0, 0),
+(441, 3, 3, 1, 1, 1, 1),
+(442, 3, 4, 0, 0, 0, 0),
+(443, 3, 5, 0, 0, 0, 0),
+(444, 3, 6, 0, 0, 0, 0),
+(445, 3, 7, 0, 0, 0, 0),
+(446, 2, 1, 1, 0, 0, 0),
+(447, 2, 2, 0, 0, 0, 0),
+(448, 2, 3, 0, 0, 0, 0),
+(449, 2, 4, 0, 0, 0, 0),
+(450, 2, 5, 0, 0, 0, 0),
+(451, 2, 6, 0, 0, 0, 0),
+(452, 2, 7, 0, 0, 0, 0),
+(453, 1, 1, 1, 1, 1, 1),
+(454, 1, 2, 1, 1, 1, 1),
+(455, 1, 3, 1, 1, 1, 1),
+(456, 1, 4, 1, 1, 1, 1),
+(457, 1, 5, 1, 1, 1, 1),
+(458, 1, 6, 1, 1, 1, 1),
+(459, 1, 7, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `persona`
+-- Table structure for table `persona`
 --
 
 CREATE TABLE `persona` (
@@ -222,7 +223,7 @@ CREATE TABLE `persona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `persona`
+-- Dumping data for table `persona`
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `direccionid`, `telefono`, `email_user`, `password`, `nit`, `cargo`, `area`, `token`, `rolid`, `datecreated`, `status`) VALUES
@@ -233,7 +234,7 @@ INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `d
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rol`
+-- Table structure for table `rol`
 --
 
 CREATE TABLE `rol` (
@@ -244,7 +245,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `rol`
+-- Dumping data for table `rol`
 --
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
@@ -253,36 +254,36 @@ INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 (3, 'Solicitante', 'Solicita ayuda para el técnico de sistemas.', 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`idcategoria`);
 
 --
--- Indices de la tabla `contacto`
+-- Indexes for table `contacto`
 --
 ALTER TABLE `contacto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `direcciones`
+-- Indexes for table `direcciones`
 --
 ALTER TABLE `direcciones`
   ADD PRIMARY KEY (`iddireccion`);
 
 --
--- Indices de la tabla `imagen`
+-- Indexes for table `imagen`
 --
 ALTER TABLE `imagen`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `mantenimientoid` (`mantenimientoid`);
 
 --
--- Indices de la tabla `mantenimiento`
+-- Indexes for table `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`idmantenimiento`),
@@ -290,13 +291,13 @@ ALTER TABLE `mantenimiento`
   ADD KEY `personaid` (`personaid`);
 
 --
--- Indices de la tabla `modulo`
+-- Indexes for table `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
 
 --
--- Indices de la tabla `permisos`
+-- Indexes for table `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermiso`),
@@ -304,7 +305,7 @@ ALTER TABLE `permisos`
   ADD KEY `moduloid` (`moduloid`);
 
 --
--- Indices de la tabla `persona`
+-- Indexes for table `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
@@ -312,89 +313,89 @@ ALTER TABLE `persona`
   ADD KEY `iddireccion` (`direccionid`);
 
 --
--- Indices de la tabla `rol`
+-- Indexes for table `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idrol`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `contacto`
+-- AUTO_INCREMENT for table `contacto`
 --
 ALTER TABLE `contacto`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `direcciones`
+-- AUTO_INCREMENT for table `direcciones`
 --
 ALTER TABLE `direcciones`
   MODIFY `iddireccion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `mantenimiento`
+-- AUTO_INCREMENT for table `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   MODIFY `idmantenimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT de la tabla `modulo`
+-- AUTO_INCREMENT for table `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `permisos`
+-- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=439;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=460;
 
 --
--- AUTO_INCREMENT de la tabla `persona`
+-- AUTO_INCREMENT for table `persona`
 --
 ALTER TABLE `persona`
   MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `rol`
+-- AUTO_INCREMENT for table `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `imagen`
+-- Constraints for table `imagen`
 --
 ALTER TABLE `imagen`
   ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`mantenimientoid`) REFERENCES `mantenimiento` (`idmantenimiento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `mantenimiento`
+-- Constraints for table `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`categoriaid`) REFERENCES `categoria` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `mantenimiento_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `permisos`
+-- Constraints for table `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`moduloid`) REFERENCES `modulo` (`idmodulo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `persona`
+-- Constraints for table `persona`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
