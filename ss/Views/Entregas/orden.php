@@ -29,7 +29,7 @@
         <section class="invoice">
           <div class="row mb-4">
             <div class="col-6">
-              <h2 class="page-header"><i ></i> <img src="<?= media(); ?> /images/logo.png" width="150px" heigh="200px"> </h2>
+              <h2 class="page-header"><i ></i> <img src="<?= media(); ?>/images/logo.png" width="150px" heigh="200px"> </h2>
             </div>
             <div class="col-6">
               <h5 class="text-right">Fecha Entrega: <?= $pago['datefinish'] ?>
