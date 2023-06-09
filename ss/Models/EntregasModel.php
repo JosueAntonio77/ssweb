@@ -9,10 +9,11 @@
 		public function selectEntregas($idpersona = null){
 			$where = "";
 			if($idpersona != null){
-				$where = "WHERE personaid =".$idpersona;
+				$where = "WHERE m.personaid =".$idpersona;
 			}
 					$sql = "SELECT m.idmantenimiento,
 					m.equipo,
+					m.personaid,
 					d.direccion as direcciones,
 					m.diagnostico,
 					CONCAT(pd.nombres,' ',pd.apellidos) AS persona, /* solicitante */
@@ -25,9 +26,7 @@
 					INNER JOIN direcciones d ON pd.direccionid = d.iddireccion $where AND m.status = 2";
             $request = $this ->select_all($sql);
             return $request;
-
 		}
-		
 		//Para la parte de la vista de detalles entrega
 		public function selectEntrega(int $idmantenimiento, $idpersona = NULL){
 			$busqueda = "";
@@ -36,6 +35,7 @@
 			}
 		$request = array();
 		$sql = "SELECT m.idmantenimiento,
+							m.personaid,
 							m.equipo,
 							d.direccion as persona,
 							m.diagnostico,p.nombres as persona,
@@ -48,6 +48,7 @@
 			if(!empty($requestMantenimiento)){
 				$idpersona = $requestMantenimiento['personaid'];
 				$sql_solicitante = "SELECT p.idpersona,
+											m.personaid,
 											CONCAT(p.nombres,' ',p.apellidos) AS persona, /* solicitante */
 											CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
 											p.telefono,
@@ -58,6 +59,7 @@
 											m.idmantenimiento,
 											m.equipo,
 											d.direccion,
+											m.descripcion,
 											m.diagnostico,
 											m.personaid,
 											DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
@@ -88,6 +90,13 @@
 									'orden' => $requestsolicitante,
 									'detalle' => $requestEntregas);
 			}
+			return $request;
+		}
+		public function deleteMantenimiento(int $idmantenimiento){
+			$this->intIdMantenimiento = $idmantenimiento;
+			$sql = "UPDATE mantenimiento SET status = ? WHERE idmantenimiento = $this->intIdMantenimiento ";
+			$arrData = array(0);
+			$request = $this->update($sql,$arrData);
 			return $request;
 		}
 	}

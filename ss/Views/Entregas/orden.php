@@ -64,8 +64,9 @@
                   <tr>
                     <th>ID</th>
                     <th >Equipo</th>
-                    <th >Dirección</th>
+                    <th >Descripción</th>
                     <th >Diagnóstico</th>
+                    <th >Fecha Entrega</th>
                     <th >Atendió</th>
                   </tr>
                 </thead>
@@ -73,8 +74,9 @@
                   <tr>
                     <td><?= $pago['idmantenimiento'] ?></td>
                     <td><?= $pago['equipo'] ?></td>
-                    <td><?= $pago['direccion'] ?></td>
+                    <td><?= $pago['descripcion'] ?></td>
                     <td><?= $pago['diagnostico'] ?></td>
+                    <td><?= $pago['datefinish'] ?></td>
                     <td><?=$pago['personatecnico']?></td>
                   </tr>
                 </tbody>

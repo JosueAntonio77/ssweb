@@ -53,10 +53,10 @@ class Entregas extends Controllers{
 				}
 				/*if($_SESSION['permisosMod']['u']){
 					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
-				}
+				}*/
 				if($_SESSION['permisosMod']['d']){	
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
-				}*/
+				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 
@@ -64,6 +64,23 @@ class Entregas extends Controllers{
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
 		die();	
+	}
+
+	public function delMantenimiento(){
+		if($_POST){
+			if($_SESSION['permisosMod']['d']){
+				$intIdmantenimiento = intval($_POST['idMantenimiento']);
+				$requestDelete = $this->model->deleteMantenimiento($intIdmantenimiento);
+				if($requestDelete)
+				{
+					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la recepción');
+				}else{
+					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la recepción.');
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
 	}
 
 	public function getMantenimiento($idmantenimiento){
