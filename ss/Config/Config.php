@@ -49,8 +49,8 @@
 	//Módulos
 	const MDASHBOARD 	= 1;
 	const MUSUARIOS 	= 2;
-	const MSOLICITUDES 	= 3;
-	const MSOLICITANTES = 4;
+	const MSOLICITANTES = 3;
+	const MSOLICITUDES 	= 4;
 	const MRECEPCIONES 	= 5;
 	const MENTREGAS 	= 6;
 	const MCONTACTOS 	= 7;

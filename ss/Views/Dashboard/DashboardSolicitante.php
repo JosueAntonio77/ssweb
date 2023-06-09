@@ -64,7 +64,7 @@
             <?php } ?>
         </div>
         <div class="row">
-            <?php if (!empty($_SESSION['permisos'][MRECEPCIONES]['r'])) { ?>
+            <?php if (!empty($_SESSION['permisos'][MSOLICITUDES]['r'])) { ?>
                 <div class="col-md-6">
                     <div class="tile">
                         <h3 class="tile-title">Mantenimientos Solicitados</h3>
@@ -72,13 +72,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Solicitante</th>
-                                    <th>Estado</th>
+                                    <th>Técnico</th>
+                                    <th>Descripción</th>
                                     <th>Problema</th>
                                     <!--
                                     <th class="text-right">Problema</th>
-                                    -->
-                                    <th>Acciones</th>
+                                    <th>Acciones</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,13 +87,13 @@
                                 ?>
                                         <tr>
                                             <td><?= $mantenimiento['idmantenimiento'] ?></td>
-                                            <td><?= $mantenimiento['nombre'] ?></td>
-                                            <td><?= $mantenimiento['status'] ?></td>
+                                            <td><?= $mantenimiento['tecnico'] ?></td>
+                                            <td><?= $mantenimiento['descripcion'] ?></td>
                                             <td><?= $mantenimiento['categoria'] ?></td>
                                             <!--
                                             <td class="text-right"><?= SMONEY . " " . formatMoney($mantenimiento['monto']) ?></td>
+                                            <td><a href="<?= base_url() ?>/entregas/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                             -->
-                                            <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                         </tr>
                                 <?php }
                                 } ?>
@@ -103,61 +102,60 @@
                         </table>
                     </div>
                 </div>
-            <?php } ?>
-
-            <div class="col-md-6">
-                <div class="tile">
-                    <div class="container-title">
-                        <h3 class="tile-title">Historial</h3>
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre de la resepción</th>
-                                    <th>Problema</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if (count($data['mantenimientosTen']) > 0) {
-                                    foreach ($data['mantenimientosTen'] as $mantenimiento) {
-                                ?>
-                                        <tr>
-                                            <td><?= $mantenimiento['idmantenimiento'] ?></td>
-                                            <td><?= $mantenimiento['nombre'] ?></td>
-                                            <td><?= $mantenimiento['categoria'] ?></td>
-                                            <!--
-                                            <td><?= SMONEY . formatMoney($mantenimiento['precio']) ?></td>
-                                            
-                                            <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] . '/' . $producto['ruta'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                                            -->
-                                        </tr>
-                                <?php }
-                                } ?>
-
-                            </tbody>
-                        </table>
-
+                <div class="col-md-6">
+                    <div class="tile">
+                        <div class="container-title">
+                            <h3 class="tile-title">Historial</h3>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre de la recepción</th>
+                                        <th>Descripción</th>
+                                        <th>Diagnóstico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (count($data['mantenimientosTen']) > 0) {
+                                        foreach ($data['mantenimientosTen'] as $mantenimiento) {
+                                    ?>
+                                            <tr>
+                                                <td><?= $mantenimiento['idmantenimiento'] ?></td>
+                                                <td><?= $mantenimiento['nombre'] ?></td>
+                                                <td><?= $mantenimiento['descripcion'] ?></td>
+                                                <td><?= $mantenimiento['diagnostico'] ?></td>
+                                                <!--
+                                                <td><?= SMONEY . formatMoney($mantenimiento['precio']) ?></td>
+                                                
+                                                <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] . '/' . $producto['ruta'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                                -->
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
                 </div>
-            </div>            
+            <?php } ?>            
         </div>
                         
         <div class="row">
-            <div class="col-md-12">
-                <div class="tile">
-                    <div class="container-title">
-                        <h3 class="tile-title">Entregas por mes</h3>
-                        <div class="dflex">
-                            <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
-                            <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
+            <?php if (!empty($_SESSION['permisos'][MENTREGAS]['r'])) { ?>
+                <div class="col-md-12">
+                    <div class="tile">
+                        <div class="container-title">
+                            <h3 class="tile-title">Entregas por mes</h3>
+                            <div class="dflex">
+                                <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
+                                <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
+                            </div>
                         </div>
+                        <div id="graficaMes"></div>
                     </div>
-                    <div id="graficaMes"></div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
                             
 

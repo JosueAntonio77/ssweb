@@ -32,7 +32,9 @@
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
 			if($rolid == RSOLICITANTE ){
-				$where = " WHERE personaid = ".$idUser;
+				$where = " WHERE status = 2 AND personaid = ".$idUser;
+			} else {
+				$where = "WHERE status = 2";
 			}
 
 			$sql = "SELECT COUNT(*) as total FROM mantenimiento ".$where;
@@ -46,15 +48,21 @@
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
 			if($rolid == RSOLICITANTE ){
-				$where = " WHERE p.personaid = ".$idUser;
+				$where = " WHERE p.status = 1 AND p.personaid = ".$idUser;
+			} else {
+				$where = " WHERE p.status = 2";
 			}
 
-			$sql = "SELECT p.idmantenimiento, 
+			$sql = "SELECT p.idmantenimiento,
+							p.descripcion,
+							p.diagnostico, 
 							CONCAT(pr.nombres,' ',pr.apellidos) AS nombre,
+							CONCAT(t.nombres,' ',t.apellidos) AS tecnico,
 							c.nombre AS categoria,  
 							p.status 
 					FROM mantenimiento p
 					INNER JOIN persona pr ON p.personaid = pr.idpersona
+					INNER JOIN persona t ON p.personat = t.idpersona
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					$where
 					ORDER BY p.idmantenimiento DESC LIMIT 10 ";
@@ -72,15 +80,20 @@
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
 			if($rolid == RSOLICITANTE ){
-				$where = " WHERE p.personaid = ".$idUser;
+				$where = "WHERE p.status = 2 AND p.personaid = ".$idUser;
+			} else {
+				$where = " WHERE p.status = 1";
 			}
 
 			$sql = "SELECT p.idmantenimiento, 
 							p.nombre,
-							c.nombre AS categoria,  
+							p.descripcion,
+							p.diagnostico,
+							c.nombre AS categoria, 
+							CONCAT(pr.nombres,' ',pr.apellidos) AS tecnico,
 							p.status 
 					FROM mantenimiento p
-					INNER JOIN persona pr ON p.personaid = pr.idpersona
+					INNER JOIN persona pr ON p.personat = pr.idpersona
 					INNER JOIN categoria c ON p.categoriaid = c.idcategoria
 					$where
 					ORDER BY p.idmantenimiento DESC LIMIT 10 ";
@@ -116,10 +129,10 @@
 				$date = date_create($anio."-".$mes."-".$n_dia);
 				$fechaMantenimiento = date_format($date,"Y-m-d");
 				$sql = "SELECT 
-						DAY(datecreated) AS dia, 
+						DAY(datefinish) AS dia, 
 						COUNT(idmantenimiento) AS cantidad
 					FROM mantenimiento 
-					WHERE DATE(datecreated) = '$fechaMantenimiento' AND status = '2' ".$where;
+					WHERE DATE(datefinish) = '$fechaMantenimiento' AND status = '2' ".$where;
 				$mantenimientoDia = $this->select($sql);
 				$mantenimientoDia['dia'] = $n_dia;
 				$n_dia++;
@@ -144,8 +157,8 @@
 						$i AS mes, 
 						COUNT(idmantenimiento) AS cantidad
 					FROM mantenimiento 
-					WHERE MONTH(datecreated)= $i AND YEAR(datecreated) = $anio AND status = '2' 
-					GROUP BY MONTH(datecreated) ";
+					WHERE MONTH(datefinish)= $i AND YEAR(datefinish) = $anio AND status = '2' 
+					GROUP BY MONTH(datefinish) ";
 				$mantenimientosMes = $this->select($sql);
 				$arrData['mes'] = $arrMeses[$i-1];
 				if(empty($mantenimientosMes)){

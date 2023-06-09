@@ -66,13 +66,13 @@
       <?php if (!empty($_SESSION['permisos'][MRECEPCIONES]['r'])) { ?>
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">Últimos Mantenimientos</h3>
+            <h3 class="tile-title">Últimos Entregados</h3>
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Solicitante</th>
-                  <th>Estado</th>
+                  <th>Técnico</th>
                   <th>Problema</th>
                   <!--
                   <th class="text-right">Problema</th>
@@ -88,7 +88,7 @@
                     <tr>
                       <td><?= $mantenimiento['idmantenimiento'] ?></td>
                       <td><?= $mantenimiento['nombre'] ?></td>
-                      <td><?= $mantenimiento['status'] ?></td>
+                      <td><?= $mantenimiento['tecnico'] ?></td>
                       <td><?= $mantenimiento['categoria'] ?></td>
                       <!--
                       <td class="text-right"><?= SMONEY . " " . formatMoney($mantenimiento['monto']) ?></td>
@@ -102,6 +102,42 @@
             </table>
           </div>
         </div>
+        <div class="col-md-6">
+                    <div class="tile">
+                        <div class="container-title">
+                            <h3 class="tile-title">Pendientes</h3>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre de la recepción</th>
+                                        <th>Descripción</th>
+                                        <th>Problema</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (count($data['mantenimientosTen']) > 0) {
+                                        foreach ($data['mantenimientosTen'] as $mantenimiento) {
+                                    ?>
+                                            <tr>
+                                                <td><?= $mantenimiento['idmantenimiento'] ?></td>
+                                                <td><?= $mantenimiento['nombre'] ?></td>
+                                                <td><?= $mantenimiento['descripcion'] ?></td>
+                                                <td><?= $mantenimiento['categoria'] ?></td>
+                                                <!--
+                                                <td><?= SMONEY . formatMoney($mantenimiento['precio']) ?></td>
+                                                
+                                                <td><a href="<?= base_url() ?>/mantenimientos/orden/<?= $mantenimiento['idmantenimiento'] . '/' . $producto['ruta'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                                -->
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
       <?php } ?>
 
       <!--
@@ -122,32 +158,34 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="container-title">
-            <h3 class="tile-title">Entregas por mes</h3>
-            <div class="dflex">
-              <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
-              <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
+      <?php if (!empty($_SESSION['permisos'][MENTREGAS]['r'])) { ?>
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="container-title">
+              <h3 class="tile-title">Entregas por mes</h3>
+              <div class="dflex">
+                <input class="date-picker mantenimientosMes" name="mantenimientosMes" placeholder="Mes y Año">
+                <button type="button" class="btnVentasMes btn btn-info btn-sm" onclick="fntSearchMMes()"> <i class="fas fa-search"></i> </button>
+              </div>
             </div>
+            <div id="graficaMes"></div>
           </div>
-          <div id="graficaMes"></div>
         </div>
-      </div>
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="container-title">
-            <h3 class="tile-title">Entregas por año</h3>
-            <div class="dflex">
-              <input class="mantenimientosAnio" name="mantenimientosAnio" placeholder="Año" minlength="4" maxlength="4" onkeypress="return controlTag(event);">
-              <button type="button" class="btnVentasAnio btn btn-info btn-sm" onclick="fntSearchMAnio()"> <i class="fas fa-search"></i> </button>
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="container-title">
+              <h3 class="tile-title">Entregas por año</h3>
+              <div class="dflex">
+                <input class="mantenimientosAnio" name="mantenimientosAnio" placeholder="Año" minlength="4" maxlength="4" onkeypress="return controlTag(event);">
+                <button type="button" class="btnVentasAnio btn btn-info btn-sm" onclick="fntSearchMAnio()"> <i class="fas fa-search"></i> </button>
+              </div>
             </div>
+            <div id="graficaAnio"></div>
           </div>
-          <div id="graficaAnio"></div>
         </div>
-      </div>
+      <?php } ?>
     </div>
-
+      
   </main>
 <?php footerAdmin($data); ?>
 
