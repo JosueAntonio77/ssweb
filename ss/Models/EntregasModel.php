@@ -62,6 +62,7 @@
 											m.descripcion,
 											m.diagnostico,
 											m.personaid,
+											DATE_FORMAT(m.datecreated, '%d/%m/%Y') as datecreated,
 											DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
 											m.status
 										FROM persona as p

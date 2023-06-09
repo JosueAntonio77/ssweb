@@ -32,7 +32,7 @@
               <h2 class="page-header"><i ></i> <img src="<?= media(); ?> /images/logo.png" width="150px" heigh="200px"> </h2>
             </div>
             <div class="col-6">
-              <h5 class="text-right">Fecha entrega: <?= $pago['datefinish'] ?>
+              <h5 class="text-right">Fecha Entrega: <?= $pago['datefinish'] ?>
                  </h5>
             </div>
           </div>
@@ -66,7 +66,7 @@
                     <th >Equipo</th>
                     <th >Descripción</th>
                     <th >Diagnóstico</th>
-                    <th >Fecha Entrega</th>
+                    <th >Fecha Solicitado</th>
                     <th >Atendió</th>
                   </tr>
                 </thead>
@@ -76,7 +76,7 @@
                     <td><?= $pago['equipo'] ?></td>
                     <td><?= $pago['descripcion'] ?></td>
                     <td><?= $pago['diagnostico'] ?></td>
-                    <td><?= $pago['datefinish'] ?></td>
+                    <td><?= $pago['datecreated'] ?></td>
                     <td><?=$pago['personatecnico']?></td>
                   </tr>
                 </tbody>
