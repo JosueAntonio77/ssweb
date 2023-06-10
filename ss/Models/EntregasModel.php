@@ -12,14 +12,15 @@
 				$where = "WHERE m.personaid =".$idpersona;
 			}
 					$sql = "SELECT m.idmantenimiento,
-					m.equipo,
-					m.personaid,
-					d.direccion as direcciones,
-					m.diagnostico,
-					CONCAT(pd.nombres,' ',pd.apellidos) AS persona, /* solicitante */
-					CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
-					DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
-					m.status
+						m.nombre,
+						m.equipo,
+						m.personaid,
+						d.direccion as direcciones,
+						m.diagnostico,
+						CONCAT(pd.nombres,' ',pd.apellidos) AS persona, /* solicitante */
+						CONCAT(pt.nombres,' ',pt.apellidos) AS personatecnico, /* tecnico */
+						DATE_FORMAT(m.datefinish, '%d/%m/%Y') as datefinish,
+						m.status
 					FROM mantenimiento as m 
 					INNER JOIN persona pd ON m.personaid = pd.idpersona
 					INNER JOIN persona pt ON m.personat = pt.idpersona
@@ -35,6 +36,7 @@
 			}
 		$request = array();
 		$sql = "SELECT m.idmantenimiento,
+							m.nombre,
 							m.personaid,
 							m.equipo,
 							d.direccion as persona,
@@ -57,6 +59,7 @@
 											p.cargo,
 											p.area,
 											m.idmantenimiento,
+											m.nombre,
 											m.equipo,
 											d.direccion,
 											m.descripcion,
@@ -72,6 +75,7 @@
 									WHERE m.idmantenimiento = $idmantenimiento AND m.status = 2";
 					$requestsolicitante = $this->select($sql_solicitante);
 					$sql_detalle = "SELECT m.idmantenimiento,
+											m.nombre,
 											m.equipo,
 											d.direccion as direcciones,
 											m.diagnostico,

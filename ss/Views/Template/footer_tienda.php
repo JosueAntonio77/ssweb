@@ -2,20 +2,16 @@
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
-				
-
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
 						Contacto
 					</h4>
-
 					<p class="stext-107 cl7 size-201">
-						Dirección: C. 80 1885, Centro, 97320 Progreso, Yuc.
+							<?= CALLE ?>
 						<br><br>
-						Teléfono: +52 9995098813
+							Teléfono: <?= TEL_EMPRESA ?>
 						<br>
 					</p>
-
 					<div class="p-t-27">
 						<a href="https://facebook.com" target="_blanck" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fa fa-facebook"></i>
@@ -29,6 +25,18 @@
 							<i class="fa fa-linkedin"></i>
 						</a>
 					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Descripción
+					</h4>
+					<p class="stext-107 cl7">
+							<?= NOMBRE_EMPRESA ?>
+						<br><br>
+							<?= DESCRIPCION ?>
+						<br>
+					</p>
+					
 				</div>
 			</div>
 

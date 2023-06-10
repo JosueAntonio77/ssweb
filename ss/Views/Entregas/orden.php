@@ -37,7 +37,8 @@
             </div>
           </div>
           <div class="row invoice-info">
-            <div class="col-4"><strong>Solicita:</strong>
+            <div class="col-4">
+              <strong>Solicita:</strong>
               <address><?=$pago['persona']?> <br>
               <strong>Dirección: </strong><?=$pago['direccion']?><br>
               <strong>Área: </strong><?=$pago['area']?><br>
@@ -46,15 +47,16 @@
               </address>
             </div>
             <div class="col-4">
-            <strong>Para:</strong>
+            <strong>Datos:</strong>
               <address><strong><?= NOMBRE_EMPRESA ?></strong><br>
-              <strong>Web: </strong> <?= WEB_EMPRESA ?><br>
-              <strong>Ubicación: </strong> <?= CALLE ?>
+              <strong>Web:  </strong> <?= WEB_EMPRESA ?><br>
+              <strong>Ubicación:  </strong> <?= CALLE ?>
                </address>
             </div>
-            <div class="col-4">Contactos</b><br> 
+            <div class="col-4">
+            <strong>Contacto:</strong></b><br> 
             <strong>Tel: </strong> <?= TEL_EMPRESA ?><br>
-                <b>Email: </b> 
+                <b>Email: </b> <?= EMAIL_REMITENTE ?>
             </div>
           </div>
           <div class="row">
@@ -63,16 +65,18 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th >Equipo</th>
-                    <th >Descripción</th>
-                    <th >Diagnóstico</th>
-                    <th >Fecha Solicitado</th>
-                    <th >Atendió</th>
+                    <th>Nombre</th>
+                    <th>Equipo</th>
+                    <th>Descripción</th>
+                    <th>Diagnóstico</th>
+                    <th>Fecha Solicitado</th>
+                    <th>Atendió</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td><?= $pago['idmantenimiento'] ?></td>
+                    <td><?= $pago['nombre'] ?></td>
                     <td><?= $pago['equipo'] ?></td>
                     <td><?= $pago['descripcion'] ?></td>
                     <td><?= $pago['diagnostico'] ?></td>

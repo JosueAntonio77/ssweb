@@ -30,13 +30,14 @@
 
 	//Datos envio de correo
 	const NOMBRE_REMITENTE = "H. AYUNTAMIENTO DE PROGRESO";
-	const EMAIL_REMITENTE = "no-reply@abelosh.com";
+	const EMAIL_REMITENTE = "ayuntamientoprogreso@gmail.com";
 	const NOMBRE_EMPRESA = "H. AYUNTAMIENTO DE PROGRESO";
 	const WEB_EMPRESA = "http://www.ayuntamientodeprogreso.gob.mx";
 	const DESCRIPCION = "Un socio de confianza en temas de gestión de la energía, mantenimiento y automatización.";
 	const SHAREDHASH = "H. AYUNTAMIENTO DE PROGRESO";
 	const CALLE = "CALLE 25 POR 80 CENTRO CP 97320, PROGRESO, YUCATÁN.";
-	const TEL_EMPRESA = "969 103 6000";
+	const TEL_EMPRESA = "  +52 969 103 6000";
+	const TEL_OFICINA_EMPRESA = "  +52 9995 098 813";
 	
 	//Constantes de las Categorías para el Slider
 	const CAT_SLIDER = "1,2,3";

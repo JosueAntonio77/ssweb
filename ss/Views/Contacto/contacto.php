@@ -53,7 +53,7 @@
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">
-								C. 80 1885, Centro, 97320 Progreso, Yuc.
+								<?= CALLE ?>
 							</p>
 						</div>
 					</div>
@@ -69,14 +69,14 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18" style="display:flex; flex-direction:row;">
-								<label style="color:gray;">Ayuda:  </label> +52 9995098813
+								<label style="color:gray;">Ayuda:  </label> <?= TEL_EMPRESA ?>
 							</p>
 							<p class="stext-115 cl1 size-213 p-t-18" style="display:flex; flex-direction:row;padding:0;">
-								<label style="color:gray;">Oficina:  </label> +52 9999197070
-							</p>
+								<label style="color:gray;">Oficina:  </label> <?= TEL_OFICINA_EMPRESA ?>
+							</p><!--
 							<p class="stext-115 cl1 size-213 p-t-18" style="display:flex; flex-direction:row;padding:0;">
 								<label style="color:gray;">Ventas:  </label> +52 9993539101
-							</p>
+							</p>-->
 						</div>
 					</div>
 
@@ -91,7 +91,7 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								ayuntamientoprogreso@gmail.com
+								<?= EMAIL_REMITENTE ?>
 							</p>
 						</div>
 					</div>
