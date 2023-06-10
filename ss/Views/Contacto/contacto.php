@@ -89,9 +89,13 @@
 							<span class="mtext-110 cl2">
 								Más Información
 							</span>
-
 							<p class="stext-115 cl1 size-213 p-t-18">
 								<?= EMAIL_REMITENTE ?>
+							</p>
+							<p class="stext-115 cl1 size-213" style="display:flex; flex-direction:row;">
+								<a href="<?=WEB_EMPRESA?>" class="stext-115 cl1 size-213 p-t-18" target="_blanck">
+									<?= WEB_EMPRESA ?> 
+								</a>
 							</p>
 						</div>
 					</div>

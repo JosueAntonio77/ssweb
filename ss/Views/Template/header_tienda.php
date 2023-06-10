@@ -16,7 +16,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="<?= media() ?>/images/favicon.ico" />
+	<link rel="icon" type="image/png" href="<?= media() ?>/images/iconp.ico" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
@@ -61,10 +61,13 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
+					<div class="left-top-bar"><!--
 						<a href="<?=WEB_EMPRESA?>" class="semibold-text mb-2" target="_blanck">
-							H. AYUNTAMIENTO DE PROGRESO 
-						</a>
+							<?= NOMBRE_EMPRESA ?> 
+						</a>-->
+						<div class="left-top-bar" href="<?=WEB_EMPRESA?>" target="_blanck">
+							<?= NOMBRE_EMPRESA ?>
+						</div>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -124,7 +127,7 @@ if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						H. AYUNTAMIENTO DE PROGRESO
+						<?= NOMBRE_EMPRESA ?>
 					</div>
 				</li>
 
