@@ -93,7 +93,7 @@
                       <!--
                       <td class="text-right"><?= SMONEY . " " . formatMoney($mantenimiento['monto']) ?></td>
                       -->
-                      <td><a href="<?= base_url() ?>/entregas/orden/<?= $mantenimiento['idmantenimiento'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                      <td><a href="<?= base_url() ?>/entregas/orden/<?= $mantenimiento['idmantenimiento'] ?>" target=""><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                     </tr>
                 <?php }
                 } ?>
