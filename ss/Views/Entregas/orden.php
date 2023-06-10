@@ -65,7 +65,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Nombre Recepción</th>
                     <th>Equipo</th>
                     <th>Descripción</th>
                     <th>Diagnóstico</th>
