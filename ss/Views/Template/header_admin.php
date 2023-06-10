@@ -6,9 +6,9 @@
   <meta name="description" content="Ayuntamiento de Progreso">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="TecNM">
+  <meta name="author" content="JOSUE CASTRO - LEANDRO GONZALEZ">
   <meta name="theme-color" content="#009688">
-  <link rel="shortcut icon" href="<?= media(); ?>/images/favicon.ico">
+  <link rel="shortcut icon" href="<?= media(); ?>/images/iconp.ico">
   <title><?= $data['page_tag'] ?></title>
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
