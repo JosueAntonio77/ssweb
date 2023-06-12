@@ -67,7 +67,6 @@ tableEntregas = $('#tableEntregas').dataTable( {
     "iDisplayLength": 10,
     "order":[[0,"desc"]]  
 });
-
     if(document.querySelector("#formEntregas")){
         let formEntregas = document.querySelector("#formEntregas");
         formEntregas.onsubmit = function(e) {
@@ -158,9 +157,7 @@ function fntDelInfo(idMantenimiento){
         }
 
     });
-
 }
-
 tinymce.init({
     selector: '#txtDescripcion', 
     width: "100%",

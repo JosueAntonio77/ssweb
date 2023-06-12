@@ -30,7 +30,6 @@
                 <h5>DATOS PERSONALES <button class="btn btn-sm btn-info" type="button" onclick="openModalPerfil();"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button></h5>
               </div>
             </div>
-
             <table class="table table-bordered">
               <tbody>
                 <tr>

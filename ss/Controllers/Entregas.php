@@ -31,14 +31,11 @@ class Entregas extends Controllers{
 				$idpersona = $_SESSION['userData']['idpersona'];
 			}
 			$arrData = $this->model->selectEntregas($idpersona);
-			//dep($arrData);
-			//exit();
+
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
-
-				//$arrData[$i]['monto'] = SMONEY.formatMoney($arrData[$i]['monto']);
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/entregas/orden/'.$arrData[$i]['idmantenimiento'].'" target="_blanck"	class="btn btn-info btn-sm"> <i class="far fa-eye"></i></a>';
@@ -51,9 +48,7 @@ class Entregas extends Controllers{
 						$arrData[$i]['status'] = '<span class="badge badge-success">Entregado</span>';
 					}
 				}
-				/*if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idmantenimiento'].')" title="Editar recepción"><i class="fas fa-pencil-alt"></i></button>';
-				}*/
+
 				if($_SESSION['permisosMod']['d']){	
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idmantenimiento'].')" title="Eliminar recepción"><i class="far fa-trash-alt"></i></button>';
 				}

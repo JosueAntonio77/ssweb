@@ -17,7 +17,6 @@
 		{
 			parent::__construct();
 		}	
-
 		public function insertMantenimiento(string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, int $personat, string $equipo, int $status){
 
 			$this->strNombre 		= $nombre;
@@ -58,7 +57,6 @@
 			}
 	        return $return;
 		}
-
 		public function updateMantenimiento(int $idmantenimiento, string $nombre, string $descripcion, string $diagnostico, int $categoriaid, int $personaid, int $personat, string $equipo, int $status){
 			
 			$this->intIdMantenimiento 	= $idmantenimiento;
@@ -71,7 +69,7 @@
 			$this->strEquipo 			= $equipo;
 			$this->intStatus 			= $status;
 			$return = 0;
-			
+	
 			$sql = "SELECT * FROM mantenimiento WHERE nombre = '{$this->strNombre}' AND idmantenimiento != $this->intIdMantenimiento ";
 			$request = $this->select_all($sql);
 			if(empty($request))
@@ -102,7 +100,6 @@
 			}
 	        return $return;
 		}
-
 		public function selectRecepciones()
 		{
 			$whereAdmin = "";
@@ -132,7 +129,6 @@
 					$request = $this->select_all($sql);
 					return $request;
 		}
-
 		public function selectMantenimiento(int $idmantenimiento){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "SELECT p.idmantenimiento,
@@ -157,7 +153,6 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-		
 		public function selectPersonas()
 		{
 			$whereAdmin = "";
@@ -172,7 +167,6 @@
 					$request = $this->select_all($sql);
 					return $request;
 		}
-
 		public function selectPersonasT()
 		{
 			$whereAdmin = "";
@@ -194,7 +188,6 @@
 					$request = $this->select_all($sql);
 					return $request;
 		}
-
 		/*
 		public function selectDirecciones()
 		{
@@ -208,7 +201,6 @@
 			return $request;
 		}
 		*/
-
 		public function insertImage(int $idmantenimiento, string $imagen){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$this->strImagen = $imagen;
@@ -218,7 +210,6 @@
 	        $request_insert = $this->insert($query_insert,$arrData);
 	        return $request_insert;
 		}
-
 		public function selectImages(int $idmantenimiento){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "SELECT mantenimientoid,img
@@ -227,7 +218,6 @@
 			$request = $this->select_all($sql);
 			return $request;
 		}
-
 		public function deleteImage(int $idmantenimiento, string $imagen){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$this->strImagen = $imagen;
@@ -237,7 +227,6 @@
 	        $request_delete = $this->delete($query);
 	        return $request_delete;
 		}
-
 		public function deleteMantenimiento(int $idmantenimiento){
 			$this->intIdMantenimiento = $idmantenimiento;
 			$sql = "UPDATE mantenimiento SET status = ? WHERE idmantenimiento = $this->intIdMantenimiento ";
@@ -245,6 +234,5 @@
 			$request = $this->update($sql,$arrData);
 			return $request;
 		}
-
 	}
  ?>
