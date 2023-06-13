@@ -215,16 +215,16 @@
 
 		public function putDEmpresa(){
 			if($_POST){
-				if(empty($_POST['txtNit']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
+				if(empty($_POST['listDireccionid']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					$idUsuario = $_SESSION['idUser'];
-					$strNit = strClean($_POST['txtNit']);
+					$intDireccionId = strClean($_POST['listDireccionid']);
 					$strCargo = strClean($_POST['txtCargo']);
 					$strArea = strClean($_POST['txtArea']);
 					$request_dataempresa = $this->model->updateDataEmpresa($idUsuario,
-																		$strNit,
+																		$intDireccionId,
 																		$strCargo, 
 																		$strArea);
 					if($request_dataempresa)
