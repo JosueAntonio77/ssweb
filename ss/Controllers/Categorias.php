@@ -19,7 +19,7 @@
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Categorias";
-			$data['page_title'] = "CATEGORIAS <small>Mgdakava</small>";
+			$data['page_title'] = "CATEGORIAS <small>H. Ayuntamiento de Progreso</small>";
 			$data['page_name'] = "categorias";
 			$data['page_functions_js'] = "functions_categorias.js";
 			$this->views->getView($this,"categorias",$data);

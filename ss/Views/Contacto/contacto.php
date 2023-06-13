@@ -1,6 +1,6 @@
 <?php
 	headerTienda($data);
-	getModal('modalCarrito', $data);
+/* Vista de Contactate con Nosotros */
 ?>
 <br><br><br>
 	<!-- Title page -->
@@ -9,8 +9,6 @@
 			Contacto
 		</h2>
 	</section>
-	
-
 	<!-- Content page -->
 	<section class="bg0 p-t-104 p-b-116">
 		<div class="container">
