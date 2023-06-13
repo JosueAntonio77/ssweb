@@ -10,7 +10,6 @@
 		private $intTelefono;
 		private $strEmail;
 		private $strPassword;
-		private $strNit;
 		private $strCargo;
 		private $strArea;
 		private $strToken;
@@ -22,7 +21,7 @@
 			parent::__construct();
 		}	
 
-		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $nit, string $cargo,  string $area,  string $token, int $tipoid, int $status){
+		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo,  string $area,  string $token, int $tipoid, int $status){
 
 			$this->strIdentificacion 	= $identificacion;
 			$this->strNombre 			= $nombre;
@@ -31,7 +30,6 @@
 			$this->intTelefono 			= $telefono;
 			$this->strEmail 			= $email;
 			$this->strPassword 			= $password;
-			$this->strNit				= $nit; 
 			$this->strCargo				= $cargo;
 			$this->strArea				= $area;
 			$this->strToken				= $token; 
@@ -52,7 +50,6 @@
 														telefono,
 														email_user,
 														password,
-														nit, 
 														cargo, 
 														area, 
 														token, 
@@ -66,7 +63,6 @@
         						$this->intTelefono,
         						$this->strEmail,
         						$this->strPassword,
-								$this->strNit, 
 								$this->strCargo, 
 								$this->strArea, 
 								$this->strToken, 
@@ -114,7 +110,6 @@
 							d.direccion, 
 							p.telefono,
 							p.email_user,
-							p.nit,
 							p.cargo,
 							p.area,
 							r.idrol,
@@ -242,14 +237,14 @@
 		    return $request;
 		}
 
-		public function updateDataEmpresa(int $idUsuario, string $strNit, string $strCargo, string $strArea){
+		public function updateDataEmpresa(int $idUsuario, int $direccionid, string $strCargo, string $strArea){
 			$this->intIdUsuario = $idUsuario;
-			$this->strNit = $strNit;
+			$this->intDireccionId = $direccionid;
 			$this->strCargo = $strCargo;
 			$this->strArea = $strArea;
-			$sql = "UPDATE persona SET nit=?, cargo=?, area=? 
+			$sql = "UPDATE persona SET direccionid=?, cargo=?, area=? 
 						WHERE idpersona = $this->intIdUsuario ";
-			$arrData = array($this->strNit,
+			$arrData = array($this->intDireccionId,
 							$this->strCargo,
 							$this->strArea);
 			$request = $this->update($sql,$arrData);

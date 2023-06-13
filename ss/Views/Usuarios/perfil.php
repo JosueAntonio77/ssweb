@@ -62,8 +62,8 @@
             <form id="formDataEmpresa" name="formDataEmpresa">
               <div class="row mb-4">
                 <div class="col-md-6">
-                  <label>Dirección</label>
-                  <input class="form-control" type="text" id="txtNit" name="txtNit" value="<?= $_SESSION['userData']['nit']; ?>">
+                  <label for="listDireccionid">Dirección</label>
+                  <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" required ></select>
                 </div>
                 <div class="col-md-6">
                   <label>Cargo</label>

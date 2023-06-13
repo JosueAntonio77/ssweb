@@ -184,11 +184,11 @@ document.addEventListener('DOMContentLoaded', function(){
         formDataEmpresa.onsubmit = function(e) {
             e.preventDefault();
             
-            var strNit = document.querySelector('#txtNit').value;
+            var intDireccion = document.querySelector('#listDireccionid').value;
             var strCargo = document.querySelector('#txtCargo').value;
             var strArea = document.querySelector('#txtArea').value;
            
-            if(strNit == '' || strCargo == '' || strArea == '' )
+            if(intDireccion == '' || strCargo == '' || strArea == '' )
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
