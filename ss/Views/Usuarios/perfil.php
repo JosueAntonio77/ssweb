@@ -17,7 +17,7 @@
       <div class="tile p-0">
         <ul class="nav flex-column nav-tabs user-tabs">
           <li class="nav-item"><a class="nav-link active" href="#user-timeline" data-toggle="tab">Datos Personales</a></li>
-          <li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">Datos Empresa</a></li>
+          <li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">Datos Adicionales</a></li>
         </ul>
       </div>
     </div>
@@ -58,7 +58,7 @@
         </div>
         <div class="tab-pane fade" id="user-settings">
           <div class="tile user-settings">
-            <h4 class="line-head">Datos Empresa</h4>
+            <h4 class="line-head">Datos Adicionales</h4>
             <form id="formDataEmpresa" name="formDataEmpresa">
               <div class="row mb-4">
                 <div class="col-md-6">
