@@ -7,6 +7,7 @@
 	<title><?= $data['page_tag']; ?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="author" content="JOSUE CASTRO - LEANDRO GONZÁLEZ">
 	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="<?= media() ?>/images/iconp.ico" />
