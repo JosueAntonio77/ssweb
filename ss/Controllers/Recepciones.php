@@ -250,5 +250,5 @@ class Recepciones extends Controllers{
 		}
 
 }
-
+// ALTER TABLE mantenimiento AUTO_INCREMENT=1; reiniciar contador de tabla mentenimiento. 
 ?>
