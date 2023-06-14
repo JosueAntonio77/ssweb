@@ -21,7 +21,7 @@
 			parent::__construct();
 		}	
 
-		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo,  string $area,  string $token, int $tipoid, int $status){
+		public function insertUsuario(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid, int $status){
 
 			$this->strIdentificacion 	= $identificacion;
 			$this->strNombre 			= $nombre;
@@ -30,9 +30,6 @@
 			$this->intTelefono 			= $telefono;
 			$this->strEmail 			= $email;
 			$this->strPassword 			= $password;
-			$this->strCargo				= $cargo;
-			$this->strArea				= $area;
-			$this->strToken				= $token; 
 			$this->intTipoId 			= $tipoid;
 			$this->intStatus 			= $status;
 			$return = 0;
@@ -50,12 +47,9 @@
 														telefono,
 														email_user,
 														password,
-														cargo, 
-														area, 
-														token, 
 														rolid,
 														status) 
-								  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+								  VALUES (?,?,?,?,?,?,?,?,?)";
 	        	$arrData = array($this->strIdentificacion,
         						$this->strNombre,
         						$this->strApellido,
@@ -63,9 +57,6 @@
         						$this->intTelefono,
         						$this->strEmail,
         						$this->strPassword,
-								$this->strCargo, 
-								$this->strArea, 
-								$this->strToken, 
         						$this->intTipoId,
         						$this->intStatus);
 	        	$request_insert = $this->insert($query_insert,$arrData);

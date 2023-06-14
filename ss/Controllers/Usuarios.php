@@ -29,7 +29,7 @@
 				
 				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['listDireccionid']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) )
 				{
-					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos o número de télefono no válido.');
 				}else{ 
 					$idUsuario 			= intval($_POST['idUsuario']);
 					$strIdentificacion 	= strClean($_POST['txtIdentificacion']);
@@ -40,7 +40,6 @@
 					$strEmail 			= strtolower(strClean($_POST['txtEmail']));
 					$intTipoId 			= intval(strClean($_POST['listRolid']));
 					$intStatus 			= intval(strClean($_POST['listStatus']));
-					$strRelleno 		= "";
 
 					if($idUsuario == 0)
 					{
@@ -53,11 +52,7 @@
 																			$intDireccionId,  
 																			$intTelefono, 
 																			$strEmail,
-																			$strPassword,
-																			$strRelleno, 
-																			$strRelleno, 
-																			$strRelleno, 
-																			$strRelleno, 
+																			$strPassword, 
 																			$intTipoId, 
 																			$intStatus );
 						}
@@ -183,7 +178,7 @@
 			if($_POST){
 				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) )
 				{
-					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos o número de télefono no válido.');
 				}else{
 					$idUsuario = $_SESSION['idUser'];
 					$strIdentificacion = strClean($_POST['txtIdentificacion']);

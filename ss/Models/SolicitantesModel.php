@@ -9,10 +9,8 @@ class SolicitantesModel extends Mysql
 	private $intTelefono;
 	private $strEmail;
 	private $strPassword;
-	private $strNit;
 	private $strCargo;
 	private $strArea;
-	private $strToken;
 	private $intTipoId;
 	private $intStatus;
 
@@ -23,7 +21,7 @@ class SolicitantesModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $nit, string $cargo, string $area,  string $token, int $tipoid){
+	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $cargo, string $area, int $tipoid){
 
 		$this->strIdentificacion 	= $identificacion;
 		$this->strNombre 			= $nombre;
@@ -32,10 +30,8 @@ class SolicitantesModel extends Mysql
 		$this->intTelefono 			= $telefono;
 		$this->strEmail 			= $email;
 		$this->strPassword 			= $password;
-		$this->strNit				= $nit; 
 		$this->strCargo 			= $cargo;
 		$this->strArea 				= $area;
-		$this->strToken				= $token; 
 		$this->intTipoId 			= $tipoid;
 		$return = 0;
 
@@ -52,12 +48,10 @@ class SolicitantesModel extends Mysql
 													telefono,
 													email_user,
 													password,
-													nit, 
 													cargo,
 													area,
-													token, 
 													rolid) 
-							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+							VALUES(?,?,?,?,?,?,?,?,?,?)";
         	$arrData = array($this->strIdentificacion,
     						$this->strNombre,
     						$this->strApellido,
@@ -65,10 +59,8 @@ class SolicitantesModel extends Mysql
     						$this->intTelefono,
     						$this->strEmail,
     						$this->strPassword,
-							$this->strNit,
     						$this->strCargo,
     						$this->strArea,
-							$this->strToken, 
 							$this->intTipoId);
         	$request_insert = $this->insert($query_insert,$arrData);
         	$return = $request_insert;

@@ -59,39 +59,29 @@
 				
 				if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailSolicitante']) )
 				{
-					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos o número de télefono no válido.');
 				}else{ 
 
-					$strIdentificacion 	= "";
 					$strNombre	 		= ucwords(strClean($_POST['txtNombre']));
 					$strApellido 		= ucwords(strClean($_POST['txtApellido']));
 					$intDireccionId 	= 1;
 					$intTelefono 		= intval(strClean($_POST['txtTelefono']));
 					$strEmail 			= strtolower(strClean($_POST['txtEmailSolicitante']));
-					$strNit 			= "";
-					$strCargo 			= "";
-					$strArea 			= "";
-					$strToken 			= "";
 					$intTipoId 			= RSOLICITANTE;  
 
 					//$request_user = "";
 					$strPassword = passGenerator();
 					$strPasswordEncript = hash("SHA256",$strPassword);
-					$request_user = $this->insertSolicitante($strIdentificacion,
-															$strNombre, 
+					$request_user = $this->insertSolicitante($strNombre, 
 															$strApellido,
 															$intDireccionId,  
 															$intTelefono, 
 															$strEmail,
 															$strPasswordEncript,
-															$strNit,
-															$strCargo,
-															$strArea,
-															$strToken,
 															$intTipoId );
 
 					if($request_user > 0 ){
-						$arrResponse = array('status' => true, 'msg' => 'Se ha enviado un email a tu cuenta de correo para acceder al sitío');
+						//Para el correo al registrarse.  
 						$nombreUsuario = $strNombre.' '.$strApellido;
 						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
 											 'email' => $strEmail,
@@ -101,7 +91,14 @@
 						//$_SESSION['login'] = true;
 						//$this->login->sessionLogin($request_user);
 						//Esta comentado por que estamos de forma local. Esto sirve para enviar a su correo credenciales. 
-                        sendEmail($dataUsuario,'email_bienvenida');
+                        $sendEmail = sendEmail($dataUsuario,'email_bienvenida');
+						if($sendEmail){
+							$arrResponse = array('status' => true, 
+								'msg' => 'Se ha enviado un email a su cuenta de correo para acceder al sitío');
+						}else{
+							$arrResponse = array('status' => false, 
+							 'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
+						}
 					}else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');		
 					}else{
@@ -115,7 +112,7 @@
 
 		public function resetPass(){
 			if($_POST){
-				error_reporting(0);
+				//error_reporting(0);
 
 				if(empty($_POST['txtEmailReset'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );

@@ -3,34 +3,23 @@ require_once("Libraries/Core/Mysql.php");
 trait ASolicitante
 {
 	private $con;
-	private $intIdUsuario;
-	private $strIdentificacion;
 	private $strNombre;
 	private $strApellido;
+	private $intDireccionId;
 	private $intTelefono;
 	private $strEmail;
 	private $strPassword;
-	private $strNit;
-	private $strCargo;
-	private $strArea;
-	private $strToken;
 	private $intTipoId;
-	private $intIdTransaccion;
 
-	public function insertSolicitante(string $identificacion, string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, string $nit, string $cargo, string $area,  string $token, int $tipoid)
+	public function insertSolicitante( string $nombre, string $apellido, int $direccionid, int $telefono, string $email, string $password, int $tipoid)
 	{
 		$this->con = new Mysql();
-		$this->strIdentificacion 	= $identificacion;
 		$this->strNombre 			= $nombre;
 		$this->strApellido 			= $apellido;
 		$this->intDireccionId 		= $direccionid; 
 		$this->intTelefono 			= $telefono;
 		$this->strEmail 			= $email;
 		$this->strPassword 			= $password;
-		$this->strNit				= $nit;
-		$this->strCargo 			= $cargo;
-		$this->strArea 				= $area;
-		$this->strToken				= $token;
 		$this->intTipoId 			= $tipoid;
 
 		$return = 0;
@@ -40,31 +29,21 @@ trait ASolicitante
 
 		if (empty($request)) {
 			$query_insert  = "INSERT INTO persona(
-				identificacion,
 				nombres,
 				apellidos,
 				direccionid,
 				telefono,
 				email_user,
 				password,
-				nit, 
-				cargo,
-				area,
-				token,
 				rolid) 
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+			VALUES(?,?,?,?,?,?,?)";
 			$arrData = array(
-				$this->strIdentificacion,
 				$this->strNombre,
 				$this->strApellido,
 				$this->intDireccionId, 
 				$this->intTelefono,
 				$this->strEmail,
 				$this->strPassword,
-				$this->strNit,
-				$this->strCargo,
-    			$this->strArea,
-				$this->strToken,
 				$this->intTipoId
 			);
 			$request_insert = $this->con->insert($query_insert, $arrData);
@@ -73,126 +52,6 @@ trait ASolicitante
 			$return = "exist";
 		}
 		return $return;
-	}
-
-	public function insertPedido(string $idtransaccionpaypal = NULL, string $datospaypal = NULL, int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio, string $status)
-	{
-		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO pedido(idtransaccionpaypal,datospaypal,personaid,costo_envio,monto,tipopagoid,direccion_envio,status) 
-							  VALUES(?,?,?,?,?,?,?,?)";
-		$arrData = array(
-			$idtransaccionpaypal,
-			$datospaypal,
-			$personaid,
-			$costo_envio,
-			$monto,
-			$tipopagoid,
-			$direccionenvio,
-			$status
-		);
-		$request_insert = $this->con->insert($query_insert, $arrData);
-		$return = $request_insert;
-		return $return;
-	}
-
-	public function insertDetalle(int $idpedido, int $productoid, float $precio, int $cantidad)
-	{
-		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,precio,cantidad) 
-							  VALUES(?,?,?,?)";
-		$arrData = array(
-			$idpedido,
-			$productoid,
-			$precio,
-			$cantidad
-		);
-		$request_insert = $this->con->insert($query_insert, $arrData);
-		$return = $request_insert;
-		return $return;
-	}
-
-	public function insertDetalleTemp(array $pedido)
-	{
-		$this->intIdUsuario = $pedido['idcliente'];
-		$this->intIdTransaccion = $pedido['idtransaccion'];
-		$productos = $pedido['productos'];
-
-		$this->con = new Mysql();
-		$sql = "SELECT * FROM detalle_temp WHERE 
-					transaccionid = '{$this->intIdTransaccion}' AND 
-					personaid = $this->intIdUsuario";
-		$request = $this->con->select_all($sql);
-
-		if (empty($request)) {
-			foreach ($productos as $producto) {
-				$query_insert  = "INSERT INTO detalle_temp(personaid,productoid,precio,cantidad,transaccionid) 
-								  VALUES(?,?,?,?,?)";
-				$arrData = array(
-					$this->intIdUsuario,
-					$producto['idproducto'],
-					$producto['precio'],
-					$producto['cantidad'],
-					$this->intIdTransaccion
-				);
-				$request_insert = $this->con->insert($query_insert, $arrData);
-			}
-		} else {
-			$sqlDel = "DELETE FROM detalle_temp WHERE 
-				transaccionid = '{$this->intIdTransaccion}' AND 
-				personaid = $this->intIdUsuario";
-			$request = $this->con->delete($sqlDel);
-			foreach ($productos as $producto) {
-				$query_insert  = "INSERT INTO detalle_temp(personaid,productoid,precio,cantidad,transaccionid) 
-								  VALUES(?,?,?,?,?)";
-				$arrData = array(
-					$this->intIdUsuario,
-					$producto['idproducto'],
-					$producto['precio'],
-					$producto['cantidad'],
-					$this->intIdTransaccion
-				);
-				$request_insert = $this->con->insert($query_insert, $arrData);
-			}
-		}
-	}
-
-	public function getPedido(int $idpedido)
-	{
-		$this->con = new Mysql();
-		$request = array();
-		$sql = "SELECT p.idpedido,
-							p.referenciacobro,
-							p.idtransaccionpaypal,
-							p.personaid,
-							p.fecha,
-							p.costo_envio,
-							p.monto,
-							p.tipopagoid,
-							t.tipopago,
-							p.direccion_envio,
-							p.status
-					FROM pedido as p
-					INNER JOIN tipopago t
-					ON p.tipopagoid = t.idtipopago
-					WHERE p.idpedido =  $idpedido";
-		$requestPedido = $this->con->select($sql);
-		if (count($requestPedido) > 0) {
-			$sql_detalle = "SELECT p.idproducto,
-											p.nombre as producto,
-											d.precio,
-											d.cantidad
-									FROM detalle_pedido d
-									INNER JOIN producto p
-									ON d.productoid = p.idproducto
-									WHERE d.pedidoid = $idpedido
-									";
-			$requestProductos = $this->con->select_all($sql_detalle);
-			$request = array(
-				'orden' => $requestPedido,
-				'detalle' => $requestProductos
-			);
-		}
-		return $request;
 	}
 
 	public function setSuscripcion(string $nombre, string $email)

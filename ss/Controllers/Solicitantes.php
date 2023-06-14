@@ -32,7 +32,7 @@ class Solicitantes extends Controllers{
 			//dep($_POST);exit;
 			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['listDireccionid']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtCargo']) || empty($_POST['txtArea']) )
 			{
-				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos o número de télefono no válido.');
 			}else{ 
 
 				$idUsuario 			= intval($_POST['idUsuario']);
@@ -45,7 +45,6 @@ class Solicitantes extends Controllers{
 				$strCargo 			= ucwords(strClean($_POST['txtCargo']));
 				$strArea 			= ucwords(strClean($_POST['txtArea']));
 				$intTipoId 			= RSOLICITANTE;  
-				$strRelleno 		= ""; 
 
 				//$request_user = "";
 				if($idUsuario == 0){
@@ -61,10 +60,8 @@ class Solicitantes extends Controllers{
 																			$intTelefono, 
 																			$strEmail,
 																			$strPasswordEncript,
-																			$strRelleno,
 																			$strCargo,
 																			$strArea,
-																			$strRelleno,
 																			$intTipoId);
 					}
 				}else{

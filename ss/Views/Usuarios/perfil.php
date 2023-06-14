@@ -63,7 +63,7 @@
               <div class="row mb-4">
                 <div class="col-md-6">
                   <label for="listDireccionid">Dirección</label>
-                  <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" value="<?= $_SESSION['userData']['iddireccion']; ?>" ></select>
+                  <select class="form-control" data-live-search="true" id="listDireccionid" name="listDireccionid" value="<?= $_SESSION['userData']['direccionid']; ?>" ></select>
                 </div>
                 <div class="col-md-6">
                   <label>Cargo</label>
