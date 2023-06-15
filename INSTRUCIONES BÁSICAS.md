@@ -42,7 +42,7 @@ En el mismo documento colocara los datos de su empresa:
     const TEL_EMPRESA = "NÚMERO DE LA EMPRESA";
     const TEL_OFICINA_EMPRESA = "NÚMERO DE OFICINA";
   
- En este caso se trabajo en una empresa y se coloco de la sigueinte manera: 
+ En este caso se trabajo en una empresa y se colocó de la sigueinte manera: 
  
 	const NOMBRE_REMITENTE = "H. AYUNTAMIENTO DE PROGRESO";
 	const EMAIL_REMITENTE = "ayuntamientoprogreso@gmail.com";
