@@ -54,5 +54,16 @@ En el mismo documento colocara los datos de su empresa:
 	const TEL_EMPRESA = "  +52 969 103 6000";
 	const TEL_OFICINA_EMPRESA = "  +52 9995 098 813";
  
- 
- 
+# Soporte 
+
+## Contactos 
+
+**Josue Antonio Castro Collí** 
+
+- Email: josueantonio785@gmail.com 
+- Teléfono: 9993815121
+
+**Leandro Mijaíl González Gómez**
+
+- Email: 
+- Teléfono: 
