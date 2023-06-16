@@ -56,8 +56,6 @@ En el mismo documento colocara los datos de su empresa:
  
 # Soporte 
 
-## Contactos 
-
 **Josue Antonio Castro Collí** 
 
 - Email: josueantonio785@gmail.com 
@@ -65,5 +63,5 @@ En el mismo documento colocara los datos de su empresa:
 
 **Leandro Mijaíl González Gómez**
 
-- Email: 
-- Teléfono: 
+- Email: spikegonzalez85@gmail.com
+- Teléfono: 9992980703
